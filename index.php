@@ -4,7 +4,7 @@ get_header();
 if (is_user_logged_in()) {
    if (have_posts()) {
       while (have_posts()) {
-         echo '<h3>Theme Framework Index.php</h3>';
+         echo '<h3>Theme Framework Index.php page</h3>';
          the_post();
          get_template_part('');
       }
