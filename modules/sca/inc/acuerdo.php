@@ -7,31 +7,31 @@
  * 
  * 
  *****************************************************************************/
-function mcssca_crea_etiquetas_acuerdo($singular = 'Post', $plural = 'Posts')
+function themeframework_crea_etiquetas_acuerdo($singular = 'Post', $plural = 'Posts')
 {
    $p_lower = strtolower($plural);
    $s_lower = strtolower($singular);
 
    return [
-      'name'                     => _x($plural, 'post type general name', 'mcssca'),
-      'singular_name'            => _x($singular, 'post type singular name', 'mcssca'),
-      'menu_name'                => _x($plural, 'admin menu', 'mcssca'),
-      'name_admin_bar'           => _x($singular, 'add new on admin bar', 'mcssca'),
-      'add_new'                  => _x("Nuevo $singular", 'prayer', 'mcssca'),
-      'add_new_item'             => __("Agregar $singular", 'mcssca'),
-      'new_item'                 => __("Nuevo $singular", 'mcssca'),
-      'edit_item'                => __("Editar $singular", 'mcssca'),
-      'view_item'                => __("Ver $singular", 'mcssca'),
-      'view_items'               => __("Ver $plural", 'mcssca'),
-      'all_items'                => __("Todos $plural", 'mcssca'),
-      'search_items'             => __("Buscar $plural", 'mcssca'),
-      'parent_item_colon'        => __("Parent $singular", 'mcssca'),
-      'not_found'                => __("No $p_lower found", 'mcssca'),
-      'not_found_in_trash'       => __("No $p_lower found in trash", 'mcssca'),
-      'archives'                 => __("$singular Archives", 'mcssca'),
-      'attributes'               => __("$singular Attributes", 'mcssca'),
-      'insert_into_item'         => __("Insertar $s_lower", 'mcssca'),
-      'uploaded_to_this_item'    => __("Adjuntar a un $s_lower", 'mcssca'),
+      'name'                     => _x($plural, 'post type general name', 'themeframework'),
+      'singular_name'            => _x($singular, 'post type singular name', 'themeframework'),
+      'menu_name'                => _x($plural, 'admin menu', 'themeframework'),
+      'name_admin_bar'           => _x($singular, 'add new on admin bar', 'themeframework'),
+      'add_new'                  => _x("Nuevo $singular", 'prayer', 'themeframework'),
+      'add_new_item'             => __("Agregar $singular", 'themeframework'),
+      'new_item'                 => __("Nuevo $singular", 'themeframework'),
+      'edit_item'                => __("Editar $singular", 'themeframework'),
+      'view_item'                => __("Ver $singular", 'themeframework'),
+      'view_items'               => __("Ver $plural", 'themeframework'),
+      'all_items'                => __("Todos $plural", 'themeframework'),
+      'search_items'             => __("Buscar $plural", 'themeframework'),
+      'parent_item_colon'        => __("Parent $singular", 'themeframework'),
+      'not_found'                => __("No $p_lower found", 'themeframework'),
+      'not_found_in_trash'       => __("No $p_lower found in trash", 'themeframework'),
+      'archives'                 => __("$singular Archives", 'themeframework'),
+      'attributes'               => __("$singular Attributes", 'themeframework'),
+      'insert_into_item'         => __("Insertar $s_lower", 'themeframework'),
+      'uploaded_to_this_item'    => __("Adjuntar a un $s_lower", 'themeframework'),
    ];
 }
 /******************************************************************************
@@ -41,7 +41,7 @@ function mcssca_crea_etiquetas_acuerdo($singular = 'Post', $plural = 'Posts')
  * 
  * 
  *****************************************************************************/
-function mcssca_capacidades_acuerdo($singular = 'post', $plural = 'posts')
+function themeframework_capacidades_acuerdo($singular = 'post', $plural = 'posts')
 {
    return [
       'edit_post'                => "edit_$singular",
@@ -68,11 +68,11 @@ function mcssca_capacidades_acuerdo($singular = 'post', $plural = 'posts')
  * 
  * 
  *****************************************************************************/
-function mcssca_acuerdo_post_type()
+function themeframework_acuerdo_post_type()
 {
    $type = 'acuerdo';
-   $labels = mcssca_crea_etiquetas_acuerdo('Acuerdo', 'Acuerdos');
-   $capabilities = mcssca_capacidades_acuerdo('acuerdo', 'acuerdos');
+   $labels = themeframework_crea_etiquetas_acuerdo('Acuerdo', 'Acuerdos');
+   $capabilities = themeframework_capacidades_acuerdo('acuerdo', 'acuerdos');
 
    $args = array(
       'capability_type'          => ['acuerdo', 'acuerdos'],
@@ -90,7 +90,7 @@ function mcssca_acuerdo_post_type()
 
    register_post_type($type, $args);
 }
-add_action('init', 'mcssca_acuerdo_post_type');
+add_action('init', 'themeframework_acuerdo_post_type');
 /******************************************************************************
  * 
  * 
@@ -120,17 +120,17 @@ add_action('pre_get_posts', 'acuerdo_taxonomia_filter');
  * 
  * 
  *****************************************************************************/
-function mcssca_crear_campos_acuerdo()
+function themeframework_crear_campos_acuerdo()
 {
    add_meta_box(
       'asignar_id',
       'ID Asignado',
-      'mcssca_crear_asignar_id_cbk',
+      'themeframework_crear_asignar_id_cbk',
       'acuerdo',
       'normal',
       'default'
    );
-   function mcssca_crear_asignar_id_cbk($post)
+   function themeframework_crear_asignar_id_cbk($post)
    {
       wp_nonce_field('asignar_id_nonce', 'asignar_id_nonce');
       $asignar_id = get_post_meta($post->ID, '_asignar_id', true);
@@ -152,12 +152,12 @@ function mcssca_crear_campos_acuerdo()
    add_meta_box(
       'acta_id',
       'ID Acta',
-      'mcssca_crear_acta_id_cbk',
+      'themeframework_crear_acta_id_cbk',
       'acuerdo',
       'normal',
       'default'
    );
-   function mcssca_crear_acta_id_cbk($post)
+   function themeframework_crear_acta_id_cbk($post)
    {
       wp_nonce_field('acta_id_nonce', 'acta_id_nonce');
       $acta_id = get_post_meta($post->ID, '_acta_id', true);
@@ -167,12 +167,12 @@ function mcssca_crear_campos_acuerdo()
    add_meta_box(
       'comite_id',
       'ID Comité',
-      'mcssca_crear_comite_id_cbk',
+      'themeframework_crear_comite_id_cbk',
       'acuerdo',
       'normal',
       'default'
    );
-   function mcssca_crear_comite_id_cbk($post)
+   function themeframework_crear_comite_id_cbk($post)
    {
       wp_nonce_field('comite_id_nonce', 'comite_id_nonce');
       $comite_id = get_post_meta($post->ID, '_comite_id', true);
@@ -182,12 +182,12 @@ function mcssca_crear_campos_acuerdo()
    add_meta_box(
       'n_acuerdo',
       'Nùmero de Acuerdo',
-      'mcssca_crear_n_acuerdo_cbk',
+      'themeframework_crear_n_acuerdo_cbk',
       'acuerdo',
       'normal',
       'default'
    );
-   function mcssca_crear_n_acuerdo_cbk($post)
+   function themeframework_crear_n_acuerdo_cbk($post)
    {
       wp_nonce_field('n_acuerdo_nonce', 'n_acuerdo_nonce');
       $n_acuerdo = get_post_meta($post->ID, '_n_acuerdo', true);
@@ -197,12 +197,12 @@ function mcssca_crear_campos_acuerdo()
    add_meta_box(
       'vigente',
       'Acuerdo Vigente',
-      'mcssca_crear_acuerdo_vigente_cbk',
+      'themeframework_crear_acuerdo_vigente_cbk',
       'acuerdo',
       'normal',
       'default'
    );
-   function mcssca_crear_acuerdo_vigente_cbk($post)
+   function themeframework_crear_acuerdo_vigente_cbk($post)
    {
       wp_nonce_field('vigente_nonce', 'vigente_nonce');
       $vigente = get_post_meta($post->ID, '_vigente', true);
@@ -212,12 +212,12 @@ function mcssca_crear_campos_acuerdo()
    add_meta_box(
       'f_compromiso',
       'Fecha de Compromiso',
-      'mcssca_crear_f_compromiso_cbk',
+      'themeframework_crear_f_compromiso_cbk',
       'acuerdo',
       'normal',
       'default'
    );
-   function mcssca_crear_f_compromiso_cbk($post)
+   function themeframework_crear_f_compromiso_cbk($post)
    {
       wp_nonce_field('f_compromiso_nonce', 'f_compromiso_nonce');
       $f_compromiso = get_post_meta($post->ID, '_f_compromiso', true);
@@ -227,19 +227,19 @@ function mcssca_crear_campos_acuerdo()
    add_meta_box(
       'f_seguimiento',
       'Fecha Seguimiento',
-      'mcssca_crear_acuerdo_f_seguimiento_cbk',
+      'themeframework_crear_acuerdo_f_seguimiento_cbk',
       'acuerdo',
       'normal',
       'default'
    );
-   function mcssca_crear_acuerdo_f_seguimiento_cbk($post)
+   function themeframework_crear_acuerdo_f_seguimiento_cbk($post)
    {
       wp_nonce_field('f_seguimiento_nonce', 'f_seguimiento_nonce');
       $f_seguimiento = get_post_meta($post->ID, '_f_seguimiento', true);
       echo '<input type="date" style="width:20%" id="f_seguimiento" name="f_seguimiento" value="' . esc_attr($f_seguimiento) . '" >';
    }
 }
-add_action('add_meta_boxes', 'mcssca_crear_campos_acuerdo');
+add_action('add_meta_boxes', 'themeframework_crear_campos_acuerdo');
 /******************************************************************************
  * 
  * 
@@ -249,7 +249,7 @@ add_action('add_meta_boxes', 'mcssca_crear_campos_acuerdo');
  * 
  * 
  *****************************************************************************/
-function mcssca_guardar_asignar_id($post_id)
+function themeframework_guardar_asignar_id($post_id)
 {
    if (!isset($_POST['asignar_id_nonce'])) {
       return;
@@ -275,9 +275,9 @@ function mcssca_guardar_asignar_id($post_id)
    $asignar_id = sanitize_text_field($_POST['asignar_id']);
    update_post_meta($post_id, '_asignar_id', $asignar_id);
 }
-add_action('save_post', 'mcssca_guardar_asignar_id');
+add_action('save_post', 'themeframework_guardar_asignar_id');
 
-function mcssca_guardar_acta_id($post_id)
+function themeframework_guardar_acta_id($post_id)
 {
    if (!isset($_POST['acta_id_nonce'])) {
       return;
@@ -303,9 +303,9 @@ function mcssca_guardar_acta_id($post_id)
    $acta_id = sanitize_text_field($_POST['acta_id']);
    update_post_meta($post_id, '_acta_id', $acta_id);
 }
-add_action('save_post', 'mcssca_guardar_acta_id');
+add_action('save_post', 'themeframework_guardar_acta_id');
 
-function mcssca_guardar_comite_id($post_id)
+function themeframework_guardar_comite_id($post_id)
 {
    if (!isset($_POST['comite_id_nonce'])) {
       return;
@@ -331,9 +331,9 @@ function mcssca_guardar_comite_id($post_id)
    $comite_id = sanitize_text_field($_POST['comite_id']);
    update_post_meta($post_id, '_comite_id', $comite_id);
 }
-add_action('save_post', 'mcssca_guardar_comite_id');
+add_action('save_post', 'themeframework_guardar_comite_id');
 
-function mcssca_guardar_n_acuerdo($post_id)
+function themeframework_guardar_n_acuerdo($post_id)
 {
    if (!isset($_POST['n_acuerdo_nonce'])) {
       return;
@@ -359,9 +359,9 @@ function mcssca_guardar_n_acuerdo($post_id)
    $n_acuerdo = sanitize_text_field($_POST['n_acuerdo']);
    update_post_meta($post_id, '_n_acuerdo', $n_acuerdo);
 }
-add_action('save_post', 'mcssca_guardar_n_acuerdo');
+add_action('save_post', 'themeframework_guardar_n_acuerdo');
 
-function mcssca_guardar_acuerdo_vigente($post_id)
+function themeframework_guardar_acuerdo_vigente($post_id)
 {
    if (!isset($_POST['vigente_nonce'])) {
       return;
@@ -387,9 +387,9 @@ function mcssca_guardar_acuerdo_vigente($post_id)
    $vigente = sanitize_text_field($_POST['vigente']);
    update_post_meta($post_id, '_vigente', $vigente);
 }
-add_action('save_post', 'mcssca_guardar_acuerdo_vigente');
+add_action('save_post', 'themeframework_guardar_acuerdo_vigente');
 
-function mcssca_guardar_f_compromiso($post_id)
+function themeframework_guardar_f_compromiso($post_id)
 {
    if (!isset($_POST['f_compromiso_nonce'])) {
       return;
@@ -415,9 +415,9 @@ function mcssca_guardar_f_compromiso($post_id)
    $f_compromiso = sanitize_text_field($_POST['f_compromiso']);
    update_post_meta($post_id, '_f_compromiso', $f_compromiso);
 }
-add_action('save_post', 'mcssca_guardar_f_compromiso');
+add_action('save_post', 'themeframework_guardar_f_compromiso');
 
-function mcssca_guardar_acuerdo_f_seguimiento($post_id)
+function themeframework_guardar_acuerdo_f_seguimiento($post_id)
 {
    if (!isset($_POST['f_seguimiento_nonce'])) {
       return;
@@ -444,7 +444,7 @@ function mcssca_guardar_acuerdo_f_seguimiento($post_id)
    $f_seguimiento = $f_seg->format('Y-m-d');
    update_post_meta($post_id, '_f_seguimiento', $f_seguimiento);
 }
-add_action('save_post', 'mcssca_guardar_acuerdo_f_seguimiento');
+add_action('save_post', 'themeframework_guardar_acuerdo_f_seguimiento');
 
 /******************************************************************************
  * 
@@ -455,7 +455,7 @@ add_action('save_post', 'mcssca_guardar_acuerdo_f_seguimiento');
  * 
  *****************************************************************************/
 
-function mcssca_agregar_acuerdo_meta_fields()
+function themeframework_agregar_acuerdo_meta_fields()
 {
    register_meta('post', '_asignar_id', array(
       'type' => 'string',
@@ -502,10 +502,10 @@ function mcssca_agregar_acuerdo_meta_fields()
       'show_in_rest' => true
    ));
 }
-add_action('rest_api_init', 'mcssca_agregar_acuerdo_meta_fields');
+add_action('rest_api_init', 'themeframework_agregar_acuerdo_meta_fields');
 
-if (!function_exists('mcssca_acuerdo_meta_request_params')) {
-   function mcssca_acuerdo_meta_request_params($args, $request)
+if (!function_exists('themeframework_acuerdo_meta_request_params')) {
+   function themeframework_acuerdo_meta_request_params($args, $request)
    {
       $args += array(
          'meta_key'   => $request['meta_key'],
@@ -514,7 +514,7 @@ if (!function_exists('mcssca_acuerdo_meta_request_params')) {
       );
       return $args;
    }
-   add_filter('rest_acuerdo_query', 'mcssca_acuerdo_meta_request_params', 99, 2);
+   add_filter('rest_acuerdo_query', 'themeframework_acuerdo_meta_request_params', 99, 2);
 }
 /******************************************************************************
  * 
@@ -558,7 +558,7 @@ if (!function_exists('mcssca_acuerdo_meta_request_params')) {
  *****************************************************************************/
 add_action('init', function () {
    $admin = get_role('administrator');
-   $capabilities = mcssca_capacidades_acuerdo('acuerdo', 'acuerdos');
+   $capabilities = themeframework_capacidades_acuerdo('acuerdo', 'acuerdos');
    foreach ($capabilities as $capability) {
       if (!$admin->has_cap($capability)) {
          $admin->add_cap($capability);

@@ -61,7 +61,7 @@ if (count($principal) > 0) {
  * 
  *****************************************************************************/
 if (!function_exists('themeframework_get_page_att')) {
-   function themeframework_get_page_att($postType = '', $fullpage = true)
+   function themeframework_get_page_att($postType = '', $fullpage = false)
    {
       $atributos = [];
       $usuario = wp_get_current_user();

@@ -7,31 +7,31 @@
  * 
  * 
  *****************************************************************************/
-function mcssca_crea_etiquetas_acta($singular = 'Post', $plural = 'Posts')
+function themeframework_crea_etiquetas_acta($singular = 'Post', $plural = 'Posts')
 {
    $p_lower = strtolower($plural);
    $s_lower = strtolower($singular);
 
    return [
-      'name'                     => _x($plural, 'post type general name', 'mcssca'),
-      'singular_name'            => _x($singular, 'post type singular name', 'mcssca'),
-      'menu_name'                => _x($plural, 'admin menu', 'mcssca'),
-      'name_admin_bar'           => _x($singular, 'add new on admin bar', 'mcssca'),
-      'add_new'                  => _x("Nuevo $singular", 'prayer', 'mcssca'),
-      'add_new_item'             => __("Agregar $singular", 'mcssca'),
-      'new_item'                 => __("Nuevo $singular", 'mcssca'),
-      'edit_item'                => __("Editar $singular", 'mcssca'),
-      'view_item'                => __("Ver $singular", 'mcssca'),
-      'view_items'               => __("Ver $plural", 'mcssca'),
-      'all_items'                => __("Todos $plural", 'mcssca'),
-      'search_items'             => __("Buscar $plural", 'mcssca'),
-      'parent_item_colon'        => __("Parent $singular", 'mcssca'),
-      'not_found'                => __("No $p_lower found", 'mcssca'),
-      'not_found_in_trash'       => __("No $p_lower found in trash", 'mcssca'),
-      'archives'                 => __("$singular Archives", 'mcssca'),
-      'attributes'               => __("$singular Attributes", 'mcssca'),
-      'insert_into_item'         => __("Insertar $s_lower", 'mcssca'),
-      'uploaded_to_this_item'    => __("Adjuntar a un $s_lower", 'mcssca'),
+      'name'                     => _x($plural, 'post type general name', 'themeframework'),
+      'singular_name'            => _x($singular, 'post type singular name', 'themeframework'),
+      'menu_name'                => _x($plural, 'admin menu', 'themeframework'),
+      'name_admin_bar'           => _x($singular, 'add new on admin bar', 'themeframework'),
+      'add_new'                  => _x("Nuevo $singular", 'prayer', 'themeframework'),
+      'add_new_item'             => __("Agregar $singular", 'themeframework'),
+      'new_item'                 => __("Nuevo $singular", 'themeframework'),
+      'edit_item'                => __("Editar $singular", 'themeframework'),
+      'view_item'                => __("Ver $singular", 'themeframework'),
+      'view_items'               => __("Ver $plural", 'themeframework'),
+      'all_items'                => __("Todos $plural", 'themeframework'),
+      'search_items'             => __("Buscar $plural", 'themeframework'),
+      'parent_item_colon'        => __("Parent $singular", 'themeframework'),
+      'not_found'                => __("No $p_lower found", 'themeframework'),
+      'not_found_in_trash'       => __("No $p_lower found in trash", 'themeframework'),
+      'archives'                 => __("$singular Archives", 'themeframework'),
+      'attributes'               => __("$singular Attributes", 'themeframework'),
+      'insert_into_item'         => __("Insertar $s_lower", 'themeframework'),
+      'uploaded_to_this_item'    => __("Adjuntar a un $s_lower", 'themeframework'),
    ];
 }
 /******************************************************************************
@@ -41,7 +41,7 @@ function mcssca_crea_etiquetas_acta($singular = 'Post', $plural = 'Posts')
  * 
  * 
  *****************************************************************************/
-function mcssca_capacidades_acta($singular = 'post', $plural = 'posts')
+function themeframework_capacidades_acta($singular = 'post', $plural = 'posts')
 {
    return [
       'edit_post'                => "edit_$singular",
@@ -68,11 +68,11 @@ function mcssca_capacidades_acta($singular = 'post', $plural = 'posts')
  * 
  * 
  *****************************************************************************/
-function mcssca_acta_post_type()
+function themeframework_acta_post_type()
 {
    $type = 'acta';
-   $labels = mcssca_crea_etiquetas_acta('Acta', 'Actas');
-   $capabilities = mcssca_capacidades_acta('acta', 'actas');
+   $labels = themeframework_crea_etiquetas_acta('Acta', 'Actas');
+   $capabilities = themeframework_capacidades_acta('acta', 'actas');
 
    $args = array(
       'capability_type'          => ['acta', 'actas'],
@@ -90,7 +90,7 @@ function mcssca_acta_post_type()
 
    register_post_type($type, $args);
 }
-add_action('init', 'mcssca_acta_post_type');
+add_action('init', 'themeframework_acta_post_type');
 /******************************************************************************
  * 
  * 
@@ -118,19 +118,19 @@ add_action('pre_get_posts', 'acta_taxonomia_filter');
  * 
  * 
  *****************************************************************************/
-function mcssca_crear_campos_acta()
+function themeframework_crear_campos_acta()
 {
 
    add_meta_box(
       'n_acta',
       'Número de acta',
-      'mcssca_crear_n_acta_cbk',
+      'themeframework_crear_n_acta_cbk',
       'acta',
       'normal',
       'default'
    );
 
-   function mcssca_crear_n_acta_cbk($post)
+   function themeframework_crear_n_acta_cbk($post)
    {
       wp_nonce_field('n_acta_nonce', 'n_acta_nonce');
       $n_acta = get_post_meta($post->ID, '_n_acta', true);
@@ -140,12 +140,12 @@ function mcssca_crear_campos_acta()
    add_meta_box(
       'f_acta',
       'Fecha de acta',
-      'mcssca_crear_f_acta_cbk',
+      'themeframework_crear_f_acta_cbk',
       'acta',
       'normal',
       'default'
    );
-   function mcssca_crear_f_acta_cbk($post)
+   function themeframework_crear_f_acta_cbk($post)
    {
       wp_nonce_field('f_acta_nonce', 'f_acta_nonce');
       $f_acta = get_post_meta($post->ID, '_f_acta', true);
@@ -155,13 +155,13 @@ function mcssca_crear_campos_acta()
    add_meta_box(
       'comite_id',
       'ID Comité',
-      'mcssca_crear_comite_id_acta_cbk',
+      'themeframework_crear_comite_id_acta_cbk',
       'acta',
       'normal',
       'default'
    );
 
-   function mcssca_crear_comite_id_acta_cbk($post)
+   function themeframework_crear_comite_id_acta_cbk($post)
    {
       wp_nonce_field('comite_id_nonce', 'comite_id_nonce');
       $comite_id = get_post_meta($post->ID, '_comite_id', true);
@@ -180,7 +180,7 @@ function mcssca_crear_campos_acta()
 <?php
    }
 }
-add_action('add_meta_boxes', 'mcssca_crear_campos_acta');
+add_action('add_meta_boxes', 'themeframework_crear_campos_acta');
 /******************************************************************************
  * 
  * 
@@ -190,7 +190,7 @@ add_action('add_meta_boxes', 'mcssca_crear_campos_acta');
  * 
  * 
  *****************************************************************************/
-function mcssca_guardar_n_acta($post_id)
+function themeframework_guardar_n_acta($post_id)
 {
    if (!isset($_POST['n_acta_nonce'])) {
       return;
@@ -216,9 +216,9 @@ function mcssca_guardar_n_acta($post_id)
    $n_acta = sanitize_text_field($_POST['n_acta']);
    update_post_meta($post_id, '_n_acta', $n_acta);
 }
-add_action('save_post', 'mcssca_guardar_n_acta');
+add_action('save_post', 'themeframework_guardar_n_acta');
 
-function mcssca_guardar_f_acta($post_id)
+function themeframework_guardar_f_acta($post_id)
 {
    if (!isset($_POST['f_acta_nonce'])) {
       return;
@@ -244,9 +244,9 @@ function mcssca_guardar_f_acta($post_id)
    $f_acta = sanitize_text_field($_POST['f_acta']);
    update_post_meta($post_id, '_f_acta', $f_acta);
 }
-add_action('save_post', 'mcssca_guardar_f_acta');
+add_action('save_post', 'themeframework_guardar_f_acta');
 
-function mcssca_guardar_comite_id_acta($post_id)
+function themeframework_guardar_comite_id_acta($post_id)
 {
    if (!isset($_POST['comite_id_nonce'])) {
       return;
@@ -272,7 +272,7 @@ function mcssca_guardar_comite_id_acta($post_id)
    $comite_id = sanitize_text_field($_POST['comite_id']);
    update_post_meta($post_id, '_comite_id', $comite_id);
 }
-add_action('save_post', 'mcssca_guardar_comite_id_acta');
+add_action('save_post', 'themeframework_guardar_comite_id_acta');
 /******************************************************************************
  * 
  * 
@@ -281,7 +281,7 @@ add_action('save_post', 'mcssca_guardar_comite_id_acta');
  * 
  * 
  *****************************************************************************/
-function mcssca_agregar_acta_meta_fields()
+function themeframework_agregar_acta_meta_fields()
 {
 
    register_meta('post', '_comite_id', array(
@@ -291,10 +291,10 @@ function mcssca_agregar_acta_meta_fields()
       'show_in_rest' => true
    ));
 }
-add_action('rest_api_init', 'mcssca_agregar_acta_meta_fields');
+add_action('rest_api_init', 'themeframework_agregar_acta_meta_fields');
 
-if (!function_exists('mcssca_acta_meta_request_params')) {
-   function mcssca_acta_meta_request_params($args, $request)
+if (!function_exists('themeframework_acta_meta_request_params')) {
+   function themeframework_acta_meta_request_params($args, $request)
    {
       $args += array(
          'meta_key'   => $request['meta_key'],
@@ -303,7 +303,7 @@ if (!function_exists('mcssca_acta_meta_request_params')) {
       );
       return $args;
    }
-   add_filter('rest_acta_query', 'mcssca_acta_meta_request_params', 99, 2);
+   add_filter('rest_acta_query', 'themeframework_acta_meta_request_params', 99, 2);
 }
 /******************************************************************************
  * 
@@ -328,7 +328,7 @@ if (!function_exists('mcssca_acta_meta_request_params')) {
  *****************************************************************************/
 add_action('init', function () {
    $admin = get_role('administrator');
-   $capabilities = mcssca_capacidades_acta('acta', 'actas');
+   $capabilities = themeframework_capacidades_acta('acta', 'actas');
    foreach ($capabilities as $capability) {
       if (!$admin->has_cap($capability)) {
          $admin->add_cap($capability);

@@ -16,15 +16,15 @@ get_header();
     </header>
     <section class="container py-5">
         <?php if (have_posts()) : ?>
-            <?php if (mcssca_get_page_att($postType)['userAdmin']) : ?>
-                <?php echo get_template_part(mcssca_get_page_att($postType)['agregarpost']) ?>
+            <?php if (themeframework_get_page_att($postType)['userAdmin']) : ?>
+                <?php echo get_template_part(themeframework_get_page_att($postType)['agregarpost']) ?>
             <?php endif; ?>
             <?php if (isset($description)) : ?>
                 <div class="archive-description"><?php echo wp_kses_post(wpautop($description)); ?></div>
             <?php endif; ?>
-            <div class="<?php echo mcssca_get_page_att($postType)['div1'] ?>">
-                <div class="<?php echo mcssca_get_page_att($postType)['div2'] ?>">
-                    <div class="<?php echo mcssca_get_page_att($postType)['div3'] ?>">
+            <div class="<?php echo themeframework_get_page_att($postType)['div1'] ?>">
+                <div class="<?php echo themeframework_get_page_att($postType)['div2'] ?>">
+                    <div class="<?php echo themeframework_get_page_att($postType)['div3'] ?>">
                         <?php while (have_posts()) : ?>
                             <?php
                             the_post();
@@ -34,12 +34,12 @@ get_header();
                     </div>
                 </div>
                 <?php if ($postType == 'post') : ?>
-                    <div class="<?php echo mcssca_get_page_att($postType)['div4'] ?>">
-                        <?php get_template_part(mcssca_get_page_att($postType)['barra']) ?>
+                    <div class="<?php echo themeframework_get_page_att($postType)['div4'] ?>">
+                        <?php get_template_part(themeframework_get_page_att($postType)['barra']) ?>
                     </div>
                 <?php else : ?>
-                    <div class="<?php echo mcssca_get_page_att($postType)['div5'] ?>">
-                        <?php get_template_part(mcssca_get_page_att($postType)['barra']) ?>
+                    <div class="<?php echo themeframework_get_page_att($postType)['div5'] ?>">
+                        <?php get_template_part(themeframework_get_page_att($postType)['barra']) ?>
                     </div>
                 <?php endif; ?>
             </div>

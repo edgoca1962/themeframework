@@ -7,31 +7,31 @@
  * 
  * 
  *****************************************************************************/
-function mcssca_crea_etiquetas_puesto($singular = 'Post', $plural = 'Posts')
+function themeframework_crea_etiquetas_puesto($singular = 'Post', $plural = 'Posts')
 {
    $p_lower = strtolower($plural);
    $s_lower = strtolower($singular);
 
    return [
-      'name'                     => _x($plural, 'post type general name', 'mcssca'),
-      'singular_name'            => _x($singular, 'post type singular name', 'mcssca'),
-      'menu_name'                => _x($plural, 'admin menu', 'mcssca'),
-      'name_admin_bar'           => _x($singular, 'add new on admin bar', 'mcssca'),
-      'add_new'                  => _x("Nuevo $singular", 'prayer', 'mcssca'),
-      'add_new_item'             => __("Agregar $singular", 'mcssca'),
-      'new_item'                 => __("Nuevo $singular", 'mcssca'),
-      'edit_item'                => __("Editar $singular", 'mcssca'),
-      'view_item'                => __("Ver $singular", 'mcssca'),
-      'view_items'               => __("Ver $plural", 'mcssca'),
-      'all_items'                => __("Todos $plural", 'mcssca'),
-      'search_items'             => __("Buscar $plural", 'mcssca'),
-      'parent_item_colon'        => __("Parent $singular", 'mcssca'),
-      'not_found'                => __("No $p_lower found", 'mcssca'),
-      'not_found_in_trash'       => __("No $p_lower found in trash", 'mcssca'),
-      'archives'                 => __("$singular Archives", 'mcssca'),
-      'attributes'               => __("$singular Attributes", 'mcssca'),
-      'insert_into_item'         => __("Insertar $s_lower", 'mcssca'),
-      'uploaded_to_this_item'    => __("Adjuntar a un $s_lower", 'mcssca'),
+      'name'                     => _x($plural, 'post type general name', 'themeframework'),
+      'singular_name'            => _x($singular, 'post type singular name', 'themeframework'),
+      'menu_name'                => _x($plural, 'admin menu', 'themeframework'),
+      'name_admin_bar'           => _x($singular, 'add new on admin bar', 'themeframework'),
+      'add_new'                  => _x("Nuevo $singular", 'prayer', 'themeframework'),
+      'add_new_item'             => __("Agregar $singular", 'themeframework'),
+      'new_item'                 => __("Nuevo $singular", 'themeframework'),
+      'edit_item'                => __("Editar $singular", 'themeframework'),
+      'view_item'                => __("Ver $singular", 'themeframework'),
+      'view_items'               => __("Ver $plural", 'themeframework'),
+      'all_items'                => __("Todos $plural", 'themeframework'),
+      'search_items'             => __("Buscar $plural", 'themeframework'),
+      'parent_item_colon'        => __("Parent $singular", 'themeframework'),
+      'not_found'                => __("No $p_lower found", 'themeframework'),
+      'not_found_in_trash'       => __("No $p_lower found in trash", 'themeframework'),
+      'archives'                 => __("$singular Archives", 'themeframework'),
+      'attributes'               => __("$singular Attributes", 'themeframework'),
+      'insert_into_item'         => __("Insertar $s_lower", 'themeframework'),
+      'uploaded_to_this_item'    => __("Adjuntar a un $s_lower", 'themeframework'),
    ];
 }
 /******************************************************************************
@@ -41,7 +41,7 @@ function mcssca_crea_etiquetas_puesto($singular = 'Post', $plural = 'Posts')
  * 
  * 
  *****************************************************************************/
-function mcssca_capacidades_puesto($singular = 'post', $plural = 'posts')
+function themeframework_capacidades_puesto($singular = 'post', $plural = 'posts')
 {
    return [
       'edit_post'                => "edit_$singular",
@@ -68,11 +68,11 @@ function mcssca_capacidades_puesto($singular = 'post', $plural = 'posts')
  * 
  * 
  *****************************************************************************/
-function mcssca_puesto_post_type()
+function themeframework_puesto_post_type()
 {
    $type = 'puesto';
-   $labels = mcssca_crea_etiquetas_puesto('puesto', 'puestos');
-   $capabilities = mcssca_capacidades_puesto('puesto', 'puestos');
+   $labels = themeframework_crea_etiquetas_puesto('puesto', 'puestos');
+   $capabilities = themeframework_capacidades_puesto('puesto', 'puestos');
 
    $args = array(
       'capability_type'          => ['puesto', 'puestos'],
@@ -90,7 +90,7 @@ function mcssca_puesto_post_type()
 
    register_post_type($type, $args);
 }
-add_action('init', 'mcssca_puesto_post_type');
+add_action('init', 'themeframework_puesto_post_type');
 /******************************************************************************
  * 
  * 
@@ -119,7 +119,7 @@ add_action('pre_get_posts', 'puesto_taxonomia_filter');
  *****************************************************************************/
 add_action('init', function () {
    $admin = get_role('administrator');
-   $capabilities = mcssca_capacidades_puesto('puesto', 'puestos');
+   $capabilities = themeframework_capacidades_puesto('puesto', 'puestos');
    foreach ($capabilities as $capability) {
       if (!$admin->has_cap($capability)) {
          $admin->add_cap($capability);

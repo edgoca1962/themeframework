@@ -7,31 +7,31 @@
  * 
  * 
  *****************************************************************************/
-function mcssca_crea_etiquetas_miembro($singular = 'Post', $plural = 'Posts')
+function themeframework_crea_etiquetas_miembro($singular = 'Post', $plural = 'Posts')
 {
    $p_lower = strtolower($plural);
    $s_lower = strtolower($singular);
 
    return [
-      'name'                     => _x($plural, 'post type general name', 'mcssca'),
-      'singular_name'            => _x($singular, 'post type singular name', 'mcssca'),
-      'menu_name'                => _x($plural, 'admin menu', 'mcssca'),
-      'name_admin_bar'           => _x($singular, 'add new on admin bar', 'mcssca'),
-      'add_new'                  => _x("Nuevo $singular", 'prayer', 'mcssca'),
-      'add_new_item'             => __("Agregar $singular", 'mcssca'),
-      'new_item'                 => __("Nuevo $singular", 'mcssca'),
-      'edit_item'                => __("Editar $singular", 'mcssca'),
-      'view_item'                => __("Ver $singular", 'mcssca'),
-      'view_items'               => __("Ver $plural", 'mcssca'),
-      'all_items'                => __("Todos $plural", 'mcssca'),
-      'search_items'             => __("Buscar $plural", 'mcssca'),
-      'parent_item_colon'        => __("Parent $singular", 'mcssca'),
-      'not_found'                => __("No $p_lower found", 'mcssca'),
-      'not_found_in_trash'       => __("No $p_lower found in trash", 'mcssca'),
-      'archives'                 => __("$singular Archives", 'mcssca'),
-      'attributes'               => __("$singular Attributes", 'mcssca'),
-      'insert_into_item'         => __("Insertar $s_lower", 'mcssca'),
-      'uploaded_to_this_item'    => __("Adjuntar a un $s_lower", 'mcssca'),
+      'name'                     => _x($plural, 'post type general name', 'themeframework'),
+      'singular_name'            => _x($singular, 'post type singular name', 'themeframework'),
+      'menu_name'                => _x($plural, 'admin menu', 'themeframework'),
+      'name_admin_bar'           => _x($singular, 'add new on admin bar', 'themeframework'),
+      'add_new'                  => _x("Nuevo $singular", 'prayer', 'themeframework'),
+      'add_new_item'             => __("Agregar $singular", 'themeframework'),
+      'new_item'                 => __("Nuevo $singular", 'themeframework'),
+      'edit_item'                => __("Editar $singular", 'themeframework'),
+      'view_item'                => __("Ver $singular", 'themeframework'),
+      'view_items'               => __("Ver $plural", 'themeframework'),
+      'all_items'                => __("Todos $plural", 'themeframework'),
+      'search_items'             => __("Buscar $plural", 'themeframework'),
+      'parent_item_colon'        => __("Parent $singular", 'themeframework'),
+      'not_found'                => __("No $p_lower found", 'themeframework'),
+      'not_found_in_trash'       => __("No $p_lower found in trash", 'themeframework'),
+      'archives'                 => __("$singular Archives", 'themeframework'),
+      'attributes'               => __("$singular Attributes", 'themeframework'),
+      'insert_into_item'         => __("Insertar $s_lower", 'themeframework'),
+      'uploaded_to_this_item'    => __("Adjuntar a un $s_lower", 'themeframework'),
    ];
 }
 /******************************************************************************
@@ -41,7 +41,7 @@ function mcssca_crea_etiquetas_miembro($singular = 'Post', $plural = 'Posts')
  * 
  * 
  *****************************************************************************/
-function mcssca_capacidades_miembro($singular = 'post', $plural = 'posts')
+function themeframework_capacidades_miembro($singular = 'post', $plural = 'posts')
 {
    return [
       'edit_post'                => "edit_$singular",
@@ -68,11 +68,11 @@ function mcssca_capacidades_miembro($singular = 'post', $plural = 'posts')
  * 
  * 
  *****************************************************************************/
-function mcssca_miembro_post_type()
+function themeframework_miembro_post_type()
 {
    $type = 'miembro';
-   $labels = mcssca_crea_etiquetas_miembro('miembro', 'miembros');
-   $capabilities = mcssca_capacidades_miembro('miembro', 'miembros');
+   $labels = themeframework_crea_etiquetas_miembro('miembro', 'miembros');
+   $capabilities = themeframework_capacidades_miembro('miembro', 'miembros');
 
    $args = array(
       'capability_type'          => ['miembro', 'miembros'],
@@ -90,7 +90,7 @@ function mcssca_miembro_post_type()
 
    register_post_type($type, $args);
 }
-add_action('init', 'mcssca_miembro_post_type');
+add_action('init', 'themeframework_miembro_post_type');
 /******************************************************************************
  * 
  * 
@@ -133,7 +133,7 @@ add_action('pre_get_posts', 'miembro_taxonomia_filter');
  *****************************************************************************/
 add_action('init', function () {
    $admin = get_role('administrator');
-   $capabilities = mcssca_capacidades_miembro('miembro', 'miembros');
+   $capabilities = themeframework_capacidades_miembro('miembro', 'miembros');
    foreach ($capabilities as $capability) {
       if (!$admin->has_cap($capability)) {
          $admin->add_cap($capability);
@@ -149,18 +149,18 @@ add_action('init', function () {
  * 
  * 
  *****************************************************************************/
-function mcssca_crear_campos_miembro()
+function themeframework_crear_campos_miembro()
 {
 
    add_meta_box(
       'usr_id',
       'ID Miembro',
-      'mcssca_crear_usr_id_miembro_cbk',
+      'themeframework_crear_usr_id_miembro_cbk',
       'miembro',
       'normal',
       'default'
    );
-   function mcssca_crear_usr_id_miembro_cbk($post)
+   function themeframework_crear_usr_id_miembro_cbk($post)
    {
       wp_nonce_field('usr_id_nonce', 'usr_id_nonce');
       $usr_id = get_post_meta($post->ID, '_usr_id', true);
@@ -210,13 +210,13 @@ function mcssca_crear_campos_miembro()
    add_meta_box(
       'puesto_id',
       'ID Puesto',
-      'mcssca_crear_puesto_id_cbk',
+      'themeframework_crear_puesto_id_cbk',
       'miembro',
       'normal',
       'default',
       'show_in_rest',
    );
-   function mcssca_crear_puesto_id_cbk($post)
+   function themeframework_crear_puesto_id_cbk($post)
    {
       wp_nonce_field('puesto_id_nonce', 'puesto_id_nonce');
       $puesto_id = get_post_meta($post->ID, '_puesto_id', true);
@@ -266,7 +266,7 @@ function mcssca_crear_campos_miembro()
       echo '<input type="date" style="width:20%" id="f_final" name="f_final" value="' . esc_attr($f_final) . '" ></input>';
    }
 }
-add_action('add_meta_boxes', 'mcssca_crear_campos_miembro');
+add_action('add_meta_boxes', 'themeframework_crear_campos_miembro');
 /******************************************************************************
  * 
  * 
@@ -276,7 +276,7 @@ add_action('add_meta_boxes', 'mcssca_crear_campos_miembro');
  * 
  * 
  *****************************************************************************/
-function mcssca_guardar_usr_id_miembro($post_id)
+function themeframework_guardar_usr_id_miembro($post_id)
 {
    if (!isset($_POST['usr_id_nonce'])) {
       return;
@@ -303,9 +303,9 @@ function mcssca_guardar_usr_id_miembro($post_id)
    update_post_meta($post_id, '_usr_id', $usr_id);
 }
 
-add_action('save_post', 'mcssca_guardar_usr_id_miembro');
+add_action('save_post', 'themeframework_guardar_usr_id_miembro');
 
-function mcssca_guardar_comite_id_miembro($post_id)
+function themeframework_guardar_comite_id_miembro($post_id)
 {
    if (!isset($_POST['comite_id_nonce'])) {
       return;
@@ -331,9 +331,9 @@ function mcssca_guardar_comite_id_miembro($post_id)
    $comite_id = sanitize_text_field($_POST['comite_id']);
    update_post_meta($post_id, '_comite_id', $comite_id);
 }
-add_action('save_post', 'mcssca_guardar_comite_id_miembro');
+add_action('save_post', 'themeframework_guardar_comite_id_miembro');
 
-function mcssca_guardar_puesto_id_miembro($post_id)
+function themeframework_guardar_puesto_id_miembro($post_id)
 {
    if (!isset($_POST['puesto_id_nonce'])) {
       return;
@@ -359,9 +359,9 @@ function mcssca_guardar_puesto_id_miembro($post_id)
    $puesto_id = sanitize_text_field($_POST['puesto_id']);
    update_post_meta($post_id, '_puesto_id', $puesto_id);
 }
-add_action('save_post', 'mcssca_guardar_puesto_id_miembro');
+add_action('save_post', 'themeframework_guardar_puesto_id_miembro');
 
-function mcssca_guardar_miembro_f_inicio($post_id)
+function themeframework_guardar_miembro_f_inicio($post_id)
 {
    if (!isset($_POST['f_inicio_nonce'])) {
       return;
@@ -387,9 +387,9 @@ function mcssca_guardar_miembro_f_inicio($post_id)
    $f_inicio = sanitize_text_field($_POST['f_inicio']);
    update_post_meta($post_id, '_f_inicio', $f_inicio);
 }
-add_action('save_post', 'mcssca_guardar_miembro_f_inicio');
+add_action('save_post', 'themeframework_guardar_miembro_f_inicio');
 
-function mcssca_guardar_miembro_f_final($post_id)
+function themeframework_guardar_miembro_f_final($post_id)
 {
    if (!isset($_POST['f_final_nonce'])) {
       return;
@@ -415,7 +415,7 @@ function mcssca_guardar_miembro_f_final($post_id)
    $f_final = sanitize_text_field($_POST['f_final']);
    update_post_meta($post_id, '_f_final', $f_final);
 }
-add_action('save_post', 'mcssca_guardar_miembro_f_final');
+add_action('save_post', 'themeframework_guardar_miembro_f_final');
 /******************************************************************************
  * 
  * 
@@ -425,7 +425,7 @@ add_action('save_post', 'mcssca_guardar_miembro_f_final');
  * 
  *****************************************************************************/
 
-function mcssca_agregar_miembro_meta_fields()
+function themeframework_agregar_miembro_meta_fields()
 {
    register_meta('post', '_usr_id', array(
       'type' => 'string',
@@ -440,10 +440,10 @@ function mcssca_agregar_miembro_meta_fields()
       'show_in_rest' => true
    ));
 }
-add_action('rest_api_init', 'mcssca_agregar_miembro_meta_fields');
+add_action('rest_api_init', 'themeframework_agregar_miembro_meta_fields');
 
-if (!function_exists('mcssca_miembro_meta_request_params')) {
-   function mcssca_miembro_meta_request_params($args, $request)
+if (!function_exists('themeframework_miembro_meta_request_params')) {
+   function themeframework_miembro_meta_request_params($args, $request)
    {
       $args += array(
          'meta_key'   => $request['meta_key'],
@@ -452,5 +452,5 @@ if (!function_exists('mcssca_miembro_meta_request_params')) {
       );
       return $args;
    }
-   add_filter('rest_miembro_query', 'mcssca_miembro_meta_request_params', 99, 2);
+   add_filter('rest_miembro_query', 'themeframework_miembro_meta_request_params', 99, 2);
 }
