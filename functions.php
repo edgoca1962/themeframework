@@ -41,7 +41,7 @@ function themeframework_setup()
    // This theme uses wp_nav_menu() in one location.
    register_nav_menus(
       array(
-         'menu-1' => esc_html__('Primary', 'themeframework'),
+         'principal' => esc_html__('Principal', 'themeframework'),
       )
    );
    /*
@@ -84,12 +84,12 @@ add_action('after_setup_theme', 'themeframework_setup');
 /**
  * Enqueue scripts and styles.
  */
-function temabase_scripts()
+function themeframework_scripts()
 {
    wp_enqueue_style('styles', get_stylesheet_uri(), array(), microtime(), 'all');
    wp_enqueue_script('scripts', get_template_directory_uri() . '/assets/main.js', array('jquery'), microtime(), true);
 }
-add_action('wp_enqueue_scripts', 'temabase_scripts');
+add_action('wp_enqueue_scripts', 'themeframework_scripts');
 
 require_once ABSPATH . '/wp-admin/includes/taxonomy.php';
 

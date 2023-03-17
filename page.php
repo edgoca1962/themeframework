@@ -11,7 +11,7 @@ if (is_user_logged_in()) {
         while (have_posts()) {
             the_post();
             if (is_front_page()) {
-                $ocultarFooter = true;
+                $ocultarFooter = false;
                 get_template_part('modules/cor/template-parts/cor', 'page', ['fullpage' => $ocultarFooter]);
             } else {
                 get_template_part('modules/cor/template-parts/cor', 'page', ['fullpage' => false]);

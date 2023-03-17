@@ -101,6 +101,8 @@ if (!function_exists('themeframework_get_page_att')) {
          }
          $frontPage = false;
       }
+      if (isset($_GET['menu'])) {
+      }
       $atributos['frontPage'] = $frontPage;
       $atributos['template-parts'] = $templateParts;
       $atributos['userAdmin'] = $userAdmin;
