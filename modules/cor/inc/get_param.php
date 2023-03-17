@@ -101,20 +101,75 @@ if (!function_exists('themeframework_get_page_att')) {
          }
          $frontPage = false;
       }
-      if (isset($_GET['menu'])) {
+      $titulo = get_the_title();
+      $subtitulo = '';
+      $subtitulo2 = '';
+      $template = '';
+
+      $div3 = '';
+      $div4 = '';
+      $div5 = '';
+      $agregarpost = '';
+      $barra = '';
+      $regresar = '';
+
+
+      if (isset(explode("/", $_SERVER['REQUEST_URI'])[3])) {
+         $atributos['pag'] = explode("/", $_SERVER['REQUEST_URI'])[3];
+      } else {
+         $atributos['pag'] = '1';
       }
+      if (isset($_GET['pag'])) {
+         $atributos['pag_ant'] = sanitize_text_field($_GET['pag']);
+      } else {
+         $atributos['pag_ant'] = '1';
+      }
+      switch ($postType) {
+         case 'post':
+            if (get_the_post_thumbnail_url()) {
+               $imagen = get_the_post_thumbnail_url();
+            } else {
+               $imagen = get_template_directory_uri() . '/assets/img/bg.jpg';
+            }
+            $titulo = 'Blog';
+            if (get_the_archive_title() == 'Archives') {
+               $subtitulo = '';
+            } else {
+               $subtitulo = str_replace('Tag', 'Clasificación', get_the_archive_title(), $count);
+            }
+            $height = '60vh';
+            $subtitulo2 = '';
+            $div1 = '';
+            $div2 = '';
+            $div3 = 'row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4';
+            $div4 = '';
+            $div5 = '';
+            $agregarpost = '';
+            $barra = '';
+            $regresar = 'post';
+            break;
+      }
+      //Page atributos
       $atributos['frontPage'] = $frontPage;
       $atributos['template-parts'] = $templateParts;
       $atributos['userAdmin'] = $userAdmin;
       $atributos['height'] = $height;
       $atributos['imagen'] = $imagen;
       $atributos['fullpage'] = $fullpage;
-      $atributos['titulo'] = get_the_title();
-      $atributos['subtitulo'] = '';
-      $atributos['subtitulo2'] = '';
-      $atributos['template'] = '';
+      $atributos['titulo'] = $titulo;
+      $atributos['subtitulo'] = $subtitulo;
+      $atributos['subtitulo2'] = $subtitulo2;
+      $atributos['template'] = $template;
       $atributos['div1'] = $div1;
       $atributos['div2'] = $div2;
+
+      //Posts Atributos
+      $atributos['div3'] = $div3;
+      $atributos['div4'] = $div4;
+      $atributos['div5'] = $div5;
+      $atributos['agregarpost'] = $agregarpost;
+      $atributos['barra'] = $barra;
+      $atributos['regresar'] = $regresar;
 
       return $atributos;
    }
