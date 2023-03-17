@@ -12,7 +12,10 @@ get_header();
 <?php if (is_user_logged_in()) : ?>
     <?php $postType = get_post_type() ?>
     <header>
-        <?php get_template_part('template-parts/content', 'header', ['post_type' => $postType, 'fullpage' => false]) ?>
+        <?php
+        get_template_part('modules/cor/template-parts/cor', 'header-banner', ['postType' => get_post_type(), 'fullpage' => false]);
+        get_template_part('modules/cor/template-parts/cor', 'header-nav', ['postType' => get_post_type(), 'fullpage' => false]);
+        ?>
     </header>
     <section class="container py-5">
         <?php if (have_posts()) : ?>
@@ -28,7 +31,7 @@ get_header();
                         <?php while (have_posts()) : ?>
                             <?php
                             the_post();
-                            get_template_part('template-parts/' . get_post_type());
+                            get_template_part(themeframework_get_page_att($postType)['template-parts']);
                             ?>
                         <?php endwhile; ?>
                     </div>

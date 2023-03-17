@@ -9,20 +9,25 @@
 get_header();
 $postType = get_post_type();
 ?>
-<?php get_template_part('template-parts/content', 'header', ['post_type' => $postType, 'fullpage' => false]) ?>
+<header>
+    <?php
+    get_template_part('modules/cor/template-parts/cor', 'header-banner', ['postType' => get_post_type(), 'fullpage' => false]);
+    get_template_part('modules/cor/template-parts/cor', 'header-nav', ['postType' => get_post_type(), 'fullpage' => false]);
+    ?>
+</header>
 <section class="container py-5">
     <div class="<?php echo themeframework_get_page_att($postType)['div1'] ?>">
-        <div class="<?php echo themeframework_get_page_att($postType)['div2'] ?>">
-            <div class="<?php echo themeframework_get_page_att($postType)['div3'] ?>">
+        <div class="<?php echo themeframework_get_page_att($postType)['div1'] ?>">
+            <div class="<?php echo themeframework_get_page_att($postType)['div1'] ?>">
                 <?php if (have_posts()) : ?>
                     <?php
                     while (have_posts()) :
                         the_post();
-                        get_template_part('template-parts/' . get_post_type(), 'single');
+                        get_template_part(themeframework_get_page_att($postType)['template-parts-single']);
                     endwhile;
                     ?>
                 <?php else : ?>
-                    <?php get_template_part('template-parts/content', 'none') ?>
+                    <?php get_template_part('modules/cor/template-parts/cor', 'none', ['fullpage' => true]); ?>
                 <?php endif ?>
             </div>
         </div>

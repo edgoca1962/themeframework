@@ -95,3 +95,6 @@ require_once ABSPATH . '/wp-admin/includes/taxonomy.php';
 
 require get_template_directory() . "/modules/cor/inc/get_param.php";
 require get_template_directory() . "/modules/cor/inc/login.php";
+require get_template_directory() . '/modules/twentytwentyone/class-twenty-twenty-one-svg-icons.php';
+require get_template_directory() . '/modules/twentytwentyone/template-functions.php';
+require get_template_directory() . '/modules/twentytwentyone/template-tags.php';

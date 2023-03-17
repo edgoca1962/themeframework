@@ -137,6 +137,8 @@ if (!function_exists('themeframework_get_page_att')) {
             } else {
                $subtitulo = str_replace('Tag', 'Clasificación', get_the_archive_title(), $count);
             }
+            $templateParts = 'modules/pst/template-parts/' . $postType;
+            $templatePartsSingle = 'modules/pst/template-parts/single-' . $postType;
             $height = '60vh';
             $subtitulo2 = '';
             $div1 = '';
@@ -152,6 +154,7 @@ if (!function_exists('themeframework_get_page_att')) {
       //Page atributos
       $atributos['frontPage'] = $frontPage;
       $atributos['template-parts'] = $templateParts;
+      $atributos['template-parts-single'] = $templateParts;
       $atributos['userAdmin'] = $userAdmin;
       $atributos['height'] = $height;
       $atributos['imagen'] = $imagen;
