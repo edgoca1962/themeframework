@@ -1,7 +1,7 @@
 <div class="col">
     <div class="card h-100 border border-0 bg-transparent">
         <div class="card-body">
-            <h5 class="card-title"><?php the_title() ?></h5>
+            <h2 class="card-title"><?php the_title() ?></h2>
             <?php the_content() ?>
         </div>
         <div class="card-footer">

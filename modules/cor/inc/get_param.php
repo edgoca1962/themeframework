@@ -112,6 +112,7 @@ if (!function_exists('themeframework_get_page_att')) {
       $agregarpost = '';
       $barra = '';
       $regresar = '';
+      $templatePartsSingle = '';
 
 
       if (isset(explode("/", $_SERVER['REQUEST_URI'])[3])) {
@@ -131,14 +132,18 @@ if (!function_exists('themeframework_get_page_att')) {
             } else {
                $imagen = get_template_directory_uri() . '/assets/img/bg.jpg';
             }
-            $titulo = 'Blog';
+            if (is_single()) {
+               $titulo = get_the_title();
+            } else {
+               $titulo = 'Blog';
+            }
             if (get_the_archive_title() == 'Archives') {
                $subtitulo = '';
             } else {
                $subtitulo = str_replace('Tag', 'Clasificación', get_the_archive_title(), $count);
             }
             $templateParts = 'modules/pst/template-parts/' . $postType;
-            $templatePartsSingle = 'modules/pst/template-parts/single-' . $postType;
+            $templatePartsSingle = 'modules/pst/template-parts/' . $postType . '-single';
             $height = '60vh';
             $subtitulo2 = '';
             $div1 = '';
@@ -151,10 +156,9 @@ if (!function_exists('themeframework_get_page_att')) {
             $regresar = 'post';
             break;
       }
-      //Page atributos
       $atributos['frontPage'] = $frontPage;
       $atributos['template-parts'] = $templateParts;
-      $atributos['template-parts-single'] = $templateParts;
+      $atributos['template-parts-single'] = $templatePartsSingle;
       $atributos['userAdmin'] = $userAdmin;
       $atributos['height'] = $height;
       $atributos['imagen'] = $imagen;
@@ -165,8 +169,6 @@ if (!function_exists('themeframework_get_page_att')) {
       $atributos['template'] = $template;
       $atributos['div1'] = $div1;
       $atributos['div2'] = $div2;
-
-      //Posts Atributos
       $atributos['div3'] = $div3;
       $atributos['div4'] = $div4;
       $atributos['div5'] = $div5;

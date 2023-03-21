@@ -40,9 +40,9 @@ $postType = get_post_type();
                 <?php get_template_part(themeframework_get_page_att($postType)['barra']) ?>
             </div>
         <?php endif; ?>
-        <!-- <div>
+        <div>
             <button class="btn btn-warning btn-sm"><a class="text-black" href="<?php echo get_post_type_archive_link(themeframework_get_page_att($postType)['regresar']) . 'page/' . themeframework_get_page_att($postType)['pag_ant']  ?>">Regresar</a></button>
-        </div> -->
+        </div>
     </div>
 </section>
 <?php
