@@ -93,9 +93,9 @@ add_action('wp_enqueue_scripts', 'themeframework_scripts');
 
 require_once ABSPATH . '/wp-admin/includes/taxonomy.php';
 
-require get_template_directory() . "/modules/cor/inc/get_param.php";
-require get_template_directory() . "/modules/cor/inc/login.php";
-require get_template_directory() . '/modules/cor/inc/twentytwentyone/class-twenty-twenty-one-svg-icons.php';
-require get_template_directory() . '/modules/cor/inc/twentytwentyone/template-functions.php';
-require get_template_directory() . '/modules/cor/inc/twentytwentyone/template-tags.php';
-require get_template_directory() . "/modules/cor/inc/walker.php";
+require get_template_directory() . "/modules/core/inc/get_param.php";
+require get_template_directory() . "/modules/core/inc/login.php";
+require get_template_directory() . '/modules/core/inc/twentytwentyone/class-twenty-twenty-one-svg-icons.php';
+require get_template_directory() . '/modules/core/inc/twentytwentyone/template-functions.php';
+require get_template_directory() . '/modules/core/inc/twentytwentyone/template-tags.php';
+require get_template_directory() . "/modules/core/inc/walker.php";

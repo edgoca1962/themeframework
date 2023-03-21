@@ -17,9 +17,6 @@ get_header();
         ?>
     </header>
     <section class="container py-5">
-        <pre>
-            <?php print_r(themeframework_get_page_att($postType)) ?>
-        </pre>
         <?php if (have_posts()) : ?>
             <?php if (isset($description)) : ?>
                 <div class="archive-description"><?php echo wp_kses_post(wpautop($description)); ?></div>
