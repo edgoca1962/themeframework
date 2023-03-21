@@ -12,22 +12,22 @@ if (is_user_logged_in()) {
             the_post();
             if (is_front_page()) {
                 $ocultarFooter = false;
-                get_template_part('modules/cor/template-parts/cor', 'page', ['fullpage' => $ocultarFooter]);
+                get_template_part('modules/core/template-parts/cor', 'page', ['fullpage' => $ocultarFooter]);
             } else {
-                get_template_part('modules/cor/template-parts/cor', 'page', ['fullpage' => false]);
+                get_template_part('modules/core/template-parts/cor', 'page', ['fullpage' => false]);
                 $ocultarFooter = false;
             }
         }
     } else {
-        get_template_part('modules/cor/template-parts/cor', 'none', ['fullpage' => true]);
+        get_template_part('modules/core/template-parts/cor', 'none', ['fullpage' => true]);
     }
 } else {
     if (is_page('cor-login')) {
-        get_template_part('modules/cor/template-parts/cor-login');
+        get_template_part('modules/core/template-parts/cor-login');
     } elseif (is_front_page()) {
-        get_template_part('modules/cor/template-parts/cor', 'page', ['fullpage' => true, 'noingresado' => false, '404' => false]);
+        get_template_part('modules/core/template-parts/cor', 'page', ['fullpage' => true, 'noingresado' => false, '404' => false]);
     } else {
-        get_template_part('modules/cor/template-parts/cor', 'page', ['fullpage' => true, 'noingresado' => true]);
+        get_template_part('modules/core/template-parts/cor', 'page', ['fullpage' => true, 'noingresado' => true]);
     }
     $ocultarFooter = true;
 }

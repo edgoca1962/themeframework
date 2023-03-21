@@ -18,6 +18,9 @@ get_header();
         ?>
     </header>
     <section class="container py-5">
+        <pre>
+            <?php print_r(themeframework_get_page_att($postType)) ?>
+        </pre>
         <?php if (have_posts()) : ?>
             <?php if (themeframework_get_page_att($postType)['userAdmin']) : ?>
                 <?php echo get_template_part(themeframework_get_page_att($postType)['agregarpost']) ?>

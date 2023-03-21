@@ -6,8 +6,8 @@ get_header(); ?>
    <?php $postType = get_post_type() ?>
    <header>
       <?php
-      get_template_part('modules/cor/template-parts/cor', 'header-banner', ['postType' => get_post_type(), 'fullpage' => false]);
-      get_template_part('modules/cor/template-parts/cor', 'header-nav', ['postType' => get_post_type(), 'fullpage' => false]);
+      get_template_part('modules/core/template-parts/cor', 'header-banner', ['postType' => get_post_type(), 'fullpage' => false]);
+      get_template_part('modules/core/template-parts/cor', 'header-nav', ['postType' => get_post_type(), 'fullpage' => false]);
       ?>
    </header>
    <section class="container py-5">
@@ -23,7 +23,7 @@ get_header(); ?>
       ?>
    <?php else : ?>
       <?php
-      if (is_page('login')) {
+      if (is_page('cor-login')) {
          get_template_part('');
       } elseif (is_front_page()) {
          get_template_part('');
