@@ -103,14 +103,21 @@ if (!function_exists('themeframework_get_page_att')) {
          $postType = sanitize_text_field($_GET['cpt']);
       }
       if (isset(explode("/", $_SERVER['REQUEST_URI'])[3])) {
-         $pag = explode("/", $_SERVER['REQUEST_URI'])[3];
+         if (explode("/", $_SERVER['REQUEST_URI'])[3] != '') {
+            if (explode("/", $_SERVER['REQUEST_URI'])[3] == 'page') {
+               $pag = 0; //explode("/", $_SERVER['REQUEST_URI'])[4];
+            } else {
+               $pag = explode("/", $_SERVER['REQUEST_URI'])[3];
+            }
+         } else {
+            $pag = 0;
+         }
       } else {
          $pag = '1';
       }
       if (isset($_GET['pag'])) {
          $pag_ant = sanitize_text_field($_GET['pag']);
       } else {
-         $pag = '1';
          $pag_ant = '1';
       }
       /* 
