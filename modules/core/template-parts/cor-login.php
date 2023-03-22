@@ -1,15 +1,12 @@
 <section id="hero-page" class="d-flex flex-column justify-content-center align-items-center text-white" style="background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(<?php echo themeframework_get_page_att(get_post_type(), true)['imagen'] ?>) no-repeat center /cover; height: <?php echo  themeframework_get_page_att(get_post_type(), true)['height'] ?>;">
-   <h1 class="animate__animated animate__fadeInDown mb-3  text-center fw-lighter"><?php echo $titulo ?></h1>
-   <h3 class="animate__animated animate__fadeInUp mb-3 text-center fw-lighter"><?php echo themeframework_get_page_att(get_post_type(), true)['subtitulo'] ?></h3>
-   <h5 class="animate__animated animate__fadeInUp text-center fw-lighter"><?php echo themeframework_get_page_att(get_post_type(), true)['subtitulo2'] ?></h5>
-   <div class="row">
-      <div style="margin-top: 50vh;">
+   <div class="row overflow-hidden">
+      <div style="margin-top: 25vh;">
          <section class="col vh-100 d-flex justify-content-center">
             <div class='position-relative'>
                <div class="d-flex justify-content-center">
                   <a href="<?php echo esc_url(site_url('/')) ?>" style="z-index:5">
                      <!-- rounded-circle border border-3 -->
-                     <img class="img-thumbnail rounded-circle" src="<?php echo wp_get_attachment_image_src(get_theme_mod('custom_logo'), 'full')[0] ?>" style="width:100px;" alt="Logo">
+                     <img src="<?php echo wp_get_attachment_image_src(get_theme_mod('custom_logo'), 'full')[0] ?>" style="width:100px;" alt="Logo">
                   </a>
                </div>
                <div class="ingreso-bg p-5 rounded-5 shadowcss" style="margin-top:-2.3rem; width:20rem;">

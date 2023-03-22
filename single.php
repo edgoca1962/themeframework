@@ -15,10 +15,10 @@ $postType = get_post_type();
     get_template_part('modules/core/template-parts/cor', 'header-nav', ['postType' => get_post_type(), 'fullpage' => false]);
     ?>
 </header>
-<section class="container py-5">
+<section class="background-blend">
     <div class="<?php echo themeframework_get_page_att($postType)['div1'] ?>">
-        <div class="<?php echo themeframework_get_page_att($postType)['div1'] ?>">
-            <div class="<?php echo themeframework_get_page_att($postType)['div1'] ?>">
+        <div class="<?php echo themeframework_get_page_att($postType)['div2'] ?>">
+            <div class="<?php echo themeframework_get_page_att($postType)['div3'] ?>">
                 <?php if (have_posts()) : ?>
                     <?php
                     while (have_posts()) :
@@ -30,6 +30,9 @@ $postType = get_post_type();
                     <?php get_template_part('modules/core/template-parts/cor', 'none', ['fullpage' => true]); ?>
                 <?php endif ?>
             </div>
+            <div>
+                <button class="btn btn-warning btn-sm"><a class="text-black" href="<?php echo get_post_type_archive_link(themeframework_get_page_att($postType)['regresar']) . 'page/' . themeframework_get_page_att($postType)['pag_ant']  ?>">Regresar</a></button>
+            </div>
         </div>
         <?php if ($postType == 'post') : ?>
             <div class="<?php echo themeframework_get_page_att($postType)['div4'] ?>">
@@ -38,11 +41,6 @@ $postType = get_post_type();
         <?php else : ?>
             <div class="<?php echo themeframework_get_page_att($postType)['div5'] ?>">
                 <?php get_template_part(themeframework_get_page_att($postType)['barra']) ?>
-            </div>
-        <?php endif; ?>
-        <?php if (isset(explode("/", $_SERVER['REQUEST_URI'])[3])) : ?>
-            <div>
-                <button class="btn btn-warning btn-sm"><a class="text-black" href="<?php echo get_post_type_archive_link(themeframework_get_page_att($postType)['regresar']) . 'page/' . themeframework_get_page_att($postType)['pag_ant']  ?>">Regresar</a></button>
             </div>
         <?php endif; ?>
     </div>

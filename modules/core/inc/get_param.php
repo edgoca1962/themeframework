@@ -72,7 +72,6 @@ if (!function_exists('themeframework_get_page_att')) {
       $pag_ant = '';
       $imagen = '';
       $height = '';
-      $fullpage = false;
       $div1 = '';
       $div2 = '';
       $fontweight = '';
@@ -111,6 +110,7 @@ if (!function_exists('themeframework_get_page_att')) {
       if (isset($_GET['pag'])) {
          $pag_ant = sanitize_text_field($_GET['pag']);
       } else {
+         $pag = '1';
          $pag_ant = '1';
       }
       /* 
@@ -130,16 +130,15 @@ if (!function_exists('themeframework_get_page_att')) {
       } else {
          $height = '60vh';
          $fullpage = false;
-         $div1 = 'background-blend';
-         $div2 = 'container py-5';
+         $div1 = 'container py-5';
       }
       if (is_front_page()) {
-         $templateParts = 'modules/cor/template-parts/cor/';
+         $templateParts = 'modules/core/template-parts/cor/';
       } else {
          if (get_the_ID()) {
             $templateParts = 'modules/' . substr(get_post(get_the_ID())->post_name, 0, 3) . '/template-parts/';
          } else {
-            $templateParts = 'modules/cor/template-parts/';
+            $templateParts = 'modules/core/template-parts/';
          }
       }
 
@@ -152,6 +151,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $titulo = get_the_title();
             } else {
                $titulo = 'Blog';
+               $div3 = 'row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4';
             }
             if (get_the_archive_title() != 'Archives') {
                $subtitulo = str_replace('Tag', 'Clasificación', get_the_archive_title(), $count);
@@ -161,7 +161,6 @@ if (!function_exists('themeframework_get_page_att')) {
             $fontweight = 'fw-lighter';
             $display = 'display-4';
             $height = '60vh';
-            $div3 = 'row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4';
             $regresar = 'post';
             break;
          case 'comite':
@@ -364,7 +363,6 @@ if (!function_exists('themeframework_get_page_att')) {
       $atributos['pag'] = $pag;
       $atributos['pag_ant'] = $pag_ant;
       $atributos['imagen'] = $imagen;
-      $atributos['fullpage'] = $fullpage;
       $atributos['height'] = $height;
       $atributos['fontweight'] = $fontweight;
       $atributos['display'] = $display;
