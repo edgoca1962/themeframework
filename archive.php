@@ -18,40 +18,42 @@ get_header();
         ?>
     </header>
     <section class="background-blend">
-        <?php if (have_posts()) : ?>
-            <?php if (themeframework_get_page_att($postType)['userAdmin']) : ?>
-                <?php echo get_template_part(themeframework_get_page_att($postType)['agregarpost']) ?>
-            <?php endif; ?>
-            <?php if (isset($description)) : ?>
-                <div class="archive-description"><?php echo wp_kses_post(wpautop($description)); ?></div>
-            <?php endif; ?>
-            <div class="<?php echo themeframework_get_page_att($postType)['div1'] ?>">
-                <div class="<?php echo themeframework_get_page_att($postType)['div2'] ?>">
-                    <div class="<?php echo themeframework_get_page_att($postType)['div3'] ?>">
-                        <?php while (have_posts()) : ?>
-                            <?php
-                            the_post();
-                            get_template_part(themeframework_get_page_att($postType)['template-parts']);
-                            ?>
-                        <?php endwhile; ?>
-                    </div>
-                </div>
-                <?php if ($postType == 'post') : ?>
-                    <div class="<?php echo themeframework_get_page_att($postType)['div4'] ?>">
-                        <?php get_template_part(themeframework_get_page_att($postType)['barra']) ?>
-                    </div>
-                <?php else : ?>
-                    <div class="<?php echo themeframework_get_page_att($postType)['div5'] ?>">
-                        <?php get_template_part(themeframework_get_page_att($postType)['barra']) ?>
-                    </div>
+        <div class="<?php echo themeframework_get_page_att($postType)['div0'] ?>">
+            <?php if (have_posts()) : ?>
+                <?php if (themeframework_get_page_att($postType)['userAdmin']) : ?>
+                    <?php echo get_template_part(themeframework_get_page_att($postType)['agregarpost']) ?>
                 <?php endif; ?>
-                <div class="mt-3">
-                    <?php twenty_twenty_one_the_posts_navigation() ?>
+                <?php if (isset($description)) : ?>
+                    <div class="archive-description"><?php echo wp_kses_post(wpautop($description)); ?></div>
+                <?php endif; ?>
+                <div class="<?php echo themeframework_get_page_att($postType)['div1'] ?>">
+                    <div class="<?php echo themeframework_get_page_att($postType)['div2'] ?>">
+                        <div class="<?php echo themeframework_get_page_att($postType)['div3'] ?>">
+                            <?php while (have_posts()) : ?>
+                                <?php
+                                the_post();
+                                get_template_part(themeframework_get_page_att($postType)['template-parts']);
+                                ?>
+                            <?php endwhile; ?>
+                        </div>
+                    </div>
+                    <?php if ($postType == 'post') : ?>
+                        <div class="<?php echo themeframework_get_page_att($postType)['div4'] ?>">
+                            <?php get_template_part(themeframework_get_page_att($postType)['barra']) ?>
+                        </div>
+                    <?php else : ?>
+                        <div class="<?php echo themeframework_get_page_att($postType)['div5'] ?>">
+                            <?php get_template_part(themeframework_get_page_att($postType)['barra']) ?>
+                        </div>
+                    <?php endif; ?>
+                    <div class="mt-3">
+                        <?php twenty_twenty_one_the_posts_navigation() ?>
+                    </div>
                 </div>
-            </div>
-        <?php else : ?>
-            <?php get_template_part('template-parts/content', 'none') ?>
-        <?php endif; ?>
+            <?php else : ?>
+                <?php get_template_part('template-parts/content', 'none') ?>
+            <?php endif; ?>
+        </div>
     </section>
     <?php get_footer('footer', ['fullpage' => false]) ?>
 <?php else : ?>

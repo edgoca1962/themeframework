@@ -99,3 +99,8 @@ require get_template_directory() . '/modules/core/inc/twentytwentyone/class-twen
 require get_template_directory() . '/modules/core/inc/twentytwentyone/template-functions.php';
 require get_template_directory() . '/modules/core/inc/twentytwentyone/template-tags.php';
 require get_template_directory() . "/modules/core/inc/walker.php";
+
+require get_template_directory() . "/modules/sca/inc/comite.php";
+
+require get_template_directory() . "/modules/sca/inc/f_totalacuerdos.php";
+require get_template_directory() . "/modules/sca/inc/mantenimiento.php";

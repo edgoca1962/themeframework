@@ -78,6 +78,7 @@ if (!function_exists('themeframework_get_page_att')) {
       $titulo = '';
       $subtitulo = '';
       $subtitulo2 = '';
+      $div0 = '';
       $div1 = '';
       $div2 = '';
       $div3 = '';
@@ -168,7 +169,7 @@ if (!function_exists('themeframework_get_page_att')) {
                } else {
                   $titulo = 'Comités';
                }
-               if (get_the_archive_title() == 'Archives') {
+               if (get_the_archive_title() != 'Archives') {
                   $subtitulo = '';
                } else {
                   $subtitulo = str_replace('Tag', 'Clasificación', get_the_archive_title(), $count);
@@ -176,10 +177,12 @@ if (!function_exists('themeframework_get_page_att')) {
                $fontweight = 'fw-lighter';
                $display = 'display-4';
                $height = '60vh';
+               $div0 = 'container py-5';
                $div1 = "row";
                $div2 = "col-xl-8";
                $div3 = "row row-cols-1 row-cols-lg-2 g-2 g-lg-5";
                $div5 = 'col-xl-4';
+               $templateParts = 'modules/sca/template-parts/' . $postType;
                $agregarpost = 'modules/sca/template-parts/' . $postType . '-mantenimiento';
                $barra = 'modules/sca/template-parts/sca-busquedas';
                break;
@@ -235,6 +238,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $fontweight = 'fw-lighter';
                $display = 'display-4';
                $height = '60vh';
+               $div0 = 'container py-5';
                $div1 = "row";
                $div2 = "col-xl-8";
                $div3 = "row row-cols-1 row-cols-md-2 g-4 mb-5";
@@ -310,6 +314,7 @@ if (!function_exists('themeframework_get_page_att')) {
                }
                $display = 'display-4';
                $height = '60vh';
+               $div0 = 'container py-5';
                $div1 = "row";
                $div2 = "col-xl-8";
                $div5 = 'col-xl-4';
@@ -320,6 +325,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $titulo = 'Miembros';
                $display = 'display-4';
                $height = '60vh';
+               $div0 = 'container py-5';
                $div1 = "row";
                $div2 = "col-xl-8";
                $div3 = "row row-cols-1 row-cols-lg-3 g-2 g-lg-5";
@@ -331,6 +337,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $titulo = 'Puestos';
                $display = 'display-4';
                $height = '60vh';
+               $div0 = 'container py-5';
                $div1 = "row";
                $div2 = "col-xl-8";
                $div3 = "row row-cols-1 row-cols-lg-3 g-2 g-lg-5";
@@ -342,6 +349,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $titulo = 'Consulta de Películas y Series';
                $display = 'display-4';
                $height = '60vh';
+               $div0 = 'container py-5';
                $div1 = 'row';
                $div2 = 'col-xl-9';
                $div3 = 'row row-cols-1 row-cols-lg-4 g-2 g-lg-5';
@@ -367,14 +375,15 @@ if (!function_exists('themeframework_get_page_att')) {
       $atributos['titulo'] = $titulo;
       $atributos['subtitulo'] = $subtitulo;
       $atributos['subtitulo2'] = $subtitulo2;
+      $atributos['div0'] = $div0;
       $atributos['div1'] = $div1;
       $atributos['div2'] = $div2;
       $atributos['div3'] = $div3;
       $atributos['div4'] = $div4;
       $atributos['div5'] = $div5;
+      $atributos['template-parts'] = $templateParts;
       $atributos['agregarpost'] = $agregarpost;
       $atributos['barra'] = $barra;
-      $atributos['template-parts'] = $templateParts;
       $atributos['template-parts-single'] = $templatePartsSingle;
       $atributos['regresar'] = $regresar;
       $atributos['prefijo'] =  $prefijo;
