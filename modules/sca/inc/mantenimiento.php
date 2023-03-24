@@ -910,40 +910,96 @@ function verAcuerdos()
    ]);
 
    $verAcuerdosComite = [];
-   if (in_array('administrator', $roles) || in_array('author', $roles) || in_array('contributor', $roles)) {
+   if (themeframework_get_page_att()['userAdmin']) {
       foreach ($comites as $comite) {
          $verAcuerdosComite[$comite->ID] = 'todos';
       }
    } else {
-      if (count($miembros)) {
-         foreach ($miembros as $miembro) {
-            if ($usuario->ID == get_post_meta($miembro->ID, '_usr_id', true)) {
-               if (preg_match("/Junta/i", $miembro->post_title)) {
-                  foreach ($comites as $comite) {
-                     $verAcuerdosComite[$comite->ID] = 'todos';
-                  }
-               } else {
-                  if (preg_match("/Coordina/i", $miembro->post_title)) {
-                     $verAcuerdosComite[get_post_meta($miembro->ID, '_comite_id', true)] = 'todos';
-                  } else {
-                     foreach ($acuerdos as $acuerdo) {
-                        if ($usuario->ID == get_post_meta($acuerdo->ID, '_asignar_id', true)) {
-                           $verAcuerdosComite[get_post_meta($acuerdo->ID, '_comite_id', true)] = 'asignados';
-                        }
-                     }
-                  }
-               }
-            }
+      $miembroJunta = false;
+      foreach ($miembros as $miembro) {
+         if (preg_match("/Junta/i", $miembro->post_title)) {
+            $miembroJunta = true;
+         }
+      }
+      if ($miembroJunta) {
+         foreach ($comites as $comite) {
+            $verAcuerdosComite[$comite->ID] = 'todos';
          }
       } else {
-         foreach ($acuerdos as $acuerdo) {
-            if ($usuario->ID == get_post_meta($acuerdo->ID, '_asignar_id', true)) {
-               $verAcuerdosComite[get_post_meta($acuerdo->ID, '_comite_id', true)] = 'asignados';
+         $coordinador = false;
+         foreach ($miembros as $miembro) {
+            if (preg_match("/Coordina/i", $miembro->post_title)) {
+               $verAcuerdosComite[get_post_meta($miembro->ID, '_comite_id', true)] = 'todos';
+               $coordinador = true;
+            }
+         }
+         if ($coordinador) {
+            foreach ($comites as $comite) {
+               if ($verAcuerdosComite[$comite->ID] == null) {
+                  $verAcuerdosComite[$comite->ID] = 'asignados';
+               }
+            }
+         } else {
+            foreach ($comites as $comite) {
+               $verAcuerdosComite[$comite->ID] = 'asignados';
             }
          }
       }
    }
    return $verAcuerdosComite;
+}
+function themeframework_miembroJunta()
+{
+   $usuario = wp_get_current_user();
+
+   $miembros = get_posts([
+      'post_type' => 'miembro',
+      'numberposts' => -1,
+      'post_status' => 'publish',
+      'meta_key' => '_usr_id',
+      'meta_value' => $usuario->ID,
+   ]);
+
+   if (count($miembros)) {
+      foreach ($miembros as $miembro) {
+         if ($usuario->ID == get_post_meta($miembro->ID, '_usr_id', true)) {
+            if (preg_match("/Junta/i", $miembro->post_title)) {
+               $miembroJunta = true;
+            }
+         }
+      }
+   } else {
+      $miembroJunta = false;
+   }
+   return $miembroJunta;
+}
+/******************************************************************************
+ * 
+ * 
+ * Obtener acuerdos por comités y vigencia para graficarlos.
+ * 
+ * 
+ *****************************************************************************/
+function themeframework_get_comites()
+{
+   $datosComites = [];
+   $comites = get_posts([
+      'post_type' => 'comite',
+      'numberposts' => -1,
+      'post_status' => 'publish',
+      'orderby' => 'ID',
+      'order' => 'ASC'
+   ]);
+   $datosComites['comites'] = $comites;
+
+   $datosComite = [];
+   array_push($datosComite, ['ID' => 'todos', 'nombre' => 'Resumen General']);
+   foreach ($comites as $comite) {
+      array_push($datosComite, ['ID' => $comite->ID, 'nombre' => get_post($comite)->post_title]);
+   }
+   $datosComites['datosComite'] = $datosComite;
+
+   return $datosComites;
 }
 /******************************************************************************
  * 
@@ -997,16 +1053,41 @@ function themeframework_pre_get_posts($query)
          }
 
          if (isset($_GET['asignar_id'])) {
-            $asignar_id = intval(sanitize_text_field($_GET['asignar_id']));
-            if ($asignar_id == '1') {
-               $asignar_id_mq =
-                  [
-                     'key' => '_asignar_id',
-                     'value' => '',
-                     'compare' => '!='
-                  ];
+            $asignar_id = sanitize_text_field($_GET['asignar_id']);
+            if ($asignar_id == wp_get_current_user()->ID) {
+               if (isset($_GET['comite_id'])) {
+                  $comite_id = sanitize_text_field($_GET['comite_id']);
+                  if ($comite_id != '') {
+                     if (verAcuerdos()[$comite_id] == 'asignados') {
+                        $asignar_id_mq =
+                           [
+                              'key' => '_asignar_id',
+                              'value' => $asignar_id
+                           ];
+                     } else {
+                        $asignar_id_mq =
+                           [
+                              'key' => '_asignar_id',
+                              'value' => '',
+                              'compare' => '!='
+                           ];
+                     }
+                  } else {
+                     $asignar_id_mq =
+                        [
+                           'key' => '_asignar_id',
+                           'value' => $asignar_id
+                        ];
+                  }
+               } else {
+                  $asignar_id_mq =
+                     [
+                        'key' => '_asignar_id',
+                        'value' => wp_get_current_user()->ID
+                     ];
+               }
             } else {
-               if ($asignar_id == wp_get_current_user()->ID) {
+               if (themeframework_miembroJunta() || themeframework_get_page_att()['userAdmin']) {
                   $asignar_id_mq =
                      [
                         'key' => '_asignar_id',
@@ -1021,8 +1102,7 @@ function themeframework_pre_get_posts($query)
                }
             }
          } else {
-            $usuarioRoles = wp_get_current_user()->roles;
-            if (in_array('administrator', $usuarioRoles) || in_array('author', $usuarioRoles)) {
+            if (themeframework_get_page_att()['userAdmin']) {
                $asignar_id_mq =
                   [
                      'key' => '_asignar_id',
@@ -1030,19 +1110,114 @@ function themeframework_pre_get_posts($query)
                      'compare' => '!='
                   ];
             } else {
-               $asignar_id_mq =
-                  [
-                     'key' => '_asignar_id',
-                     'value' => wp_get_current_user()->ID,
-                  ];
+               if (isset($_GET['comite_id'])) {
+                  $comite_id = sanitize_text_field($_GET['comite_id']);
+                  if (verAcuerdos()[$comite_id] == 'todos') {
+                     $asignar_id_mq =
+                        [
+                           'key' => '_asignar_id',
+                           'value' => '',
+                           'compare' => '!='
+                        ];
+                  } else {
+                     $asignar_id_mq =
+                        [
+                           'key' => '_asignar_id',
+                           'value' => wp_get_current_user()->ID,
+                        ];
+                  }
+               } else {
+                  $asignar_id_mq =
+                     [
+                        'key' => '_asignar_id',
+                        'value' => wp_get_current_user()->ID,
+                     ];
+               }
             }
          }
+
+         if (isset($_GET['vigencia'])) {
+
+            $vigencia = sanitize_text_field($_GET['vigencia']);
+
+            $fechaInicial = date('Y-m-d', strtotime('First day of ' . date('F')));
+            $fechaFinal = date('Y-m-d', strtotime('Last day of ' . date('F')));
+
+            switch ($vigencia) {
+               case '1':
+                  $filtrovigencia =
+                     [
+                        'key' => '_f_compromiso',
+                        'value' => $fechaInicial,
+                        'compare' => '<'
+                     ];
+                  $statusvigencia =
+                     [
+                        'key' => '_vigente',
+                        'value' => '1',
+                     ];
+                  break;
+
+               case '2':
+                  $filtrovigencia =
+                     [
+                        'key' => '_f_compromiso',
+                        'value' => [$fechaInicial, $fechaFinal],
+                        'compare' => 'BETWEEN'
+                     ];
+                  $statusvigencia =
+                     [
+                        'key' => '_vigente',
+                        'value' => '1',
+                     ];
+                  break;
+
+               case '3':
+                  $filtrovigencia =
+                     [
+                        'key' => '_f_compromiso',
+                        'value' => $fechaFinal,
+                        'compare' => '>'
+                     ];
+                  $statusvigencia =
+                     [
+                        'key' => '_vigente',
+                        'value' => '1',
+                     ];
+                  break;
+
+               case '4':
+                  $filtrovigencia =
+                     [
+                        'key' => '_f_compromiso',
+                        'value' => '',
+                        'compare' => '!='
+                     ];
+                  $statusvigencia =
+                     [
+                        'key' => '_vigente',
+                        'value' => '0',
+                     ];
+                  break;
+
+               default:
+                  $filtrovigencia = [];
+                  $statusvigencia = [];
+                  break;
+            }
+         } else {
+            $filtrovigencia = [];
+            $statusvigencia = [];
+         }
+
          $query->set(
             'meta_query',
             [
                $comite_id_mq,
                $acta_id_mq,
                $asignar_id_mq,
+               $filtrovigencia,
+               $statusvigencia
             ]
          );
       }

@@ -5,11 +5,11 @@
             <h6><i class="fa-solid fa-handshake me-3"></i><?php echo 'Fecha de compromiso: ' . get_post_meta(get_the_ID(), '_f_compromiso', true) ?></h6>
          </div>
          <div class="col-md-4">
-            <h6><?php echo (get_post_meta(get_the_ID(), '_vigente', true)) ? 'Vigente' : 'Ejecutado el: ' . get_post_meta(get_the_ID(), '_f_seguimiento', true) ?></h6>
+            <h6><?php echo (get_post_meta(get_the_ID(), '_vigente', true)) ? themeframework_get_page_att('acuerdo')['status'] : 'Ejecutado el: ' . get_post_meta(get_the_ID(), '_f_seguimiento', true) ?></h6>
          </div>
       </div>
       <div class="card-body">
-         <h5 class="card-title"> <a class="text-white" href="<?php echo get_the_permalink() ?>"><?php echo 'Acuerdo-' . get_post_meta(get_the_ID(), '_n_acuerdo', true) . ' - ' . get_post(get_post_parent(get_the_ID()))->post_title ?></a></h5>
+         <h5 class="card-title"> <a class="text-white" href="<?php echo get_the_permalink() ?>"><?php echo get_post(get_post_parent(get_the_ID()))->post_title ?></a></h5>
          <p class="card-text"><?php echo the_excerpt() ?></p>
          <p class="card-text">
             <small>

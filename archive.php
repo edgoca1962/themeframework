@@ -36,6 +36,9 @@ get_header();
                                 ?>
                             <?php endwhile; ?>
                         </div>
+                        <div class="mt-3">
+                            <?php twenty_twenty_one_the_posts_navigation() ?>
+                        </div>
                     </div>
                     <?php if ($postType == 'post') : ?>
                         <div class="<?php echo themeframework_get_page_att($postType)['div4'] ?>">
@@ -46,16 +49,16 @@ get_header();
                             <?php get_template_part(themeframework_get_page_att($postType)['barra']) ?>
                         </div>
                     <?php endif; ?>
-                    <div class="mt-3">
-                        <?php twenty_twenty_one_the_posts_navigation() ?>
-                    </div>
                 </div>
             <?php else : ?>
-                <?php get_template_part('template-parts/content', 'none') ?>
+                <?php get_template_part('modules/core/template-parts/cor', 'none', ['fullpage' => false]); ?>
             <?php endif; ?>
         </div>
+        <?php get_footer('footer', ['fullpage' => false]) ?>
     </section>
-    <?php get_footer('footer', ['fullpage' => false]) ?>
 <?php else : ?>
-    <?php get_template_part('template-parts/content', 'header', ['post_type' => '', 'fullpage' => true, 'noingresado' => true]); ?>
+    <?php
+    get_template_part('modules/core/template-parts/cor', 'header-banner', ['postType' => get_post_type(), 'fullpage' => true]);
+    get_template_part('modules/core/template-parts/cor', 'header-nav', ['postType' => get_post_type(), 'fullpage' => true]);
+    ?>
 <?php endif; ?>

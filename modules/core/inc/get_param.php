@@ -92,7 +92,10 @@ if (!function_exists('themeframework_get_page_att')) {
       $prefijo = '';
       $consecutivo = '';
       $num_actas = '';
+      $comite_id = '';
       $num_acuerdos = '';
+      $status = '';
+      $asignar_id = '';
       if (in_array('administrator', $usuarioRoles) || in_array('author', $usuarioRoles)) {
          $userAdmin = true;
       } else {
@@ -144,11 +147,20 @@ if (!function_exists('themeframework_get_page_att')) {
       $fontweight = 'fw-lighter';
       $display = 'display-4';
       $titulo = get_the_title();
+      if (isset($_GET['comite_id'])) {
+         $comite_id = sanitize_text_field($_GET['comite_id']);
+         $titulo = 'Acuerdos ' . get_post($comite_id)->post_title;
+      }
+      if (isset($_GET['asignar_id'])) {
+         $asignar_id = sanitize_text_field($_GET['asignar_id']);
+         $titulo = 'Acuerdos Asignados a ' . get_user_by('ID', $asignar_id)->display_name;
+      }
       if ($postType != 'page') {
          switch ($postType) {
             case 'post':
                if (is_single()) {
-                  $titulo = get_the_title();
+                  $titulo = 'Blog';
+                  $subtitulo = get_the_title();
                } else {
                   $titulo = 'Blog';
                   $div3 = 'row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4';
@@ -183,6 +195,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $div3 = "row row-cols-1 row-cols-lg-2 g-2 g-lg-5";
                $div5 = 'col-xl-4';
                $templateParts = 'modules/sca/template-parts/' . $postType;
+               $templatePartsSingle = 'modules/sca/template-parts/' . $postType . '-single';
                $agregarpost = 'modules/sca/template-parts/' . $postType . '-mantenimiento';
                $barra = 'modules/sca/template-parts/sca-busquedas';
                break;
@@ -234,6 +247,7 @@ if (!function_exists('themeframework_get_page_att')) {
                } else {
                   $titulo = 'Minutas y Actas';
                   $prefijo = 'Minutas o Actas';
+                  $qryconsecutivo = 0;
                }
                $fontweight = 'fw-lighter';
                $display = 'display-4';
@@ -243,6 +257,8 @@ if (!function_exists('themeframework_get_page_att')) {
                $div2 = "col-xl-8";
                $div3 = "row row-cols-1 row-cols-md-2 g-4 mb-5";
                $div5 = 'col-xl-4';
+               $templateParts = 'modules/sca/template-parts/' . $postType;
+               $templatePartsSingle = 'modules/sca/template-parts/' . $postType . '-single';
                $agregarpost = 'modules/sca/template-parts/' . $postType . '-mantenimiento';
                $barra = 'modules/sca/template-parts/sca-busquedas';
                $consecutivo = $qryconsecutivo;
@@ -306,18 +322,59 @@ if (!function_exists('themeframework_get_page_att')) {
                      $titulo = "Minutas del " . $comite;
                   }
                } else {
-                  $titulo = 'Acuerdos';
+                  $titulo = 'Consulta de Acuerdos';
                }
                if (isset($_GET['acta_id']) != null) {
                   $acta_id = sanitize_text_field($_GET['acta_id']);
-                  $subtitulo = get_post($acta_id)->post_title;
+                  if (get_post($acta_id)) {
+                     $subtitulo = get_post($acta_id)->post_title;
+                  }
+               }
+               if (isset($_GET['vigencia'])) {
+                  $vigencia = sanitize_text_field($_GET['vigencia']);
+                  if (isset($_GET['comite_id'])) {
+                     $comite_id = sanitize_text_field($_GET['comite_id']);
+                     $titulo = 'Acuerdos ' . get_post($comite_id)->post_title;
+                  }
+                  if (isset($_GET['asignar_id'])) {
+                     $asignar_id = sanitize_text_field($_GET['asignar_id']);
+                     $titulo = 'Acuerdos asignados a ' . get_user_by('ID', $asignar_id)->display_name;
+                  }
+                  switch ($vigencia) {
+                     case '1':
+                        $subtitulo = 'Acuerdos Vencidos';
+                        $status = 'Vencidos';
+                        break;
+
+                     case '2':
+                        $subtitulo = 'Acuerdos Vigentes';
+                        $status = 'Vencen este mes';
+                        break;
+
+                     case '3':
+                        $subtitulo = 'Acuerdos en Proceso';
+                        $status = 'Proceso';
+                        break;
+
+                     case '4':
+                        $subtitulo = 'Acuerdos Ejecutados';
+                        $status = 'Ejecutados';
+                        break;
+
+                     default:
+                        # code...
+                        break;
+                  }
                }
                $display = 'display-4';
+               $displaysub = 'display-5';
                $height = '60vh';
                $div0 = 'container py-5';
                $div1 = "row";
                $div2 = "col-xl-8";
                $div5 = 'col-xl-4';
+               $templateParts = 'modules/sca/template-parts/' . $postType;
+               $templatePartsSingle = 'modules/sca/template-parts/' . $postType . '-single';
                $agregarpost = 'modules/sca/template-parts/' . $postType . '-mantenimiento';
                $barra = 'modules/sca/template-parts/sca-busquedas';
                break;
@@ -330,6 +387,8 @@ if (!function_exists('themeframework_get_page_att')) {
                $div2 = "col-xl-8";
                $div3 = "row row-cols-1 row-cols-lg-3 g-2 g-lg-5";
                $div5 = 'col-xl-4';
+               $templateParts = 'modules/sca/template-parts/' . $postType;
+               $templatePartsSingle = 'modules/sca/template-parts/' . $postType . '-single';
                $agregarpost = 'modules/sca/template-parts/' . $postType . '-mantenimiento';
                $barra = 'modules/sca/template-parts/sca-busquedas';
                break;
@@ -342,6 +401,8 @@ if (!function_exists('themeframework_get_page_att')) {
                $div2 = "col-xl-8";
                $div3 = "row row-cols-1 row-cols-lg-3 g-2 g-lg-5";
                $div5 = 'col-xl-4';
+               $templateParts = 'modules/sca/template-parts/' . $postType;
+               $templatePartsSingle = 'modules/sca/template-parts/' . $postType . '-single';
                $agregarpost = 'modules/sca/template-parts/' . $postType . '-mantenimiento';
                $barra = 'modules/sca/template-parts/sca-busquedas';
                break;
@@ -357,8 +418,8 @@ if (!function_exists('themeframework_get_page_att')) {
                break;
             default:
                $titulo = 'Indefinido';
-               $div1 = 'container py-5';
-               $div2 = 'row';
+               $div0 = 'container py-5';
+               $div1 = 'row';
                $div2 = 'col';
                break;
          }
@@ -388,8 +449,11 @@ if (!function_exists('themeframework_get_page_att')) {
       $atributos['regresar'] = $regresar;
       $atributos['prefijo'] =  $prefijo;
       $atributos['consecutivo'] = $consecutivo;
+      $atributos['comite_id'] = $comite_id;
       $atributos['num_actas'] = $num_actas;
       $atributos['num_acuerdos'] = $num_acuerdos;
+      $atributos['status'] = $status;
+      $atributos['asignar_id'] = $asignar_id;
       return $atributos;
    }
 }

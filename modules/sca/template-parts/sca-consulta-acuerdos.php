@@ -1,30 +1,10 @@
-<?php
-
-$usuario = wp_get_current_user();
-$roles = $usuario->roles;
-
-$comites = get_posts([
-   'post_type' => 'comite',
-   'numberposts' => -1,
-   'post_status' => 'publish',
-   'orderby' => 'ID',
-   'order' => 'ASC'
-]);
-
-$datosComite = [];
-array_push($datosComite, ['ID' => 'todos', 'nombre' => 'Resumen General']);
-foreach ($comites as $comite) {
-   array_push($datosComite, ['ID' => $comite->ID, 'nombre' => get_post($comite)->post_title]);
-}
-
-?>
 <div class="row">
    <div class="col-xl-8">
       <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
          <input id="pagina" type="hidden" value="<?php echo esc_url(site_url('/vigencia-acuerdos-comite')) ?>">
-         <input id="comites" type="hidden" value="<?php echo count($comites) + 1 ?>">
+         <input id="comites" type="hidden" value="<?php echo count(themeframework_get_comites()['comites']) + 1 ?>">
          <?php $i = 0 ?>
-         <?php foreach ($datosComite as $comite) { ?>
+         <?php foreach (themeframework_get_comites()['datosComite'] as $comite) { ?>
             <?php
             $nombreComite = $comite['nombre'];
             $totalAcuerdos = totalAcuerdos($comite['ID']);
@@ -44,6 +24,6 @@ foreach ($comites as $comite) {
       </div>
    </div>
    <div class="col-xl-4">
-      <?php get_template_part('template-parts/sca-busquedas') ?>
+      <?php get_template_part(themeframework_get_page_att('comite')['barra']) ?>
    </div>
 </div>

@@ -25,9 +25,9 @@
          </div>
       </div>
       <div class="col-xl-4">
-         <?php get_template_part('template-parts/sca-busquedas') ?>
+         <?php get_template_part(themeframework_get_page_att('comite')['barra']) ?>
       </div>
    </div>
 <?php else : ?>
-   <?php get_template_part('template-parts/content', 'none') ?>
+   <?php get_template_part('modules/core/template-parts/cor', 'none', ['fullpage' => false]); ?>
 <?php endif; ?>

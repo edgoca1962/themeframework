@@ -1,19 +1,12 @@
-<?php
-if (isset($_GET['comite_id']) != null) {
-   $comite_id = '&comite_id=' . sanitize_text_field($_GET['comite_id']);
-} else {
-   $comite_id = '';
-}
-?>
-<div class="col">
+<div class="col actas">
    <div class="card h-100" style="background: linear-gradient(to right, rgba(64, 154, 247, 1), rgba(43, 170, 177, 1)) !important; color: #fff;">
       <div class="d-flex align-items-center justify-content-center p-4">
          <div class=""><i class="fas fa-book-open" style="font-size:30px;"></i></div>
          <div class="ms-3 mb-4">
-            <h6 class="card-title mb-0"><a class="text-white" href="<?php echo get_post_type_archive_link('acuerdo') . '?cpt=acuerdo&acta_id=' . get_the_ID() . $comite_id ?>"><?php the_title() ?></a></h6>
+            <h6 class="card-title mb-0"><a class="text-white" href="<?php echo get_post_type_archive_link('acuerdo') . '?cpt=acuerdo&acta_id=' . get_the_ID() . '&comite_id=' . themeframework_get_page_att(get_post_type())['comite_id'] ?>"><?php the_title() ?></a></h6>
          </div>
       </div>
-      <?php if (themeframework_get_page_att($post->post_type)['userAdmin']) : ?>
+      <?php if (themeframework_get_page_att(get_post_type())['userAdmin']) : ?>
          <div class="d-flex card-footer">
             <button type="button" class="btn btn-outline-danger btn-sm" data-post_id="<?php echo get_the_ID() ?>" data-eliminar="elemento_<?php echo get_the_ID() ?>"><i class="fa-solid fa-trash-can" style="font-size: 12px;"></i> Eliminar</button>
 
