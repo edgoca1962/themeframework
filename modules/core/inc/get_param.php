@@ -96,6 +96,7 @@ if (!function_exists('themeframework_get_page_att')) {
       $num_acuerdos = '';
       $status = '';
       $asignar_id = '';
+      $parametros = '';
       if (in_array('administrator', $usuarioRoles) || in_array('author', $usuarioRoles)) {
          $userAdmin = true;
       } else {
@@ -317,6 +318,7 @@ if (!function_exists('themeframework_get_page_att')) {
                   foreach ($qry_n_acuerdos as $acuerdo) {
                      $num_acuerdos .= $acuerdo['meta_value'] . ',';
                   }
+                  $parametros = 'acta_id=' . $acta_id . '&comite_id=' . $comite_id;
                }
                if (isset($_GET['comite_id']) != null) {
                   $comite_id = sanitize_text_field($_GET['comite_id']);
@@ -340,20 +342,22 @@ if (!function_exists('themeframework_get_page_att')) {
                   if (isset($_GET['comite_id'])) {
                      $comite_id = sanitize_text_field($_GET['comite_id']);
                      $titulo = 'Acuerdos ' . get_post($comite_id)->post_title;
+                     $parametros = 'vigencia=' . $vigencia . '&comite_id=' . $comite_id;
                   }
                   if (isset($_GET['asignar_id'])) {
                      $asignar_id = sanitize_text_field($_GET['asignar_id']);
                      $titulo = 'Acuerdos asignados a ' . get_user_by('ID', $asignar_id)->display_name;
+                     $parametros = 'vigencia=' . $vigencia . '&asignar_id=' . $asignar_id;
                   }
                   switch ($vigencia) {
                      case '1':
                         $subtitulo = 'Acuerdos Vencidos';
-                        $status = 'Vencidos';
+                        $status = 'Vencido';
                         break;
 
                      case '2':
                         $subtitulo = 'Acuerdos Vigentes';
-                        $status = 'Vencen este mes';
+                        $status = 'Vence este mes';
                         break;
 
                      case '3':
@@ -363,7 +367,6 @@ if (!function_exists('themeframework_get_page_att')) {
 
                      case '4':
                         $subtitulo = 'Acuerdos Ejecutados';
-                        $status = 'Ejecutados';
                         break;
 
                      default:
@@ -467,6 +470,7 @@ if (!function_exists('themeframework_get_page_att')) {
       $atributos['num_acuerdos'] = $num_acuerdos;
       $atributos['status'] = $status;
       $atributos['asignar_id'] = $asignar_id;
+      $atributos['parametros'] = $parametros;
       return $atributos;
    }
 }

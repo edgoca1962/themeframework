@@ -9,7 +9,7 @@
          </div>
       </div>
       <div class="card-body">
-         <h5 class="card-title"> <a class="text-white" href="<?php echo get_the_permalink() ?>"><?php echo get_post(get_post_parent(get_the_ID()))->post_title ?></a></h5>
+         <h5 class="card-title"> <a class="text-white" href="<?php echo esc_attr(esc_url(get_the_permalink() . '?pag=' . themeframework_get_page_att($post->post_type)['pag'] . '&' . themeframework_get_page_att($post->post_type)['parametros'])) ?>"><?php echo get_post(get_post_parent(get_the_ID()))->post_title ?></a></h5>
          <p class="card-text"><?php echo the_excerpt() ?></p>
          <p class="card-text">
             <small>

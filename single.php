@@ -31,7 +31,7 @@ $postType = get_post_type();
                 <?php endif ?>
                 <?php if (themeframework_get_page_att($postType)['pag_ant'] != 0) : ?>
                     <div>
-                        <button class="btn btn-warning btn-sm"><a class="text-black" href="<?php echo get_post_type_archive_link(themeframework_get_page_att($postType)['regresar']) . 'page/' . themeframework_get_page_att($postType)['pag_ant']  ?>">Regresar</a></button>
+                        <button class="btn btn-warning btn-sm"><a class="text-black" href="<?php echo get_post_type_archive_link(themeframework_get_page_att($postType)['regresar']) . 'page/' . themeframework_get_page_att($postType)['pag_ant'] . '/?' . themeframework_get_page_att($post->post_type)['parametros']  ?>">Regresar</a></button>
                     </div>
                 <?php endif; ?>
             </div>
