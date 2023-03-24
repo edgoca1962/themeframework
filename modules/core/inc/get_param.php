@@ -198,6 +198,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $templatePartsSingle = 'modules/sca/template-parts/' . $postType . '-single';
                $agregarpost = 'modules/sca/template-parts/' . $postType . '-mantenimiento';
                $barra = 'modules/sca/template-parts/sca-busquedas';
+               $regresar = 'comite';
                break;
             case 'acta':
                if (is_single()) {
@@ -266,6 +267,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $barra = 'modules/sca/template-parts/sca-busquedas';
                $consecutivo = $qryconsecutivo;
                $num_actas = $num_actas;
+               $regresar = 'acta';
                break;
             case 'acuerdo':
                if (isset($_GET['comite_id']) != null && isset($_GET['acta_id']) != null) {
@@ -385,6 +387,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $templatePartsSingle = 'modules/sca/template-parts/' . $postType . '-single';
                $agregarpost = 'modules/sca/template-parts/' . $postType . '-mantenimiento';
                $barra = 'modules/sca/template-parts/sca-busquedas';
+               $regresar = 'acuerdo';
                break;
             case 'miembro':
                $titulo = 'Miembros';
@@ -399,6 +402,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $templatePartsSingle = 'modules/sca/template-parts/' . $postType . '-single';
                $agregarpost = 'modules/sca/template-parts/' . $postType . '-mantenimiento';
                $barra = 'modules/sca/template-parts/sca-busquedas';
+               $regresar = 'miembro';
                break;
             case 'puesto':
                $titulo = 'Puestos';
@@ -413,6 +417,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $templatePartsSingle = 'modules/sca/template-parts/' . $postType . '-single';
                $agregarpost = 'modules/sca/template-parts/' . $postType . '-mantenimiento';
                $barra = 'modules/sca/template-parts/sca-busquedas';
+               $regresar = 'puesto';
                break;
             case 'movie':
                $titulo = 'Consulta de Películas y Series';
