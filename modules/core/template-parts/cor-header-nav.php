@@ -17,8 +17,8 @@
             <span class="navbar-toggler-icon"></span>
          </button>
          <div class="justify-content-end collapse navbar-collapse" id="navbarSupportedContent">
-            <?php
-            if (is_user_logged_in()) {
+            <?php if (is_user_logged_in()) : ?>
+               <?php
                wp_nav_menu(
                   array(
                      'theme_location'  => 'principal',
@@ -27,9 +27,14 @@
                      'walker' => new Walker_Nav_Primary()
                   )
                );
-            }
-            ?>
-            <div id="btn_menu" class="navbar nav-item me-n3">
+               ?>
+               <?php if (themeframework_get_page_att()['userAdmin']) : ?>
+                  <div class="nav navbar-nav nav-item me-2 <?php echo is_page('sca-mantenimiento') ? 'active' : '' ?>">
+                     <a class="nav-link" href="<?php echo esc_url(site_url('/sca-mantenimiento')) ?>">Mantenimiento</a>
+                  </div>
+               <?php endif; ?>
+            <?php endif; ?>
+            <div id="btn_menu" class="navbar nav-item">
                <button type="button" class="btn btn-warning btn-sm">
                   <?php if (is_user_logged_in()) : ?>
                      <a class="nav-link text-dark" aria-current="page" href="<?= wp_logout_url('/') ?>"></span><i class="fas fa-sign-out-alt"></i> Salir</a>

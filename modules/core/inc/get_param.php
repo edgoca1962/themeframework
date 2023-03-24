@@ -200,6 +200,9 @@ if (!function_exists('themeframework_get_page_att')) {
                $barra = 'modules/sca/template-parts/sca-busquedas';
                break;
             case 'acta':
+               if (is_single()) {
+                  $titulo = get_the_title();
+               }
                if (isset($_GET['comite_id']) != null) {
                   $comite_id = sanitize_text_field($_GET['comite_id']);
                   $comite = get_post($comite_id)->post_title;
@@ -366,7 +369,12 @@ if (!function_exists('themeframework_get_page_att')) {
                         break;
                   }
                }
-               $display = 'display-4';
+               if (is_single()) {
+                  $titulo = get_the_title();
+                  $display = '';
+               } else {
+                  $display = 'display-4';
+               }
                $displaysub = 'display-5';
                $height = '60vh';
                $div0 = 'container py-5';
