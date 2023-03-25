@@ -19,12 +19,11 @@
             </p>
          </div>
          <?php if (themeframework_get_page_att($post->post_type)['userAdmin']) { ?>
-
-            <div class="d-flex card-footer">
-               <div class="col col-md-6">
+            <div class="card-footer">
+               <div class="col-sm-12 col-md-8">
                   <?php echo 'Comité: ' . get_post(get_post_meta($post->ID, '_comite_id', true))->post_title ?>
                </div>
-               <div class="col col-md-6">
+               <div class="col-sm-12 col-md-4">
                   <!-- Button trigger modal editar -->
                   <button type="button" class="btn btn-outline-warning btn-sm me-3" data-bs-toggle="modal" data-bs-target="#editar" data-editar="<?php echo get_the_ID() ?>" data-url="<?php echo get_site_url() . '/wp-json/wp/v2/acuerdos/' . get_the_ID() ?>" data-usr_id=<?php echo get_post_meta($post->ID, '_asignar_id', true) ?>><i class="fa-solid fa-pencil" style="font-size: 12px;"></i> Editar</button>
 
@@ -36,7 +35,6 @@
                      <input type="hidden" name="endpoint" value="<?php echo admin_url('admin-ajax.php') ?>">
                      <input type="hidden" name="post_id" value="<?php echo get_the_ID() ?>">
                   </form>
-
 
                   <input id="titulo_elemento_<?php echo get_the_ID() ?>" class="invisible" type="hidden" value="<?php echo 'Acuerdo ' . get_post_meta($post->ID, '_n_acuerdo', true) ?>">
                   <input id="msg_elemento_<?php echo get_the_ID() ?>" class="invisible" type="hidden" value="Se eliminará este acuerdo del Acta.">

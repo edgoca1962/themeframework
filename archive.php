@@ -36,7 +36,7 @@ get_header();
                                 ?>
                             <?php endwhile; ?>
                         </div>
-                        <div class="mt-3">
+                        <div class="my-3">
                             <?php twenty_twenty_one_the_posts_navigation() ?>
                         </div>
                     </div>
