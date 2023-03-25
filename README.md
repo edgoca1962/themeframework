@@ -8,3 +8,4 @@ Sistema de control de acuerdos para el mantenimiento general todos los comités 
 
 1-Modificar el parámetro para fullpage en el front-page.
 2-Modificar los atributos del logo en cor-header-nav.php y cor-login.php
+3-Cambiar redirección en el login.
