@@ -1,7 +1,7 @@
 <?php
 if (get_post_meta('_f_final') < date('Y-m-d') || get_post_meta('_f_final') == '') {
    $f_proxevento =
-      fgh001_fpe(
+      themeframework_fpe(
          get_post_meta(get_the_ID(), '_f_inicio', true),
          get_post_meta(get_the_ID(), '_h_inicio', true),
          get_post_meta(get_the_ID(), '_f_final', true),

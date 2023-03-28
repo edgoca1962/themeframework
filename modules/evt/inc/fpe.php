@@ -1,6 +1,6 @@
 <?php
 
-function fgh001_fpe($finicio = '', $horainicio = '', $ffinal = '', $tipoevento = '',  $opcionesquema = '', $numerodiames = '', $diaordinalevento = '', $diasemanaevento = [], $mesevento)
+function themeframework_fpe($finicio = '', $horainicio = '', $ffinal = '', $tipoevento = '',  $opcionesquema = '', $numerodiames = '', $diaordinalevento = '', $diasemanaevento = [], $mesevento)
 {
 
    $diaordinal = ['1' => 'first', '2' => 'second', '3' => 'third', '4' => 'fourth', '5' => 'last'];
