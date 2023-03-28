@@ -11,7 +11,9 @@ function themeframework_fechasevento($finicio = '', $ffinal = '', $tipoevento = 
 
    /********************************************************
     * 
-    * Reuniones y Eventos recurrentes semanales, mensuales y anuales. 
+    * Obtiene todas las fechas de un mes para todos los
+    * evntos: Recurrentes y eventos diarios, semanales, 
+    * mensuales y anuales. 
     * 
     ********************************************************/
    switch ($tipoevento) {

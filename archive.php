@@ -51,7 +51,7 @@ get_header();
                     <?php endif; ?>
                 </div>
             <?php else : ?>
-                <?php get_template_part('modules/core/template-parts/cor', 'none', ['fullpage' => false]); ?>
+                <?php get_template_part('modules/core/template-parts/cor', 'none'); ?>
             <?php endif; ?>
         </div>
         <?php get_footer('footer', ['fullpage' => false]) ?>

@@ -8,6 +8,8 @@
  * @package Aplicación_Web
  */
 
+date_default_timezone_set('America/Costa_Rica');
+
 if (!defined('_S_VERSION')) {
    // Replace the version number of the theme on each release.
    define('_S_VERSION', '2.0.0');
@@ -93,6 +95,7 @@ add_action('wp_enqueue_scripts', 'themeframework_scripts');
 
 require_once ABSPATH . '/wp-admin/includes/taxonomy.php';
 
+
 require get_template_directory() . "/modules/core/inc/get_param.php";
 require get_template_directory() . "/modules/core/inc/login.php";
 require get_template_directory() . '/modules/core/inc/twentytwentyone/class-twenty-twenty-one-svg-icons.php';
@@ -105,6 +108,10 @@ require get_template_directory() . "/modules/sca/inc/acta.php";
 require get_template_directory() . "/modules/sca/inc/acuerdo.php";
 require get_template_directory() . "/modules/sca/inc/miembro.php";
 require get_template_directory() . "/modules/sca/inc/puesto.php";
-
 require get_template_directory() . "/modules/sca/inc/f_totalacuerdos.php";
 require get_template_directory() . "/modules/sca/inc/mantenimiento.php";
+
+require get_template_directory() . "/modules/evt/inc/evento.php";
+require get_template_directory() . "/modules/evt/inc/fpe.php";
+require get_template_directory() . "/modules/evt/inc/fechas_evento.php";
+require get_template_directory() . "/modules/evt/inc/mantenimiento.php";

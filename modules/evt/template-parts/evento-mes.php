@@ -56,7 +56,7 @@ $textcolor = (get_post_meta($post->ID, '_f_final', true) == '') ? 'text-info' : 
                            echo '<ul class="list-unstyled">';
                            while ($query->have_posts()) {
                               $query->the_post();
-                              $fechasevento = semilla506_fechasevento(
+                              $fechasevento = themeframework_fechasevento(
                                  get_post_meta($post->ID, '_f_inicio', true),
                                  get_post_meta($post->ID, '_f_final', true),
                                  get_post_meta($post->ID, '_periodicidadevento', true),
@@ -87,7 +87,7 @@ $textcolor = (get_post_meta($post->ID, '_f_final', true) == '') ? 'text-info' : 
                            echo '<ul class="list-unstyled">';
                            while ($query->have_posts()) {
                               $query->the_post();
-                              $fechasevento = semilla506_fechasevento(
+                              $fechasevento = themeframework_fechasevento(
                                  get_post_meta($post->ID, '_f_inicio', true),
                                  get_post_meta($post->ID, '_f_final', true),
                                  get_post_meta($post->ID, '_periodicidadevento', true),

@@ -814,3 +814,19 @@ function themeframework_guardar_f_proxevento($post_id)
    update_post_meta($post_id, '_f_proxevento', $f_proxevento);
 }
 add_action('save_post', 'themeframework_guardar_f_proxevento');
+/******************************************************************************
+ * 
+ * 
+ * Otorga facultados a los roles para los custom posts type
+ * 
+ * 
+ *****************************************************************************/
+add_action('init', function () {
+   $admin = get_role('administrator');
+   $capabilities = themeframework_capacidades_acta('evento', 'eventos');
+   foreach ($capabilities as $capability) {
+      if (!$admin->has_cap($capability)) {
+         $admin->add_cap($capability);
+      }
+   }
+});

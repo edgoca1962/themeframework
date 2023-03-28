@@ -422,6 +422,17 @@ if (!function_exists('themeframework_get_page_att')) {
                $barra = 'modules/sca/template-parts/sca-busquedas';
                $regresar = 'puesto';
                break;
+            case 'evento':
+               $titulo = 'Eventos';
+               $display = 'display-4';
+               $height = '60vh';
+               $div0 = 'container py-5';
+               $div1 = "row";
+               $div2 = "col";
+               $templateParts = 'modules/evt/template-parts/' . $postType;
+               $templatePartsSingle = 'modules/evt/template-parts/' . $postType . '-single';
+               $regresar = 'evento';
+               break;
             case 'movie':
                $titulo = 'Consulta de Películas y Series';
                $display = 'display-4';
@@ -433,7 +444,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $div5 = 'col-xl-3';
                break;
             default:
-               $titulo = 'Indefinido';
+               $titulo = 'No hay registros';
                $div0 = 'container py-5';
                $div1 = 'row';
                $div2 = 'col';

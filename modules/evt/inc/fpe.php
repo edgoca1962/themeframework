@@ -11,7 +11,9 @@ function themeframework_fpe($finicio = '', $horainicio = '', $ffinal = '', $tipo
 
    /********************************************************
     * 
-    * Reuniones recurrentes semanales, mensuales y anuales. 
+    * Obtiene la fecha del próximo evento y su hora para 
+    * todo tipo de eventos: recurrentes, eventos diarios,
+    * semanales, mensuales y anuales. 
     * 
     ********************************************************/
    switch ($tipoevento) {

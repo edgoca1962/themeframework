@@ -17,7 +17,7 @@ if ($fpe->have_posts()) {
    while ($fpe->have_posts()) {
       $fpe->the_post();
       $f_proxevento =
-         semilla506_fpe(
+         themeframework_fpe(
             get_post_meta($post->ID, '_f_inicio', true),
             get_post_meta($post->ID, '_h_inicio', true),
             get_post_meta($post->ID, '_f_final', true),
