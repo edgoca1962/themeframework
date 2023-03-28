@@ -16,7 +16,6 @@ $diasemanapost = ['Monday' => 'LUN', 'Tuesday' => 'MAR', 'Wednesday' => 'MIE', '
 $numerodiasemana = ['1', '2', '3', '4', '5', '6', '7'];
 $meses = ['1' => 'Enero', '2' => 'Febrero', '3' => 'Marzo', '4' => 'Abril', '5' => 'Mayor', '6' => 'Junio', '7' => 'Julio', '8' => 'Agosto', '9' => 'Septiembre', '10' => 'Octurbre', '11' => 'Noviembre', '12' => 'Diciembre'];
 
-get_header();
 $textcolor = (get_post_meta($post->ID, '_f_final', true) == '') ? 'text-info' : 'text-warning';
 ?>
 <section class="container py-5">
@@ -50,7 +49,7 @@ $textcolor = (get_post_meta($post->ID, '_f_final', true) == '') ? 'text-info' : 
                      if ($dia == 0) {
                         if ($j == date('N', strtotime('first day of ' . date('F')))) {
                            $dia = $dia + 1;
-                           echo '<td style="width:150px;">';
+                           echo '<td class="p-3" style="width:150px;">';
                            echo '<div class="' . ($dia == date('d') ? $clase : '') . '">' . $dia . '</div>';
                            $query = new WP_Query($eventos);
                            echo '<ul class="list-unstyled">';
@@ -81,7 +80,7 @@ $textcolor = (get_post_meta($post->ID, '_f_final', true) == '') ? 'text-info' : 
                      } else {
                         $dia = $dia + 1;
                         if ($dia  <= date('j', strtotime('last day of ' . date('F')))) {
-                           echo '<td style="width:150px;">';
+                           echo '<td class="p-3" style="width:150px;">';
                            echo '<div class="' . ($dia == date('d') ? $clase : '') . '">' . $dia . '</div>';
                            $query = new WP_Query($eventos);
                            echo '<ul class="list-unstyled">';
@@ -120,9 +119,6 @@ $textcolor = (get_post_meta($post->ID, '_f_final', true) == '') ? 'text-info' : 
       </div>
    <?php
    } else {
-      get_template_part('template-parts/content', 'none');
    }
    ?>
 </section>
-<?php
-get_footer();

@@ -40,3 +40,25 @@ function themeframework_pre_get_posts_eventos($query)
    }
 }
 add_action('pre_get_posts', 'themeframework_pre_get_posts_eventos');
+/******************************************************************************
+ * 
+ * 
+ * Crea las páginas para los eventos.
+ * 
+ * 
+ *****************************************************************************/
+$evento_mes = get_posts([
+   'post_type' => 'page',
+   'post_status' => 'publish',
+   'name' => 'evt-evento-mes',
+]);
+if (count($evento_mes) > 0) {
+} else {
+   $post_data = array(
+      'post_type' => 'page',
+      'post_title' => 'Eventos del mes',
+      'post_name' => 'evt-evento-mes',
+      'post_status' => 'publish',
+   );
+   wp_insert_post($post_data);
+}
