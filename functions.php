@@ -7,7 +7,7 @@
  *
  * @package Aplicación_Web
  */
-
+//Wordfence: ee5e3f5fd23828ee1c9c3d27cee8bde830532affc76b395bcc414f3924ef4090de733f9be812717e6a89d8457b8d44f4521c13d15b11f604374f84832cdf739e
 date_default_timezone_set('America/Costa_Rica');
 
 if (!defined('_S_VERSION')) {
