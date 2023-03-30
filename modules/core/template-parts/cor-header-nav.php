@@ -47,4 +47,5 @@
       </div>
    </nav>
 </header>
+<input type="hidden" name="" id="userAdmin" value="<?php echo themeframework_get_page_att(get_post_type())['userAdmin'] ?>">
 <div class="background-blend">

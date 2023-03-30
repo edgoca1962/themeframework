@@ -206,135 +206,20 @@ if (count($clave) > 0) {
  * 
  *****************************************************************************/
 if (!function_exists('themeframework_vigencia_acuerdos')) {
-   function themeframework_vigencia_acuerdos()
+   function themeframework_vigencia_acuerdos($f_compromiso, $vigente)
    {
-      $vigencia = sanitize_text_field($_GET['id']);
-      $comite = sanitize_text_field($_GET['id1']);
-      $f_usr = sanitize_text_field($_GET['id2']);
-
       $fechaInicial = date('Y-m-d', strtotime('First day of ' . date('F')));
       $fechaFinal = date('Y-m-d', strtotime('Last day of ' . date('F')));
-
-      if ($comite == '99') {
-         $tituloComite = '';
-         $filtrocomite =
-            [
-               'key' => '_comite_id',
-               'value' => '',
-               'compare' => '!='
-            ];
+      if ($f_compromiso < $fechaInicial && $vigente == 1) {
+         $status = 'Vencido';
+      } elseif ($f_compromiso >= $fechaInicial && $f_compromiso <= $fechaFinal && $vigente == 1) {
+         $status = 'Vence este mes';
+      } elseif ($f_compromiso > $fechaFinal && $vigente == 1) {
+         $status = 'Proceso';
       } else {
-         $tituloComite = ' - ' . get_post($comite)->post_title;
-         $filtrocomite =
-            [
-               'key' => '_comite_id',
-               'value' => $comite,
-            ];
+         $status = '';
       }
-      if ($f_usr == '99') {
-         $tituloUsuario = '';
-         $filtrousuario =
-            [
-               'key' => '_asignar_id',
-               'meta' => '',
-               'compare' => '!='
-            ];
-      } else {
-         $tituloUsuario = ' - ' . get_user_by('ID', $f_usr)->display_name;
-         $filtrousuario =
-            [
-               'key' => '_asignar_id',
-               'value' => $f_usr
-            ];
-      }
-
-      switch ($vigencia) {
-         case '1':
-            $filtrovigencia =
-               [
-                  'key' => '_f_compromiso',
-                  'value' => $fechaInicial,
-                  'compare' => '<'
-               ];
-            $statusvigencia =
-               [
-                  'key' => '_vigente',
-                  'value' => '1',
-               ];
-            $status = 'Vencido';
-            $vigenciaAcuerdos = 'Acuerdos Vencidos';
-            break;
-
-         case '2':
-            $filtrovigencia =
-               [
-                  'key' => '_f_compromiso',
-                  'value' => [$fechaInicial, $fechaFinal],
-                  'compare' => 'BETWEEN'
-               ];
-            $statusvigencia =
-               [
-                  'key' => '_vigente',
-                  'value' => '1',
-               ];
-            $status = 'Vigente';
-            $vigenciaAcuerdos = 'Acuerdos por vencer este mes';
-            break;
-
-         case '3':
-            $filtrovigencia =
-               [
-                  'key' => '_f_compromiso',
-                  'value' => $fechaFinal,
-                  'compare' => '>'
-               ];
-            $statusvigencia =
-               [
-                  'key' => '_vigente',
-                  'value' => '1',
-               ];
-            $status = 'Vigente';
-            $vigenciaAcuerdos = 'Acuerdos en proceso';
-            break;
-
-         case '4':
-            $filtrovigencia =
-               [
-                  'key' => '_f_compromiso',
-                  'value' => '',
-                  'compare' => '!='
-               ];
-            $statusvigencia =
-               [
-                  'key' => '_vigente',
-                  'value' => '0',
-               ];
-            $status = 'Ejecutados';
-            $vigenciaAcuerdos = 'Acuerdos ejecutados';
-            break;
-
-         default:
-            $filtrovigencia = [];
-            $status = 'Indefinido';
-            break;
-      }
-
-      $argsvigencia = [
-         'paged'         => get_query_var('paged', 1),
-         'post_type' => 'acuerdo',
-         'post_status' => 'publish',
-         'orderby' => 'meta_key',
-         'order' => 'ASC',
-         'meta_query' =>
-         [
-            'vigencia' => $filtrovigencia,
-            'status' => $statusvigencia,
-            'comite' => $filtrocomite,
-            'usuario' => $filtrousuario,
-         ],
-         'orderby' => ['vigencia' => 'ASC']
-      ];
-      return ['tituloComite' => $tituloComite, 'tituloUsuario' => $tituloUsuario, 'status' => $status, 'vigenciaAcuerdos' => $vigenciaAcuerdos, 'argsvigencia' => $argsvigencia,];
+      return $status;
    }
 }
 /******************************************************************************

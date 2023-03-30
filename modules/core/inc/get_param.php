@@ -321,6 +321,8 @@ if (!function_exists('themeframework_get_page_att')) {
                      $num_acuerdos .= $acuerdo['meta_value'] . ',';
                   }
                   $parametros = 'acta_id=' . $acta_id . '&comite_id=' . $comite_id;
+               } else {
+                  $qryconsecutivo = 0;
                }
                if (isset($_GET['comite_id']) != null) {
                   $comite_id = sanitize_text_field($_GET['comite_id']);
@@ -379,6 +381,7 @@ if (!function_exists('themeframework_get_page_att')) {
                if (is_single()) {
                   $titulo = get_the_title();
                   $display = '';
+                  $status = themeframework_vigencia_acuerdos(get_post_meta(get_the_ID(), '_f_compromiso', true), get_post_meta(get_the_ID(), '_vigente', true));
                } else {
                   $display = 'display-4';
                }
