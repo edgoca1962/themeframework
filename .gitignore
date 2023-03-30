@@ -1,1 +1,3 @@
-**.DS_Store*
+.gitignore
+.gitignore_global
+.DS_Store
