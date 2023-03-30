@@ -5,8 +5,7 @@
             <div class='position-relative'>
                <div class="d-flex justify-content-center">
                   <a href="<?php echo esc_url(site_url('/')) ?>" style="z-index:5">
-                     <!-- rounded-circle border border-3 -->
-                     <img src="<?php echo wp_get_attachment_image_src(get_theme_mod('custom_logo'), 'full')[0] ?>" style="width:100px;" alt="Logo">
+                     <img class="rounded-circle border border-3 shadowcss" src="<?php echo wp_get_attachment_image_src(get_theme_mod('custom_logo'), 'full')[0] ?>" style="width:100px;" alt="Logo">
                   </a>
                </div>
                <div class="ingreso-bg p-5 rounded-5 shadowcss" style="margin-top:-2.3rem; width:20rem;">
