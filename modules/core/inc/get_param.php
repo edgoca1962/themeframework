@@ -93,6 +93,8 @@ if (!function_exists('themeframework_get_page_att')) {
       $consecutivo = '';
       $num_actas = '';
       $comite_id = '';
+      $titulo_comite = '';
+      $acta_id = '';
       $num_acuerdos = '';
       $status = '';
       $asignar_id = '';
@@ -391,6 +393,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $agregarpost = 'modules/sca/template-parts/' . $postType . '-mantenimiento';
                $barra = 'modules/sca/template-parts/sca-busquedas';
                $regresar = 'acuerdo';
+               $consecutivo = $qryconsecutivo;
                break;
             case 'miembro':
                $titulo = 'Miembros';
@@ -423,6 +426,24 @@ if (!function_exists('themeframework_get_page_att')) {
                $regresar = 'puesto';
                break;
             case 'evento':
+               $eventos = get_posts(['post_type' => 'evento', 'numberposts' => -1]);
+               foreach ($eventos as $evento) {
+                  if (get_post_meta($evento->ID, '_f_final', true) > date('Y-m-d') || get_post_meta($evento->ID, '_f_final', true) == '') {
+                     $f_proxevento =
+                        themeframework_fpe(
+                           get_post_meta($evento->ID, '_f_inicio', true),
+                           get_post_meta($evento->ID, '_h_inicio', true),
+                           get_post_meta($evento->ID, '_f_final', true),
+                           get_post_meta($evento->ID, '_periodicidadevento', true),
+                           get_post_meta($evento->ID, '_opcionesquema', true),
+                           get_post_meta($evento->ID, '_numerodiaevento', true),
+                           get_post_meta($evento->ID, '_numerodiaordinalevento', true),
+                           explode(',', get_post_meta($evento->ID, '_diasemanaevento', true)),
+                           get_post_meta($evento->ID, '_mesevento', true)
+                        );
+                     update_post_meta($evento->ID, '_f_proxevento', $f_proxevento);
+                  }
+               }
                $titulo = 'Eventos';
                $display = 'display-4';
                $height = '60vh';
@@ -478,6 +499,7 @@ if (!function_exists('themeframework_get_page_att')) {
       $atributos['consecutivo'] = $consecutivo;
       $atributos['comite_id'] = $comite_id;
       $atributos['num_actas'] = $num_actas;
+      $atributos['acta_id'] = $acta_id;
       $atributos['num_acuerdos'] = $num_acuerdos;
       $atributos['status'] = $status;
       $atributos['asignar_id'] = $asignar_id;

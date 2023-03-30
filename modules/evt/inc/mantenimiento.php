@@ -16,14 +16,16 @@ function themeframework_pre_get_posts_eventos($query)
          $f_final =
             [
                'key' => '_f_final',
-               'value' => date('Y-m-d'),
-               'compare' => '>'
+               'value' => date('Ymd'),
+               'compare' => '>',
+               'type' => 'DATE'
             ];
          $f_proxevento =
             [
                'key' => '_f_proxevento',
-               'value' => date('Y-m-d'),
-               'compare' => '>'
+               'value' => date('Ymd'),
+               'compare' => '>',
+               'type' => 'DATE'
             ];
          $query->set(
             'meta_query',
@@ -34,8 +36,8 @@ function themeframework_pre_get_posts_eventos($query)
             ]
          );
          $query->set('meta_key', '_f_proxevento');
-         $query->set('orderby', 'meta_value_num');
-         $query->set('order', 'DESC');
+         $query->set('orderby', 'meta_value');
+         $query->set('order', 'ASC');
       }
    }
 }

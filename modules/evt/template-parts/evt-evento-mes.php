@@ -1,11 +1,5 @@
 <?php
 
-/**
- * The main template file
- *
- * @package Aplicación_Web
- */
-
 $eventos = [
    'posts_per_page' => -1,
    'post_type' => 'evento',
@@ -29,17 +23,16 @@ $textcolor = (get_post_meta($post->ID, '_f_final', true) == '') ? 'text-info' : 
          <table class="table table-sm table-bordered table-dark">
             <thead>
                <tr>
-                  <th scope="col">Lunes</th>
-                  <th scope="col">Martes</th>
-                  <th scope="col">Miércoles</th>
-                  <th scope="col">Jueves</th>
-                  <th scope="col">Viernes</th>
-                  <th scope="col">Sábado</th>
-                  <th scope="col">Domingo</th>
+                  <th class="ps-3" scope="col">Lunes</th>
+                  <th class="ps-3" scope="col">Martes</th>
+                  <th class="ps-3" scope="col">Miércoles</th>
+                  <th class="ps-3" scope="col">Jueves</th>
+                  <th class="ps-3" scope="col">Viernes</th>
+                  <th class="ps-3" scope="col">Sábado</th>
+                  <th class="ps-3" scope="col">Domingo</th>
                </tr>
             </thead>
             <tbody>
-
                <?php
                $clase = 'rounded-circle bg-danger text-center mb-2" style="width:23px; height:23px;';
                $dia = 0;
@@ -49,10 +42,10 @@ $textcolor = (get_post_meta($post->ID, '_f_final', true) == '') ? 'text-info' : 
                      if ($dia == 0) {
                         if ($j == date('N', strtotime('first day of ' . date('F')))) {
                            $dia = $dia + 1;
-                           echo '<td class="p-3" style="width:150px;">';
+                           echo '<td style="width:150px;">';
                            echo '<div class="' . ($dia == date('d') ? $clase : '') . '">' . $dia . '</div>';
                            $query = new WP_Query($eventos);
-                           echo '<ul class="list-unstyled">';
+                           echo '<ul class="p-3 list-unstyled">';
                            while ($query->have_posts()) {
                               $query->the_post();
                               $fechasevento = themeframework_fechasevento(
@@ -80,10 +73,10 @@ $textcolor = (get_post_meta($post->ID, '_f_final', true) == '') ? 'text-info' : 
                      } else {
                         $dia = $dia + 1;
                         if ($dia  <= date('j', strtotime('last day of ' . date('F')))) {
-                           echo '<td class="p-3" style="width:150px;">';
+                           echo '<td style="width:150px;">';
                            echo '<div class="' . ($dia == date('d') ? $clase : '') . '">' . $dia . '</div>';
                            $query = new WP_Query($eventos);
-                           echo '<ul class="list-unstyled">';
+                           echo '<ul class="p-3 list-unstyled">';
                            while ($query->have_posts()) {
                               $query->the_post();
                               $fechasevento = themeframework_fechasevento(

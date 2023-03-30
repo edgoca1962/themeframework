@@ -1,23 +1,8 @@
 <?php
-if (get_post_meta('_f_final') < date('Y-m-d') || get_post_meta('_f_final') == '') {
-   $f_proxevento =
-      themeframework_fpe(
-         get_post_meta(get_the_ID(), '_f_inicio', true),
-         get_post_meta(get_the_ID(), '_h_inicio', true),
-         get_post_meta(get_the_ID(), '_f_final', true),
-         get_post_meta(get_the_ID(), '_periodicidadevento', true),
-         get_post_meta(get_the_ID(), '_opcionesquema', true),
-         get_post_meta(get_the_ID(), '_numerodiaevento', true),
-         get_post_meta(get_the_ID(), '_numerodiaordinalevento', true),
-         explode(',', get_post_meta(get_the_ID(), '_diasemanaevento', true)),
-         get_post_meta(get_the_ID(), '_mesevento', true)
-      );
-   update_post_meta(get_the_ID(), '_f_proxevento', $f_proxevento);
-}
 $diasemanapost = ['Monday' => 'Lunes', 'Tuesday' => 'Martes', 'Wednesday' => 'Miércoles', 'Thursday' => 'Jueves', 'Friday' => 'Viernes', 'Saturday' => 'Sábado', 'Sunday' => 'Domingo'];
-
 ?>
-<h4> <a href="<?php echo esc_attr(esc_url(get_the_permalink() . '?pag=' . themeframework_get_page_att($post->post_type)['pag'] . '&' . themeframework_get_page_att($post->post_type)['parametros'])) ?>"> <?php echo get_the_title() ?></a></h4>
+
+<h4> <a href="<?php echo esc_attr(esc_url(get_the_permalink() . '?pag=' . themeframework_get_page_att(get_post_type())['pag'] . '&' . themeframework_get_page_att(get_post_type())['parametros'])) ?>"> <?php echo get_the_title() ?></a></h4>
 <h5>Fecha próxima reunión: <?php echo $diasemanapost[date('l', strtotime(get_post_meta(get_the_ID(), '_f_proxevento', true)))] . ' - ' . date('d-M-Y', strtotime(get_post_meta(get_the_ID(), '_f_proxevento', true)));   ?></h5>
 
 <p>
@@ -28,6 +13,19 @@ $diasemanapost = ['Monday' => 'Lunes', 'Tuesday' => 'Martes', 'Wednesday' => 'Mi
    <?php echo 'Hora final: ' . get_post_meta(get_the_ID(), '_h_final', true) . '<br/>'  ?>
    <?php echo 'Indicador dia completo: ' . get_post_meta(get_the_ID(), '_dia_completo', true) . '<br/>'  ?>
    <?php echo 'Inscripción: ' . get_post_meta(get_the_ID(), '_inscripcion', true) . '<br/>' ?>
+   <?php
+   $fechasevento = themeframework_fechasevento(
+      get_post_meta(get_the_ID(), '_f_inicio', true),
+      get_post_meta(get_the_ID(), '_f_final', true),
+      get_post_meta(get_the_ID(), '_periodicidadevento', true),
+      get_post_meta(get_the_ID(), '_opcionesquema', true),
+      get_post_meta(get_the_ID(), '_numerodiaevento', true),
+      get_post_meta(get_the_ID(), '_numerodiaordinalevento', true),
+      explode(',', get_post_meta(get_the_ID(), '_diasemanaevento', true)),
+      get_post_meta(get_the_ID(), '_mesevento', true)
+   );
+   print_r($fechasevento);
+   ?>
 </p>
 <div class="mb-3 <?php echo (get_post_meta(get_the_ID(), '_inscripcion', true) == 'on') ? '' : 'invisible' ?>" <?php echo (get_post_meta(get_the_ID(), '_inscripcion', true) == 'on') ? '' : 'style = "width:0; height:0;"' ?>>
    <button type="button" class="btn btn-warning">Inscribirme</button>

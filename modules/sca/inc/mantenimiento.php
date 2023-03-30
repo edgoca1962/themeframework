@@ -605,7 +605,7 @@ function themeframework_registrar_acuerdo()
       );
 
       wp_insert_post($post_data);
-      wp_send_json_success($n_acta);
+      wp_send_json_success('Acuerdo Registrado');
       wp_die();
    }
 }

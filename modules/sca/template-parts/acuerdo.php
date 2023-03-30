@@ -1,3 +1,6 @@
+<pre>
+   <?php echo themeframework_get_page_att(get_post_type())['num_acuerdos'] ?>
+</pre>
 <div id="elemento_<?php echo get_the_ID() ?>" class="col">
    <div class="card mb-5 shadowcss" style="background: linear-gradient(to right, rgba(64, 154, 247, 1), rgba(43, 170, 177, 1)) !important; color: #fff;">
       <div class="card-header pt-4 d-flex">
@@ -9,7 +12,7 @@
          </div>
       </div>
       <div class="card-body">
-         <h5 class="card-title"> <a class="text-white" href="<?php echo esc_attr(esc_url(get_the_permalink() . '?pag=' . themeframework_get_page_att($post->post_type)['pag'] . '&' . themeframework_get_page_att($post->post_type)['parametros'])) ?>"><?php echo get_post(get_post_parent(get_the_ID()))->post_title ?></a></h5>
+         <h5 class="card-title"> <a class="text-white" href="<?php echo esc_attr(esc_url(get_the_permalink() . '?pag=' . themeframework_get_page_att($post->post_type)['pag'] . '&' . themeframework_get_page_att($post->post_type)['parametros'])) ?>"><?php echo get_the_title() ?></a></h5>
          <p class="card-text"><?php echo the_excerpt() ?></p>
          <p class="card-text">
             <small>
