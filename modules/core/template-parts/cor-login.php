@@ -17,9 +17,10 @@
                            Por favor digitar el usuario.
                         </div>
                      </div>
-                     <div class="form-floating mb-3 border-bottom">
+                     <div class="d-flex form-floating mb-3 border-bottom">
                         <input type="password" class="form-control bg-transparent border-0 shadow-none text-white" id="clave" name="clave" placeholder="contraseña" required>
                         <label for="clave">Contraseña</label>
+                        <span class="mt-4" id="ver_clave" style="font-size: 70%;"><i class="fa-solid fa-eye-slash"></i></i></span>
                         <div class="invalid-feedback">
                            Por favor digitar la contraseña.
                         </div>
