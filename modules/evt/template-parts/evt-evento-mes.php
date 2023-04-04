@@ -1,117 +1,90 @@
 <?php
-
-$eventos = [
-   'posts_per_page' => -1,
-   'post_type' => 'evento',
-];
-$query = new WP_Query($eventos);
-
-$diasemanapost = ['Monday' => 'LUN', 'Tuesday' => 'MAR', 'Wednesday' => 'MIE', 'Thursday' => 'JUE', 'Friday' => 'VIE', 'Saturday' => 'SAB', 'Sunday' => 'DOM'];
-$numerodiasemana = ['1', '2', '3', '4', '5', '6', '7'];
-$meses = ['1' => 'Enero', '2' => 'Febrero', '3' => 'Marzo', '4' => 'Abril', '5' => 'Mayor', '6' => 'Junio', '7' => 'Julio', '8' => 'Agosto', '9' => 'Septiembre', '10' => 'Octurbre', '11' => 'Noviembre', '12' => 'Diciembre'];
-
-$textcolor = (get_post_meta($post->ID, '_f_final', true) == '') ? 'text-info' : 'text-warning';
+if (isset($_GET['mes'])) {
+   $mes = sanitize_text_field($_GET['mes']);
+} else {
+   $mes = date('F');
+}
+$espacios = date('N', strtotime('first day of ' . $mes)) - 1;
+$restante = 8 - $espacios;
 ?>
-<section class="container py-5">
-   <div class="mb-5 text-center">
-      <h2 class="animate__animated animate__fadeInLeftBig"><small><span class="text-info"><i class="fa-solid fa-circle"></i></span></small> Reuniones y <small><span class="text-warning"><i class="fa-solid fa-circle"></i></span></small> Eventos del mes de <?php echo $meses[date('n')] ?></h2>
-   </div>
-   <?php
-   if ($query->have_posts()) {
-   ?>
-      <div class="row">
-         <table class="table table-sm table-bordered table-dark">
-            <thead>
-               <tr>
-                  <th class="ps-3" scope="col">Lunes</th>
-                  <th class="ps-3" scope="col">Martes</th>
-                  <th class="ps-3" scope="col">Miércoles</th>
-                  <th class="ps-3" scope="col">Jueves</th>
-                  <th class="ps-3" scope="col">Viernes</th>
-                  <th class="ps-3" scope="col">Sábado</th>
-                  <th class="ps-3" scope="col">Domingo</th>
-               </tr>
-            </thead>
-            <tbody>
-               <?php
-               $clase = 'rounded-circle bg-danger text-center mb-2" style="width:23px; height:23px;';
-               $dia = 0;
-               for ($i = 1; $i <= 6; $i++) {
-                  echo '<tr>';
-                  for ($j = 1; $j <= 7; $j++) {
-                     if ($dia == 0) {
-                        if ($j == date('N', strtotime('first day of ' . date('F')))) {
-                           $dia = $dia + 1;
-                           echo '<td style="width:150px;">';
-                           echo '<div class="' . ($dia == date('d') ? $clase : '') . '">' . $dia . '</div>';
-                           $query = new WP_Query($eventos);
-                           echo '<ul class="p-3 list-unstyled">';
-                           while ($query->have_posts()) {
-                              $query->the_post();
-                              $fechasevento = themeframework_fechasevento(
-                                 get_post_meta($post->ID, '_f_inicio', true),
-                                 get_post_meta($post->ID, '_f_final', true),
-                                 get_post_meta($post->ID, '_periodicidadevento', true),
-                                 get_post_meta($post->ID, '_opcionesquema', true),
-                                 get_post_meta($post->ID, '_numerodiaevento', true),
-                                 get_post_meta($post->ID, '_numerodiaordinalevento', true),
-                                 explode(',', get_post_meta($post->ID, '_diasemanaevento', true)),
-                                 get_post_meta($post->ID, '_mesevento', true)
-                              );
-                              foreach ($fechasevento as $fechadia) {
-                                 if (date('Y-m-d', strtotime('first day of ' . date('F'))) == $fechadia) {
-                                    $textcolor = (get_post_meta($post->ID, '_f_final', true) == '') ? 'text-info' : 'text-warning';
-                                    echo '<li><span class="' . $textcolor . '"><i class="fa-solid fa-circle"></i></span> <smal><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></smal></li>';
-                                 }
-                              }
-                           }
-                           echo '</ul>';
-                           echo '</td>';
-                        } else {
-                           echo '<td></td>';
-                        }
-                     } else {
-                        $dia = $dia + 1;
-                        if ($dia  <= date('j', strtotime('last day of ' . date('F')))) {
-                           echo '<td style="width:150px;">';
-                           echo '<div class="' . ($dia == date('d') ? $clase : '') . '">' . $dia . '</div>';
-                           $query = new WP_Query($eventos);
-                           echo '<ul class="p-3 list-unstyled">';
-                           while ($query->have_posts()) {
-                              $query->the_post();
-                              $fechasevento = themeframework_fechasevento(
-                                 get_post_meta($post->ID, '_f_inicio', true),
-                                 get_post_meta($post->ID, '_f_final', true),
-                                 get_post_meta($post->ID, '_periodicidadevento', true),
-                                 get_post_meta($post->ID, '_opcionesquema', true),
-                                 get_post_meta($post->ID, '_numerodiaevento', true),
-                                 get_post_meta($post->ID, '_numerodiaordinalevento', true),
-                                 explode(',', get_post_meta($post->ID, '_diasemanaevento', true)),
-                                 get_post_meta($post->ID, '_mesevento', true)
-                              );
-                              foreach ($fechasevento as $fechadia) {
-                                 if (date('Y-m-d', mktime(0, 0, 0, date('m'), $dia, date('Y'))) == $fechadia) {
-                                    $textcolor = (get_post_meta($post->ID, '_f_final', true) == '') ? 'text-info' : 'text-warning';
-                                    echo '<li><span class="' . $textcolor . '"><i class="fa-solid fa-circle"></i></span> <smal><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></smal></li>';
-                                 }
-                              }
-                           }
-                           echo '</ul>';
-                           echo '</td>';
-                        } else {
-                           echo '<td></td>';
-                        }
-                     }
-                  }
-                  echo '</tr>';
-               }
-               wp_reset_postdata();
-               ?>
+
+<div class="col-md-3 my-3">
+   <select id="mesEvento" class="form-control" name="">
+      <option value="Januray" <?php echo ($mes === "Januray") ? 'selected' : '' ?>>Enero</option>
+      <option value="February" <?php echo ($mes === "February") ? 'selected' : '' ?>>Febrero</option>
+      <option value="March" <?php echo ($mes === "March") ? 'selected' : '' ?>>Marzo</option>
+      <option value="April" <?php echo ($mes === "April") ? 'selected' : '' ?>>Abril</option>
+      <option value="May" <?php echo ($mes === "May") ? 'selected' : '' ?>>May</option>
+      <option value="June" <?php echo ($mes === "June") ? 'selected' : '' ?>>Junio</option>
+      <option value="July" <?php echo ($mes === "July") ? 'selected' : '' ?>>Julio</option>
+      <option value="August" <?php echo ($mes === "August") ? 'selected' : '' ?>>Agosto</option>
+      <option value="September" <?php echo ($mes === "September") ? 'selected' : '' ?>>Septiembre</option>
+      <option value="October" <?php echo ($mes === "October") ? 'selected' : '' ?>>Octubre</option>
+      <option value="November" <?php echo ($mes === "November") ? 'selected' : '' ?>>Noviembre</option>
+      <option value="December" <?php echo ($mes === "December") ? 'selected' : '' ?>>Diciembre</option>
+   </select>
+   <input type="hidden" id="url" value=<?php echo site_url('/evt-evento-mes') ?>>
+</div>
+<script>
+   document.getElementById('mesEvento').addEventListener('change', function() {
+      window.location.href = document.getElementById('url').value + '/?mes=' + document.getElementById('mesEvento').value
+   })
+</script>
+<div class="row my-3">
+   <div class="table-responsive">
+      <table class="table table-dark">
+         <thead>
+            <tr>
+               <th class="text-center" scope="col">Lunes</th>
+               <th class="text-center" scope="col">Martes</th>
+               <th class="text-center" scope="col">Miércoles</th>
+               <th class="text-center" scope="col">Jueves</th>
+               <th class="text-center" scope="col">Viernes</th>
+               <th class="text-center" scope="col">Sábado</th>
+               <th class="text-center" scope="col">Domingo</th>
+            </tr>
+         </thead>
+         <tbody">
+            <?php for ($semana = 1; $semana < 8; $semana++) : ?>
+               <?php if ($semana == 1) : ?>
+                  <tr>
+                     <?php if ($espacios > 0) : ?>
+                        <td colspan="<?php echo $espacios ?>"></td>
+                     <?php endif; ?>
+                     <?php for ($dia = 1; $dia < $restante; $dia++) : ?>
+                        <td>
+                           <a href="<?php echo get_post_type_archive_link('evento') . '?fpe=' . date('Ymd', strtotime($dia . $mes . date('Y'))) ?>">
+                              <span class="<?php echo (date('Ymd') == date('Ymd', strtotime($dia . $mes . date('Y')))) ? 'd-flex badge rounded-pill text-bg-danger justify-content-center' : 'd-flex justify-content-center' ?>"><?php echo $dia ?></span>
+                           </a>
+                        </td>
+                     <?php endfor; ?>
+                  </tr>
+               <?php else : ?>
+                  <tr>
+                     <?php for ($diasemana = 1; $diasemana < 8; $diasemana++) : ?>
+                        <?php if ($dia < date('j', strtotime('last day of ' . $mes))) : ?>
+                           <td>
+                              <a href="<?php echo get_post_type_archive_link('evento') . '?fpe=' . date('Ymd', strtotime($dia . $mes . date('Y'))) ?>">
+                                 <span class="<?php echo (date('Ymd') == date('Ymd', strtotime($dia . $mes . date('Y')))) ? 'd-flex badge rounded-pill text-bg-danger justify-content-center' : 'd-flex justify-content-center' ?>"><?php echo $dia++ ?></span>
+                              </a>
+                           </td>
+                        <?php else : ?>
+                           <?php if ($dia == date('j', strtotime('last day of ' . $mes))) : ?>
+                              <td>
+                                 <a href="<?php echo get_post_type_archive_link('evento') . '?fpe=' . date('Ymd', strtotime($dia . $mes . date('Y'))) ?>">
+                                    <span class="<?php echo (date('Ymd') == date('Ymd', strtotime($dia . $mes . date('Y')))) ? 'd-flex badge rounded-pill text-bg-danger justify-content-center' : 'd-flex justify-content-center' ?>"><?php echo $dia++ ?></span>
+                                 </a>
+                              </td>
+                              <?php if (7 - $diasemana > 0) :  ?>
+                                 <td colspan="<?php echo 7 - $diasemana ?>"></td>
+                              <?php endif; ?>
+                           <?php endif; ?>
+                        <?php endif; ?>
+                     <?php endfor; ?>
+                  </tr>
+               <?php endif; ?>
+            <?php endfor; ?>
             </tbody>
-         </table>
-      </div>
-   <?php
-   } else {
-   }
-   ?>
-</section>
+      </table>
+   </div>
+</div>

@@ -1,4 +1,9 @@
 <?php
+if (isset($_GET['mes'])) {
+   $mesConsulta = sanitize_text_field($_GET['mes']);
+} else {
+   $mesConsulta = date('F');
+}
 if (get_post_meta('_f_final') < date('Y-m-d') || get_post_meta('_f_final') == '') {
    $f_proxevento =
       themeframework_fpe(
@@ -23,7 +28,8 @@ $fechasevento = themeframework_fechasevento(
    get_post_meta($post->ID, '_numerodiaevento', true),
    get_post_meta($post->ID, '_numerodiaordinalevento', true),
    explode(',', get_post_meta($post->ID, '_diasemanaevento', true)),
-   get_post_meta($post->ID, '_mesevento', true)
+   get_post_meta($post->ID, '_mesevento', true),
+   $mesConsulta
 );
 
 $diasemanapost = ['Monday' => 'Lunes', 'Tuesday' => 'Martes', 'Wednesday' => 'Miércoles', 'Thursday' => 'Jueves', 'Friday' => 'Viernes', 'Saturday' => 'Sábado', 'Sunday' => 'Domingo'];

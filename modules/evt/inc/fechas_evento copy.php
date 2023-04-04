@@ -1,6 +1,6 @@
 <?php
 
-function themeframework_fechasevento($finicio = '', $ffinal = '', $tipoevento = '',  $opcionesquema = '', $numerodiames = '', $diaordinalevento = '', $diasemanaevento = [], $mesevento = '', $mesConsulta = '')
+function themeframework_fechasevento($finicio = '', $ffinal = '', $tipoevento = '',  $opcionesquema = '', $numerodiames = '', $diaordinalevento = '', $diasemanaevento = [], $mesevento = '')
 {
 
    $diaordinal = ['1' => 'first', '2' => 'second', '3' => 'third', '4' => 'fourth', '5' => 'last'];
@@ -21,24 +21,24 @@ function themeframework_fechasevento($finicio = '', $ffinal = '', $tipoevento = 
          if ($ffinal == '') {
             $fechas = [];
          } else {
-            if ($finicio > date('Y-m-d', strtotime('last day of ' . $mesConsulta)) || $ffinal < date('Y-m-d', strtotime('first day of ' . $mesConsulta))) {
+            if ($finicio > date('Y-m-d', strtotime('last day of ' . date('F'))) || $ffinal < date('Y-m-d', strtotime('first day of ' . date('F')))) {
                $fechas = [];
             } else {
-               if ($finicio >= date('Y-m-d', strtotime('first day of ' . $mesConsulta)) && $ffinal <= date('Y-m-d', strtotime('last day of ' . $mesConsulta))) {
+               if ($finicio >= date('Y-m-d', strtotime('first day of ' . date('F'))) && $ffinal <= date('Y-m-d', strtotime('last day of ' . date('F')))) {
                   $f1 = date_create($finicio);
                   $f2 = date_create($ffinal);
                }
-               if ($finicio < date('Y-m-d', strtotime('first day of ' . $mesConsulta)) && $ffinal > date('Y-m-d', strtotime('last day of ' . $mesConsulta))) {
-                  $f1 = date_create(date('Y-m-d', strtotime('first day of ' . $mesConsulta)));
-                  $f2 = date_create(date('Y-m-d', strtotime('last day of ' . $mesConsulta)));
+               if ($finicio < date('Y-m-d', strtotime('first day of ' . date('F'))) && $ffinal > date('Y-m-d', strtotime('last day of ' . date('F')))) {
+                  $f1 = date_create(date('Y-m-d', strtotime('first day of ' . date('F'))));
+                  $f2 = date_create(date('Y-m-d', strtotime('last day of ' . date('F'))));
                }
-               if ($finicio < date('Y-m-d', strtotime('first day of ' . $mesConsulta)) && $ffinal < date('Y-m-d', strtotime('last day of ' . $mesConsulta))) {
-                  $f1 = date_create(date('Y-m-d', strtotime('first day of ' . $mesConsulta)));
+               if ($finicio < date('Y-m-d', strtotime('first day of ' . date('F'))) && $ffinal < date('Y-m-d', strtotime('last day of ' . date('F')))) {
+                  $f1 = date_create(date('Y-m-d', strtotime('first day of ' . date('F'))));
                   $f2 = date_create($ffinal);
                }
-               if ($finicio > date('Y-m-d', strtotime('first day of ' . $mesConsulta)) && $ffinal > date('Y-m-d', strtotime('last day of ' . $mesConsulta))) {
+               if ($finicio > date('Y-m-d', strtotime('first day of ' . date('F'))) && $ffinal > date('Y-m-d', strtotime('last day of ' . date('F')))) {
                   $f1 = date_create($finicio);
-                  $f2 = date_create(date('Y-m-d', strtotime('last day of ' . $mesConsulta)));
+                  $f2 = date_create(date('Y-m-d', strtotime('last day of ' . date('F'))));
                }
                $n_dias = date_diff($f1, $f2);
                $numerodiasevento = $n_dias->format('%d') + 1;
@@ -58,25 +58,25 @@ function themeframework_fechasevento($finicio = '', $ffinal = '', $tipoevento = 
          if ($ffinal == '') {
             $fechas = [];
          } else {
-            if ($finicio > date('Y-m-d', strtotime('last day of ' . $mesConsulta)) || $ffinal < date('Y-m-d', strtotime('first day of ' . $mesConsulta))) {
+            if ($finicio > date('Y-m-d', strtotime('last day of ' . date('F'))) || $ffinal < date('Y-m-d', strtotime('first day of ' . date('F')))) {
                $fechas = [];
             } else {
 
-               if ($finicio >= date('Y-m-d', strtotime('first day of ' . $mesConsulta)) && $ffinal <= date('Y-m-d', strtotime('last day of ' . $mesConsulta))) {
+               if ($finicio >= date('Y-m-d', strtotime('first day of ' . date('F'))) && $ffinal <= date('Y-m-d', strtotime('last day of ' . date('F')))) {
                   $f1 = date_create($finicio);
                   $f2 = date_create($ffinal);
                }
-               if ($finicio < date('Y-m-d', strtotime('first day of ' . $mesConsulta)) && $ffinal > date('Y-m-d', strtotime('last day of ' . $mesConsulta))) {
-                  $f1 = date_create(date('Y-m-d', strtotime('first day of ' . $mesConsulta)));
-                  $f2 = date_create(date('Y-m-d', strtotime('last day of ' . $mesConsulta)));
+               if ($finicio < date('Y-m-d', strtotime('first day of ' . date('F'))) && $ffinal > date('Y-m-d', strtotime('last day of ' . date('F')))) {
+                  $f1 = date_create(date('Y-m-d', strtotime('first day of ' . date('F'))));
+                  $f2 = date_create(date('Y-m-d', strtotime('last day of ' . date('F'))));
                }
-               if ($finicio < date('Y-m-d', strtotime('first day of ' . $mesConsulta)) && $ffinal < date('Y-m-d', strtotime('last day of ' . $mesConsulta))) {
-                  $f1 = date_create(date('Y-m-d', strtotime('first day of ' . $mesConsulta)));
+               if ($finicio < date('Y-m-d', strtotime('first day of ' . date('F'))) && $ffinal < date('Y-m-d', strtotime('last day of ' . date('F')))) {
+                  $f1 = date_create(date('Y-m-d', strtotime('first day of ' . date('F'))));
                   $f2 = date_create($ffinal);
                }
-               if ($finicio > date('Y-m-d', strtotime('first day of ' . $mesConsulta)) && $ffinal > date('Y-m-d', strtotime('last day of ' . $mesConsulta))) {
+               if ($finicio > date('Y-m-d', strtotime('first day of ' . date('F'))) && $ffinal > date('Y-m-d', strtotime('last day of ' . date('F')))) {
                   $f1 = date_create($finicio);
-                  $f2 = date_create(date('Y-m-d', strtotime('last day of ' . $mesConsulta)));
+                  $f2 = date_create(date('Y-m-d', strtotime('last day of ' . date('F'))));
                }
                $n_dias = date_diff($f1, $f2);
                $numerodiasevento = $n_dias->format('%d') + 1;
@@ -93,16 +93,16 @@ function themeframework_fechasevento($finicio = '', $ffinal = '', $tipoevento = 
          }
          break;
       case '3':
-         if ($ffinal == '' || $ffinal >= date('Y-m-d', strtotime('first day of ' . $mesConsulta))) {
-            if ($finicio <= date('Y-m-d', strtotime('last day of ' . $mesConsulta))) {
+         if ($ffinal == '' || $ffinal >= date('Y-m-d', strtotime('first day of ' . date('F')))) {
+            if ($finicio <= date('Y-m-d', strtotime('last day of ' . date('F')))) {
                if ($ffinal == '') {
-                  if ($finicio >= date('Y-m-d', strtotime('first day of ' . $mesConsulta)) && $finicio <= date('Y-m-d', strtotime('last day of ' . $mesConsulta))) {
+                  if ($finicio >= date('Y-m-d', strtotime('first day of ' . date('F'))) && $finicio <= date('Y-m-d', strtotime('last day of ' . date('F')))) {
                      $f1 = date_create($finicio);
-                     $f2 = date_create(date('Y-m-d', strtotime('last day of ' . $mesConsulta)));
+                     $f2 = date_create(date('Y-m-d', strtotime('last day of ' . date('F'))));
                   }
-                  if ($finicio < date('Y-m-d', strtotime('first day of ' . $mesConsulta))) {
-                     $f1 = date_create(date('Y-m-d', strtotime('first day of ' . $mesConsulta)));
-                     $f2 = date_create(date('Y-m-d', strtotime('last day of ' . $mesConsulta)));
+                  if ($finicio < date('Y-m-d', strtotime('first day of ' . date('F')))) {
+                     $f1 = date_create(date('Y-m-d', strtotime('first day of ' . date('F'))));
+                     $f2 = date_create(date('Y-m-d', strtotime('last day of ' . date('F'))));
                   }
                   $n_dias = date_diff($f1, $f2);
                   $numerodiasevento = $n_dias->format('%d') + 1;
@@ -123,21 +123,21 @@ function themeframework_fechasevento($finicio = '', $ffinal = '', $tipoevento = 
                      }
                   }
                } else {
-                  if ($finicio >= date('Y-m-d', strtotime('first day of ' . $mesConsulta)) && $ffinal <= date('Y-m-d', strtotime('last day of ' . $mesConsulta))) {
+                  if ($finicio >= date('Y-m-d', strtotime('first day of ' . date('F'))) && $ffinal <= date('Y-m-d', strtotime('last day of ' . date('F')))) {
                      $f1 = date_create($finicio);
                      $f2 = date_create($ffinal);
                   }
-                  if ($finicio < date('Y-m-d', strtotime('first day of ' . $mesConsulta)) && $ffinal > date('Y-m-d', strtotime('last day of ' . $mesConsulta))) {
-                     $f1 = date_create(date('Y-m-d', strtotime('first day of ' . $mesConsulta)));
-                     $f2 = date_create(date('Y-m-d', strtotime('last day of ' . $mesConsulta)));
+                  if ($finicio < date('Y-m-d', strtotime('first day of ' . date('F'))) && $ffinal > date('Y-m-d', strtotime('last day of ' . date('F')))) {
+                     $f1 = date_create(date('Y-m-d', strtotime('first day of ' . date('F'))));
+                     $f2 = date_create(date('Y-m-d', strtotime('last day of ' . date('F'))));
                   }
-                  if ($finicio < date('Y-m-d', strtotime('first day of ' . $mesConsulta)) && $ffinal < date('Y-m-d', strtotime('last day of ' . $mesConsulta))) {
-                     $f1 = date_create(date('Y-m-d', strtotime('first day of ' . $mesConsulta)));
+                  if ($finicio < date('Y-m-d', strtotime('first day of ' . date('F'))) && $ffinal < date('Y-m-d', strtotime('last day of ' . date('F')))) {
+                     $f1 = date_create(date('Y-m-d', strtotime('first day of ' . date('F'))));
                      $f2 = date_create($ffinal);
                   }
-                  if ($finicio > date('Y-m-d', strtotime('first day of ' . $mesConsulta)) && $ffinal > date('Y-m-d', strtotime('last day of ' . $mesConsulta))) {
+                  if ($finicio > date('Y-m-d', strtotime('first day of ' . date('F'))) && $ffinal > date('Y-m-d', strtotime('last day of ' . date('F')))) {
                      $f1 = date_create($finicio);
-                     $f2 = date_create(date('Y-m-d', strtotime('last day of ' . $mesConsulta)));
+                     $f2 = date_create(date('Y-m-d', strtotime('last day of ' . date('F'))));
                   }
                   $n_dias = date_diff($f1, $f2);
                   $numerodiasevento = $n_dias->format('%d') + 1;
@@ -167,8 +167,8 @@ function themeframework_fechasevento($finicio = '', $ffinal = '', $tipoevento = 
          }
          break;
       case '4':
-         if ($ffinal == '' || $ffinal >= date('Y-m-d', strtotime('first day of ' . $mesConsulta))) {
-            if ($finicio <= date('Y-m-d', strtotime('last day of ' . $mesConsulta))) {
+         if ($ffinal == '' || $ffinal >= date('Y-m-d', strtotime('first day of ' . date('F')))) {
+            if ($finicio <= date('Y-m-d', strtotime('last day of ' . date('F')))) {
                if ($opcionesquema == 'on') {
                   $fecha = date('Y-m-d');
                   $f1_1 = date_create($fecha);
@@ -179,7 +179,7 @@ function themeframework_fechasevento($finicio = '', $ffinal = '', $tipoevento = 
                   }
                } else {
                   foreach ($diasemanaevento as $dia) {
-                     $strtotime = $diaordinal[$diaordinalevento] . ' ' . $diasemana[$dia] . ' of ' . $mesConsulta;
+                     $strtotime = $diaordinal[$diaordinalevento] . ' ' . $diasemana[$dia] . ' of ' . date('F');
                      if ($finicio <= date('Y-m-d', strtotime($strtotime))) {
                         $fechas[] = date('Y-m-d', strtotime($strtotime));
                      }
@@ -193,8 +193,8 @@ function themeframework_fechasevento($finicio = '', $ffinal = '', $tipoevento = 
          }
          break;
       case '5':
-         if ($ffinal == '' || $ffinal >= date('Y-m-d', strtotime('first day of ' . $mesConsulta))) {
-            if ($finicio <= date('Y-m-d', strtotime('last day of ' . $mesConsulta))) {
+         if ($ffinal == '' || $ffinal >= date('Y-m-d', strtotime('first day of ' . date('F')))) {
+            if ($finicio <= date('Y-m-d', strtotime('last day of ' . date('F')))) {
                if ($opcionesquema == 'on') {
                   if (date('m') == $mesevento) {
                      $fecha = date('Y-m-d');
