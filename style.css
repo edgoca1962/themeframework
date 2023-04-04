@@ -1,6 +1,7 @@
 /*!
 Theme Name: themeframework
 Theme URI: fgh-org.org
+Text Domain: themeframework
 Author: Edwin González
 Author URI: https://fgh'org.org
 Description: Este tema pretende ser un framework para poder implementar diferentes módulos o necesidades de un cliente. Cada módulo podría estar compuesto por uno o varios Custom Posts, páginas, sidebars, menues, etc. En este framework se incluye bootstrap, sweetalert, fontawesome, annimate entre otas dependencias que se pueden ver en el package.json file.
