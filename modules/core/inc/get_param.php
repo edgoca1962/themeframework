@@ -93,12 +93,18 @@ if (!function_exists('themeframework_get_page_att')) {
       $consecutivo = '';
       $num_actas = '';
       $comite_id = '';
-      $titulo_comite = '';
       $acta_id = '';
       $num_acuerdos = '';
       $status = '';
       $asignar_id = '';
+      $btn_regresar = '';
       $parametros = '';
+      $mes = '';
+      $espacios = '';
+      $restante = '';
+
+      $monthName = ["Januray" => "Enero", "February" => "Febrero", "March" => "Marzo", "April" => "Abril", "May" => "Mayo", "June" => "Junio", "July" => "Julio", "August" => "Agosto", "September" => "Septiembre", "October" => "Octubre", "November" => "Noviembre", "December" => "Diciembre"];
+
       if (in_array('administrator', $usuarioRoles) || in_array('author', $usuarioRoles)) {
          $userAdmin = true;
       } else {
@@ -150,6 +156,21 @@ if (!function_exists('themeframework_get_page_att')) {
       $fontweight = 'fw-lighter';
       $display = 'display-4';
       $titulo = get_the_title();
+      if (isset($_GET['mes'])) {
+         $mes = sanitize_text_field($_GET['mes']);
+      } else {
+         $mes = date('F');
+      }
+      if (isset($_GET['mes'])) {
+         $espacios = date('N', strtotime('first day of ' . $mes)) - 1;
+         $restante = 8 - $espacios;
+         $subtitulo = $monthName[$mes] . ' - ' . date('Y');
+         $displaysub = 'display-4';
+         if (is_single()) {
+            $subtitulo2 = get_the_title();
+            $displaysub2 = 'display-5';
+         }
+      }
       if (isset($_GET['comite_id'])) {
          $comite_id = sanitize_text_field($_GET['comite_id']);
          $titulo = 'Acuerdos ' . get_post($comite_id)->post_title;
@@ -176,6 +197,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $fontweight = 'fw-lighter';
                $display = 'display-4';
                $height = '60vh';
+               $btn_regresar = 'modules/pst/template-parts/post-regresar';
                $regresar = 'post';
                break;
             case 'comite':
@@ -201,6 +223,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $templatePartsSingle = 'modules/sca/template-parts/' . $postType . '-single';
                $agregarpost = 'modules/sca/template-parts/' . $postType . '-mantenimiento';
                $barra = 'modules/sca/template-parts/sca-busquedas';
+               $btn_regresar = 'modules/sca/template-parts/acuerdo-regresar';
                $regresar = 'comite';
                break;
             case 'acta':
@@ -395,6 +418,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $templatePartsSingle = 'modules/sca/template-parts/' . $postType . '-single';
                $agregarpost = 'modules/sca/template-parts/' . $postType . '-mantenimiento';
                $barra = 'modules/sca/template-parts/sca-busquedas';
+               $btn_regresar = 'modules/sca/template-parts/acuerdo-regresar';
                $regresar = 'acuerdo';
                $consecutivo = $qryconsecutivo;
                break;
@@ -448,6 +472,11 @@ if (!function_exists('themeframework_get_page_att')) {
                   }
                }
                $titulo = 'Eventos';
+               if (isset($_GET['fpe'])) {
+
+                  $subtitulo = $monthName[date('F', strtotime(sanitize_text_field($_GET['fpe'])))] . ' - ' . date('Y');
+                  $displaysub = 'display-4';
+               }
                $display = 'display-4';
                $height = '60vh';
                $div0 = 'container py-5';
@@ -497,6 +526,7 @@ if (!function_exists('themeframework_get_page_att')) {
       $atributos['agregarpost'] = $agregarpost;
       $atributos['barra'] = $barra;
       $atributos['template-parts-single'] = $templatePartsSingle;
+      $atributos['btn_regresar'] = $btn_regresar;
       $atributos['regresar'] = $regresar;
       $atributos['prefijo'] =  $prefijo;
       $atributos['consecutivo'] = $consecutivo;
@@ -507,6 +537,9 @@ if (!function_exists('themeframework_get_page_att')) {
       $atributos['status'] = $status;
       $atributos['asignar_id'] = $asignar_id;
       $atributos['parametros'] = $parametros;
+      $atributos['mes'] = $mes;
+      $atributos['espacios'] = $espacios;
+      $atributos['restante'] = $restante;
       return $atributos;
    }
 }

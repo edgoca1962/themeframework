@@ -16,7 +16,7 @@ if (count($evento_mes) > 0) {
 } else {
    $post_data = array(
       'post_type' => 'page',
-      'post_title' => 'Eventos del mes',
+      'post_title' => 'Eventos',
       'post_name' => 'evt-evento-mes',
       'post_status' => 'publish',
    );

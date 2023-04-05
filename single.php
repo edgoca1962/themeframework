@@ -7,7 +7,6 @@
  */
 
 get_header();
-$postType = get_post_type();
 ?>
 <header>
     <?php
@@ -16,32 +15,30 @@ $postType = get_post_type();
     ?>
 </header>
 <section class="background-blend">
-    <div class="<?php echo themeframework_get_page_att($postType)['div0'] ?>">
-        <div class="<?php echo themeframework_get_page_att($postType)['div1'] ?>">
-            <div class="<?php echo themeframework_get_page_att($postType)['div2'] ?>">
+    <div class="<?php echo themeframework_get_page_att(get_post_type())['div0'] ?>">
+        <div class="<?php echo themeframework_get_page_att(get_post_type())['div1'] ?>">
+            <div class="<?php echo themeframework_get_page_att(get_post_type())['div2'] ?>">
                 <?php if (have_posts()) : ?>
                     <?php
                     while (have_posts()) :
                         the_post();
-                        get_template_part(themeframework_get_page_att($postType)['template-parts-single']);
+                        get_template_part(themeframework_get_page_att(get_post_type())['template-parts-single']);
                     endwhile;
                     ?>
                 <?php else : ?>
                     <?php get_template_part('modules/core/template-parts/cor', 'none', ['fullpage' => true]); ?>
                 <?php endif ?>
-                <?php if (themeframework_get_page_att($postType)['pag_ant'] != 0) : ?>
-                    <div class="my-3">
-                        <button class="btn btn-warning btn-sm"><a class="text-black" href="<?php echo get_post_type_archive_link(themeframework_get_page_att($postType)['regresar']) . 'page/' . themeframework_get_page_att($postType)['pag_ant'] . '/?' . themeframework_get_page_att($post->post_type)['parametros']  ?>">Regresar</a></button>
-                    </div>
+                <?php if (themeframework_get_page_att(get_post_type())['pag_ant'] != 0) : ?>
+                    <?php get_template_part(themeframework_get_page_att(get_post_type())['btn_regresar']) ?>
                 <?php endif; ?>
             </div>
-            <?php if ($postType == 'post') : ?>
-                <div class="<?php echo themeframework_get_page_att($postType)['div4'] ?>">
-                    <?php get_template_part(themeframework_get_page_att($postType)['barra']) ?>
+            <?php if (get_post_type() == 'post') : ?>
+                <div class="<?php echo themeframework_get_page_att(get_post_type())['div4'] ?>">
+                    <?php get_template_part(themeframework_get_page_att(get_post_type())['barra']) ?>
                 </div>
             <?php else : ?>
-                <div class="<?php echo themeframework_get_page_att($postType)['div5'] ?>">
-                    <?php get_template_part(themeframework_get_page_att($postType)['barra']) ?>
+                <div class="<?php echo themeframework_get_page_att(get_post_type())['div5'] ?>">
+                    <?php get_template_part(themeframework_get_page_att(get_post_type())['barra']) ?>
                 </div>
             <?php endif; ?>
 

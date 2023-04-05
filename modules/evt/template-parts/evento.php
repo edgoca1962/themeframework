@@ -7,7 +7,7 @@ if (isset($_GET['fpe'])) {
 }
 ?>
 
-<h4> <a href="<?php echo esc_attr(esc_url(get_the_permalink() . '?pag=' . themeframework_get_page_att(get_post_type())['pag'] . '&' . themeframework_get_page_att(get_post_type())['parametros'] . '&mes=' . $mesConsulta)) ?>"> <?php echo get_the_title() ?></a></h4>
+<h4> <a href="<?php echo esc_attr(esc_url(get_the_permalink() . '?pag=' . themeframework_get_page_att(get_post_type())['pag'] . '&' . themeframework_get_page_att(get_post_type())['parametros'] . 'mes=' . $mesConsulta)) ?>"> <?php echo get_the_title() ?></a></h4>
 <h5>Fecha próxima reunión: <?php echo $diasemanapost[date('l', strtotime(get_post_meta(get_the_ID(), '_f_proxevento', true)))] . ' - ' . date('d-M-Y', strtotime(get_post_meta(get_the_ID(), '_f_proxevento', true)));   ?></h5>
 
 <p>
