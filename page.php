@@ -11,11 +11,11 @@ if (is_user_logged_in()) {
         while (have_posts()) {
             the_post();
             if (is_front_page()) {
-                $ocultarFooter = false;
-                get_template_part('modules/core/template-parts/cor', 'page', ['fullpage' => $ocultarFooter]);
+                $fullPage = false;
+                get_template_part('modules/core/template-parts/cor', 'page', ['fullpage' => $fullPage]);
             } else {
                 get_template_part('modules/core/template-parts/cor', 'page', ['fullpage' => false]);
-                $ocultarFooter = false;
+                $fullPage = false;
             }
         }
     } else {
@@ -29,8 +29,8 @@ if (is_user_logged_in()) {
     } else {
         get_template_part('modules/core/template-parts/cor', 'page', ['fullpage' => true, 'noingresado' => true]);
     }
-    $ocultarFooter = true;
+    $fullPage = true;
 }
-get_footer('footer', ['fullpage' => $ocultarFooter]);
+get_footer('footer', ['fullpage' => $fullPage]);
 ?>
 </div> <!-- backgroun-blend  -->
