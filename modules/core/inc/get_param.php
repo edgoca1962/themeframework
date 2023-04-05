@@ -197,7 +197,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $fontweight = 'fw-lighter';
                $display = 'display-4';
                $height = '60vh';
-               $btn_regresar = 'modules/pst/template-parts/post-regresar';
+               $btn_regresar = 'modules/core/template-parts/core-btn-regresar';
                $regresar = 'post';
                break;
             case 'comite':
@@ -223,7 +223,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $templatePartsSingle = 'modules/sca/template-parts/' . $postType . '-single';
                $agregarpost = 'modules/sca/template-parts/' . $postType . '-mantenimiento';
                $barra = 'modules/sca/template-parts/sca-busquedas';
-               $btn_regresar = 'modules/sca/template-parts/acuerdo-regresar';
+               $btn_regresar = 'modules/core/template-parts/core-btn-regresar';
                $regresar = 'comite';
                break;
             case 'acta':
@@ -293,6 +293,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $barra = 'modules/sca/template-parts/sca-busquedas';
                $consecutivo = $qryconsecutivo;
                $num_actas = $num_actas;
+               $btn_regresar = 'modules/core/template-parts/core-btn-regresar';
                $regresar = 'acta';
                break;
             case 'acuerdo':
@@ -418,7 +419,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $templatePartsSingle = 'modules/sca/template-parts/' . $postType . '-single';
                $agregarpost = 'modules/sca/template-parts/' . $postType . '-mantenimiento';
                $barra = 'modules/sca/template-parts/sca-busquedas';
-               $btn_regresar = 'modules/sca/template-parts/acuerdo-regresar';
+               $btn_regresar = 'modules/core/template-parts/core-btn-regresar';
                $regresar = 'acuerdo';
                $consecutivo = $qryconsecutivo;
                break;
@@ -435,6 +436,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $templatePartsSingle = 'modules/sca/template-parts/' . $postType . '-single';
                $agregarpost = 'modules/sca/template-parts/' . $postType . '-mantenimiento';
                $barra = 'modules/sca/template-parts/sca-busquedas';
+               $btn_regresar = 'modules/core/template-parts/core-btn-regresar';
                $regresar = 'miembro';
                break;
             case 'puesto':
@@ -450,6 +452,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $templatePartsSingle = 'modules/sca/template-parts/' . $postType . '-single';
                $agregarpost = 'modules/sca/template-parts/' . $postType . '-mantenimiento';
                $barra = 'modules/sca/template-parts/sca-busquedas';
+               $btn_regresar = 'modules/core/template-parts/core-btn-regresar';
                $regresar = 'puesto';
                break;
             case 'evento':
@@ -474,7 +477,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $titulo = 'Eventos';
                if (isset($_GET['fpe'])) {
 
-                  $subtitulo = $monthName[date('F', strtotime(sanitize_text_field($_GET['fpe'])))] . ' - ' . date('Y');
+                  $subtitulo = date('d', strtotime(sanitize_text_field($_GET['fpe']))) . ' de ' . $monthName[date('F', strtotime(sanitize_text_field($_GET['fpe'])))] . ' del ' . date('Y');
                   $displaysub = 'display-4';
                }
                $display = 'display-4';
@@ -484,6 +487,7 @@ if (!function_exists('themeframework_get_page_att')) {
                $div2 = "col";
                $templateParts = 'modules/evt/template-parts/' . $postType;
                $templatePartsSingle = 'modules/evt/template-parts/' . $postType . '-single';
+               $btn_regresar = 'modules/evt/template-parts/evento-btn-regresar';
                $regresar = 'evento';
                break;
             case 'movie':
