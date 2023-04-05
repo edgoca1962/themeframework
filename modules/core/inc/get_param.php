@@ -161,7 +161,7 @@ if (!function_exists('themeframework_get_page_att')) {
       } else {
          $mes = date('F');
       }
-      if (isset($_GET['mes'])) {
+      if (isset($mes)) {
          $espacios = date('N', strtotime('first day of ' . $mes)) - 1;
          $restante = 8 - $espacios;
          $subtitulo = $monthName[$mes] . ' - ' . date('Y');
@@ -479,6 +479,8 @@ if (!function_exists('themeframework_get_page_att')) {
 
                   $subtitulo = date('d', strtotime(sanitize_text_field($_GET['fpe']))) . ' de ' . $monthName[date('F', strtotime(sanitize_text_field($_GET['fpe'])))] . ' del ' . date('Y');
                   $displaysub = 'display-4';
+               } else {
+                  $subtitulo = '';
                }
                $display = 'display-4';
                $height = '60vh';
