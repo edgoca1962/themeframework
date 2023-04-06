@@ -3,7 +3,11 @@ $diasemanapost = ['Monday' => 'Lunes', 'Tuesday' => 'Martes', 'Wednesday' => 'Mi
 if (isset($_GET['fpe'])) {
    $mesConsulta = 'fpe=' . sanitize_text_field($_GET['fpe']);
 } else {
-   $mesConsulta = '';
+   if (isset($_GET['mes'])) {
+      $mesConsulta = sanitize_text_field($_GET['mes']);
+   } else {
+      $mesConsulta = date('F');
+   }
 }
 ?>
 

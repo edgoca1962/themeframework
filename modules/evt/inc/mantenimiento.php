@@ -57,28 +57,58 @@ function themeframework_pre_get_posts_eventos($query)
             }
             $query->set('post__in', $eventoID);
          } else {
-            $f_final =
-               [
+            if (isset($_GET['mes'])) {
+               $mes = sanitize_text_field($_GET['mes']);
+               $f_inicial = date('Y-m-d', strtotime('first day of' . $mes . ' ' . date('Y')));
+               $f_final = date('Y-m-d', strtotime('last day of' . $mes . ' ' . date('Y')));
+            } else {
+               $mes = date('F');
+               $f_inicial = date('Y-m-d');
+               $f_final = date('Y-m-d', strtotime('last day of' . $mes . ' ' . date('Y')));
+            }
+            $mesConsulta = $mes;
+            $eventoID = [];
+            $eventos = get_posts(['post_type' => 'evento', 'numberposts' => -1]);
+            foreach ($eventos as $evento) {
+               $fechasevento = themeframework_fechasevento(
+                  get_post_meta($evento->ID, '_f_inicio', true),
+                  get_post_meta($evento->ID, '_f_final', true),
+                  get_post_meta($evento->ID, '_periodicidadevento', true),
+                  get_post_meta($evento->ID, '_opcionesquema', true),
+                  get_post_meta($evento->ID, '_numerodiaevento', true),
+                  get_post_meta($evento->ID, '_numerodiaordinalevento', true),
+                  explode(',', get_post_meta($evento->ID, '_diasemanaevento', true)),
+                  get_post_meta($evento->ID, '_mesevento', true),
+                  $mesConsulta
+               );
+               if (in_array($f_inicial, $fechasevento, true)) {
+                  $eventoID[] = $evento->ID;
+               }
+               $query->set('post__in', $eventoID);
+            }
+
+            //$f_final = [];
+            /*[
                   'key' => '_f_final',
                   'value' => date('Ymd'),
                   'compare' => '>',
                   'type' => 'DATE'
-               ];
-            $f_proxevento =
+               ];*/
+            /*$f_proxevento =
                [
                   'key' => '_f_proxevento',
-                  'value' => date('Ymd'),
-                  'compare' => '>',
+                  'value' => [$f_inicial, $f_final],
+                  'compare' => 'BETWEEN',
                   'type' => 'DATE'
                ];
             $query->set(
                'meta_query',
                [
-                  'relation' => 'OR',
-                  $f_final,
+                  //'relation' => 'OR',
+                  //$f_final,
                   $f_proxevento,
                ]
-            );
+            );*/
          }
          $query->set('meta_key', '_f_proxevento');
          $query->set('orderby', 'meta_value');

@@ -103,7 +103,7 @@ if (!function_exists('themeframework_get_page_att')) {
       $espacios = '';
       $restante = '';
 
-      $monthName = ["Januray" => "Enero", "February" => "Febrero", "March" => "Marzo", "April" => "Abril", "May" => "Mayo", "June" => "Junio", "July" => "Julio", "August" => "Agosto", "September" => "Septiembre", "October" => "Octubre", "November" => "Noviembre", "December" => "Diciembre"];
+      $monthName = ["January" => "Enero", "February" => "Febrero", "March" => "Marzo", "April" => "Abril", "May" => "Mayo", "June" => "Junio", "July" => "Julio", "August" => "Agosto", "September" => "Septiembre", "October" => "Octubre", "November" => "Noviembre", "December" => "Diciembre"];
 
       if (in_array('administrator', $usuarioRoles) || in_array('author', $usuarioRoles)) {
          $userAdmin = true;
@@ -156,21 +156,6 @@ if (!function_exists('themeframework_get_page_att')) {
       $fontweight = 'fw-lighter';
       $display = 'display-4';
       $titulo = get_the_title();
-      if (isset($_GET['mes'])) {
-         $mes = sanitize_text_field($_GET['mes']);
-      } else {
-         $mes = date('F');
-      }
-      if (isset($mes)) {
-         $espacios = date('N', strtotime('first day of ' . $mes)) - 1;
-         $restante = 8 - $espacios;
-         $subtitulo = $monthName[$mes] . ' - ' . date('Y');
-         $displaysub = 'display-4';
-         if (is_single()) {
-            $subtitulo2 = get_the_title();
-            $displaysub2 = 'display-5';
-         }
-      }
       if (isset($_GET['comite_id'])) {
          $comite_id = sanitize_text_field($_GET['comite_id']);
          $titulo = 'Acuerdos ' . get_post($comite_id)->post_title;
@@ -475,18 +460,35 @@ if (!function_exists('themeframework_get_page_att')) {
                   }
                }
                $titulo = 'Eventos';
-               if (isset($_GET['fpe'])) {
 
+               if (isset($_GET['fpe'])) {
+                  $mes = date('F', strtotime(sanitize_text_field($_GET['fpe'])));
                   $subtitulo = date('d', strtotime(sanitize_text_field($_GET['fpe']))) . ' de ' . $monthName[date('F', strtotime(sanitize_text_field($_GET['fpe'])))] . ' del ' . date('Y');
                   $displaysub = 'display-4';
                } else {
-                  $subtitulo = '';
+                  if (isset($_GET['mes'])) {
+                     $mes = sanitize_text_field($_GET['mes']);
+                  } else {
+                     $mes = date('F');
+                  }
+                  $subtitulo = $monthName[$mes] . ' del ' . date('Y');
+               }
+               if (isset($mes)) {
+                  $espacios = date('N', strtotime('first day of ' . $mes)) - 1;
+                  $restante = 8 - $espacios;
+                  $displaysub = 'display-4';
+                  if (is_single()) {
+                     $subtitulo2 = get_the_title();
+                     $displaysub2 = 'display-5';
+                  }
                }
                $display = 'display-4';
                $height = '60vh';
                $div0 = 'container py-5';
                $div1 = "row";
-               $div2 = "col";
+               $div2 = "col-xl-9";
+               $div5 = 'col-xl-3';
+               $barra = 'modules/evt/template-parts/evento-calendario';
                $templateParts = 'modules/evt/template-parts/' . $postType;
                $templatePartsSingle = 'modules/evt/template-parts/' . $postType . '-single';
                $btn_regresar = 'modules/evt/template-parts/evento-btn-regresar';
