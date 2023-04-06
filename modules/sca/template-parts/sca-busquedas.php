@@ -8,7 +8,7 @@
          <div class="d-flex justify-content-between">
             <h5>Resultados</h5><span id="btn_cerrar"><i class="far fa-times-circle"></i></span>
          </div>
-         <div id="resultados_busqueda" data-url="<?= get_site_url() . '/wp-json/wp/v2/acuerdos?search=' ?>"></div>
+         <div id="resultados_busqueda" data-url="<?= get_site_url() . '/wp-json/wp/v2/acuerdos?search=' ?>" data-msg="No se encontraron acuerdos"></div>
       </div>
 
    </div>
