@@ -1,9 +1,5 @@
-<?php
-$diasemanapost = ['Monday' => 'Lunes', 'Tuesday' => 'Martes', 'Wednesday' => 'Miércoles', 'Thursday' => 'Jueves', 'Friday' => 'Viernes', 'Saturday' => 'Sábado', 'Sunday' => 'Domingo'];
-?>
-
 <h4> <a href="<?php echo esc_attr(esc_url(get_the_permalink() . '?pag=' . themeframework_get_page_att(get_post_type())['pag'] . '&' . themeframework_get_page_att(get_post_type())['parametros'] . themeframework_get_page_att(get_post_type())['mesConsultaLink'])) ?>"> <?php echo get_the_title() ?></a></h4>
-<h5>Fecha próxima reunión: <?php echo $diasemanapost[date('l', strtotime(get_post_meta(get_the_ID(), '_f_proxevento', true)))] . ' - ' . date('d-M-Y', strtotime(get_post_meta(get_the_ID(), '_f_proxevento', true)));   ?></h5>
+<h5>Fecha próxima reunión: <?php echo themeframework_get_page_att(get_post_type())['diaSemanaPost'][date('l', strtotime(get_post_meta(get_the_ID(), '_f_proxevento', true)))] . ' - ' . date('d-M-Y', strtotime(get_post_meta(get_the_ID(), '_f_proxevento', true)));   ?></h5>
 
 <p>
    <?php echo 'Tipo evento: ' . get_post_meta(get_the_ID(), '_periodicidadevento', true) . '<br/>' ?>

@@ -104,7 +104,7 @@ if (!function_exists('themeframework_get_page_att')) {
       $restante = '';
       $mesConsulta = '';
       $mesConsultaLink = '';
-
+      $diaSemanaPost = ['Monday' => 'Lunes', 'Tuesday' => 'Martes', 'Wednesday' => 'Miércoles', 'Thursday' => 'Jueves', 'Friday' => 'Viernes', 'Saturday' => 'Sábado', 'Sunday' => 'Domingo'];
       $monthName = ["January" => "Enero", "February" => "Febrero", "March" => "Marzo", "April" => "Abril", "May" => "Mayo", "June" => "Junio", "July" => "Julio", "August" => "Agosto", "September" => "Septiembre", "October" => "Octubre", "November" => "Noviembre", "December" => "Diciembre"];
 
       if (in_array('administrator', $usuarioRoles) || in_array('author', $usuarioRoles)) {
@@ -558,6 +558,7 @@ if (!function_exists('themeframework_get_page_att')) {
       $atributos['restante'] = $restante;
       $atributos['mesConsulta'] = $mesConsulta;
       $atributos['mesConsultaLink'] = $mesConsultaLink;
+      $atributos['diaSemanaPost'] = $diaSemanaPost;
       return $atributos;
    }
 }
