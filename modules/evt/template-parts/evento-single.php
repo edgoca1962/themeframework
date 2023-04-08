@@ -19,7 +19,6 @@ if (get_post_meta('_f_final') < date('Y-m-d') || get_post_meta('_f_final') == ''
       );
    update_post_meta($post->ID, '_f_proxevento', $f_proxevento);
 }
-
 $fechasevento = themeframework_fechasevento(
    get_post_meta($post->ID, '_f_inicio', true),
    get_post_meta($post->ID, '_f_final', true),

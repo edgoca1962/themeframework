@@ -1,17 +1,8 @@
 <?php
 $diasemanapost = ['Monday' => 'Lunes', 'Tuesday' => 'Martes', 'Wednesday' => 'Miércoles', 'Thursday' => 'Jueves', 'Friday' => 'Viernes', 'Saturday' => 'Sábado', 'Sunday' => 'Domingo'];
-if (isset($_GET['fpe'])) {
-   $mesConsulta = 'fpe=' . sanitize_text_field($_GET['fpe']);
-} else {
-   if (isset($_GET['mes'])) {
-      $mesConsulta = sanitize_text_field($_GET['mes']);
-   } else {
-      $mesConsulta = date('F');
-   }
-}
 ?>
 
-<h4> <a href="<?php echo esc_attr(esc_url(get_the_permalink() . '?pag=' . themeframework_get_page_att(get_post_type())['pag'] . '&' . themeframework_get_page_att(get_post_type())['parametros'] . $mesConsulta)) ?>"> <?php echo get_the_title() ?></a></h4>
+<h4> <a href="<?php echo esc_attr(esc_url(get_the_permalink() . '?pag=' . themeframework_get_page_att(get_post_type())['pag'] . '&' . themeframework_get_page_att(get_post_type())['parametros'] . themeframework_get_page_att(get_post_type())['mesConsultaLink'])) ?>"> <?php echo get_the_title() ?></a></h4>
 <h5>Fecha próxima reunión: <?php echo $diasemanapost[date('l', strtotime(get_post_meta(get_the_ID(), '_f_proxevento', true)))] . ' - ' . date('d-M-Y', strtotime(get_post_meta(get_the_ID(), '_f_proxevento', true)));   ?></h5>
 
 <p>
@@ -23,6 +14,7 @@ if (isset($_GET['fpe'])) {
    <?php echo 'Indicador dia completo: ' . get_post_meta(get_the_ID(), '_dia_completo', true) . '<br/>'  ?>
    <?php echo 'Inscripción: ' . get_post_meta(get_the_ID(), '_inscripcion', true) . '<br/>' ?>
    <?php
+   echo themeframework_get_page_att(get_post_type())['mesConsulta'] . '<br>';
    $fechasevento = themeframework_fechasevento(
       get_post_meta(get_the_ID(), '_f_inicio', true),
       get_post_meta(get_the_ID(), '_f_final', true),
@@ -32,7 +24,7 @@ if (isset($_GET['fpe'])) {
       get_post_meta(get_the_ID(), '_numerodiaordinalevento', true),
       explode(',', get_post_meta(get_the_ID(), '_diasemanaevento', true)),
       get_post_meta(get_the_ID(), '_mesevento', true),
-      $mesConsulta
+      themeframework_get_page_att(get_post_type())['mesConsulta']
    );
    print_r($fechasevento);
    ?>

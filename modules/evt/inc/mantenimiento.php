@@ -81,34 +81,11 @@ function themeframework_pre_get_posts_eventos($query)
                   get_post_meta($evento->ID, '_mesevento', true),
                   $mesConsulta
                );
-               if (in_array($f_inicial, $fechasevento, true)) {
+               if (count($fechasevento) > 0) {
                   $eventoID[] = $evento->ID;
                }
                $query->set('post__in', $eventoID);
             }
-
-            //$f_final = [];
-            /*[
-                  'key' => '_f_final',
-                  'value' => date('Ymd'),
-                  'compare' => '>',
-                  'type' => 'DATE'
-               ];*/
-            /*$f_proxevento =
-               [
-                  'key' => '_f_proxevento',
-                  'value' => [$f_inicial, $f_final],
-                  'compare' => 'BETWEEN',
-                  'type' => 'DATE'
-               ];
-            $query->set(
-               'meta_query',
-               [
-                  //'relation' => 'OR',
-                  //$f_final,
-                  $f_proxevento,
-               ]
-            );*/
          }
          $query->set('meta_key', '_f_proxevento');
          $query->set('orderby', 'meta_value');

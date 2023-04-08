@@ -3,7 +3,7 @@
       <form id="frmbuscar" class="d-flex">
          <input id="impbuscar" class="form-control w-100 me-2" type="text" style="width: 0;" placeholder="Buscar Evento" aria-label="Search">
       </form>
-      <div id="resultados" class="container invisible position-absolute search-overlay rounded-3 w-100" style="background-color: rgba(17, 153, 142, 1); height:300px;">
+      <div id="resultados" class="container invisible position-absolute search-overlay rounded-3 w-100" style="height:300px;">
          <div class="d-flex justify-content-between">
             <h5>Resultados</h5><span id="btn_cerrar"><i class="far fa-times-circle"></i></span>
          </div>
@@ -19,7 +19,7 @@
          <option value="February" <?php echo (themeframework_get_page_att(get_post_type())['mes'] === "February") ? 'selected' : '' ?>>Febrero</option>
          <option value="March" <?php echo (themeframework_get_page_att(get_post_type())['mes'] === "March") ? 'selected' : '' ?>>Marzo</option>
          <option value="April" <?php echo (themeframework_get_page_att(get_post_type())['mes'] === "April") ? 'selected' : '' ?>>Abril</option>
-         <option value="May" <?php echo (themeframework_get_page_att(get_post_type())['mes'] === "May") ? 'selected' : '' ?>>May</option>
+         <option value="May" <?php echo (themeframework_get_page_att(get_post_type())['mes'] === "May") ? 'selected' : '' ?>>Mayo</option>
          <option value="June" <?php echo (themeframework_get_page_att(get_post_type())['mes'] === "June") ? 'selected' : '' ?>>Junio</option>
          <option value="July" <?php echo (themeframework_get_page_att(get_post_type())['mes'] === "July") ? 'selected' : '' ?>>Julio</option>
          <option value="August" <?php echo (themeframework_get_page_att(get_post_type())['mes'] === "August") ? 'selected' : '' ?>>Agosto</option>

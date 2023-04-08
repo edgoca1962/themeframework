@@ -174,8 +174,10 @@ function themeframework_fechasevento($finicio = '', $ffinal = '', $tipoevento = 
                   $f1_1 = date_create($fecha);
                   $f1_2 = date_date_set($f1_1, date('Y'), date('m'), $numerodiames);
                   $f1_3 = date_format($f1_2, 'Y-m-d');
-                  if ($finicio <= $f1_3) {
-                     $fechas[] = $f1_3;
+                  if (date('F', strtotime($f1_3)) === $mesConsulta) {
+                     if ($finicio <= $f1_3) {
+                        $fechas[] = $f1_3;
+                     }
                   }
                } else {
                   foreach ($diasemanaevento as $dia) {

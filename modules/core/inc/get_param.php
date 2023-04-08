@@ -102,6 +102,8 @@ if (!function_exists('themeframework_get_page_att')) {
       $mes = '';
       $espacios = '';
       $restante = '';
+      $mesConsulta = '';
+      $mesConsultaLink = '';
 
       $monthName = ["January" => "Enero", "February" => "Febrero", "March" => "Marzo", "April" => "Abril", "May" => "Mayo", "June" => "Junio", "July" => "Julio", "August" => "Agosto", "September" => "Septiembre", "October" => "Octubre", "November" => "Noviembre", "December" => "Diciembre"];
 
@@ -462,14 +464,20 @@ if (!function_exists('themeframework_get_page_att')) {
                $titulo = 'Eventos';
 
                if (isset($_GET['fpe'])) {
+                  $mesConsultaLink = 'fpe=' . sanitize_text_field($_GET['fpe']);
+                  $mesConsulta = date('F', strtotime(sanitize_text_field($_GET['fpe'])));
                   $mes = date('F', strtotime(sanitize_text_field($_GET['fpe'])));
                   $subtitulo = date('d', strtotime(sanitize_text_field($_GET['fpe']))) . ' de ' . $monthName[date('F', strtotime(sanitize_text_field($_GET['fpe'])))] . ' del ' . date('Y');
                   $displaysub = 'display-4';
                } else {
                   if (isset($_GET['mes'])) {
                      $mes = sanitize_text_field($_GET['mes']);
+                     $mesConsultaLink = 'mes=' . $mes;
+                     $mesConsulta =  $mes;
                   } else {
                      $mes = date('F');
+                     $mesConsultaLink = 'mes=' . $mes;
+                     $mesConsulta =  $mes;
                   }
                   $subtitulo = $monthName[$mes] . ' del ' . date('Y');
                }
@@ -548,6 +556,8 @@ if (!function_exists('themeframework_get_page_att')) {
       $atributos['mes'] = $mes;
       $atributos['espacios'] = $espacios;
       $atributos['restante'] = $restante;
+      $atributos['mesConsulta'] = $mesConsulta;
+      $atributos['mesConsultaLink'] = $mesConsultaLink;
       return $atributos;
    }
 }
