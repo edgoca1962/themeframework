@@ -17,7 +17,7 @@
          </div>
          <div style="height: 205px; overflow:hidden; ">
             <div class="card text-bg-dark shadowcss h-100">
-               <img id="imagennueva" src="<?php echo get_template_directory_uri() . '/assets/img/eventos.jpg' ?>" class="card-img h-100" alt="Imágen del evento">
+               <img id="imagennueva" src="<?php echo get_template_directory_uri() . '/assets/img/eventos.jpeg' ?>" class="card-img h-100" alt="Imágen del evento">
                <div class="card-img-overlay d-flex justify-content-center align-items-center">
                   <label class="display-1" for="thumbnail"><i class="fa-regular fa-file-image"></i></label>
                   <input type="file" name="thumbnail" id="thumbnail" class="invisible" style="width: 0;">
@@ -92,16 +92,16 @@
          <section id="unico" class="invisible" style="height:0;">
          </section> <!-- Evento único -->
          <section id="diario" class="invisible" style="height:0;">
-            <?php get_template_part('template-parts/partes', 'eventodiario') ?>
+            <?php get_template_part('modules/evt/template-parts/evento', 'diario') ?>
          </section> <!-- Evento diario -->
          <section id="semanal" class="invisible" style="height:0;">
-            <?php get_template_part('template-parts/partes', 'eventosemanal') ?>
+            <?php get_template_part('modules/evt/template-parts/evento', 'semanal') ?>
          </section> <!-- Evento semanal -->
          <section id="mensual" class="invisible" style="height:0;">
-            <?php get_template_part('template-parts/partes', 'eventomensual') ?>
+            <?php get_template_part('modules/evt/template-parts/evento', 'mensual') ?>
          </section> <!-- Evento mensual -->
          <section id="anual" class="invisible" style="height:0;">
-            <?php get_template_part('template-parts/partes', 'eventoanual') ?>
+            <?php get_template_part('modules/evt/template-parts/evento', 'anual') ?>
          </section> <!-- Evento anual -->
       </div> <!-- formatos repeticion por tipo de evento -->
    </div> <!-- Fromatos de periodicidad -->
