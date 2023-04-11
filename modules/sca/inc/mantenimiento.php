@@ -198,6 +198,15 @@ if (count($clave) > 0) {
    );
    wp_insert_post($post_data);
 }
+/***************************
+ * 
+ * Crea roles para usuarios
+ * 
+ **************************/
+add_action('init', function () {
+   add_role('scaadmin', 'SCA_Administrador');
+});
+
 /******************************************************************************
  * 
  * 
@@ -673,6 +682,13 @@ function themeframework_mantener_membresia()
             $last_name = sanitize_text_field($_POST['last_name']);
             $user_login = sanitize_text_field($_POST['user_login']);
             $user_pass = sanitize_text_field($_POST['user_pass']);
+
+            /**Agrega dos roles al usuario con ID 12 */
+            /**
+             * $scaadmin = new WP_User(12); 
+             * $scaadmin->add_role('scaadmin'); 
+             */
+
             $user_nicename = $first_name . '-' . $last_name;
             $nombre = $first_name . ' ' . $last_name;
             $userdata = array(
@@ -686,7 +702,11 @@ function themeframework_mantener_membresia()
                'last_name'             => $last_name,
                'show_admin_bar_front'  => 'false'
             );
-            wp_insert_user($userdata);
+            $user_id = wp_insert_user($userdata);
+            if (isset($_POST['scaadmin'])) {
+               $scaadmin = new WP_User($user_id);
+               $scaadmin->add_role('scaadmin');
+            }
             wp_send_json_success('Usuario Registrado');
             break;
          case 'modificar_miembro':

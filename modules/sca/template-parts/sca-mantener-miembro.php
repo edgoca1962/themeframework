@@ -180,6 +180,14 @@
                            Favor no dejar en blanco.
                         </div>
                      </div>
+                     <div class="col-md pt-md-4">
+                        <div class="form-check">
+                           <input class="form-check-input" type="checkbox" value="0" id="scaadmin" name="scaadmin">
+                           <label class="form-check-label" for="scaadmin">
+                              Usuario Adm. del Sistema
+                           </label>
+                        </div>
+                     </div>
                   </div>
                </div>
                <div class="modal-footer">
